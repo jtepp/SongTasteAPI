@@ -1,5 +1,5 @@
-brain = require('brain.js')
-const net = new brain.NeuralNetwork();
+// brain = require('brain.js')
+// const net = new brain.NeuralNetwork();
 var out;
 
 exports.handler = function (event, context, callback) {
