@@ -6,6 +6,6 @@ exports.handler = function (event, context, callback) {
             'Access-Control-Allow-Headers':
                 'Origin, X-Requested-With, Content-Type, Accept',
         },
-        body: JSON.stringify({ "msg": "Hello", "other": "poop" })
+        body: JSON.stringify({ msg: "Hello", other: 3456, bd: event.body })
     })
 }
