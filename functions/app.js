@@ -1,9 +1,9 @@
 exports.handler = function (event, context, callback) {
-    brain = require("brain.js");
-    const net = new brain.NeuralNetwork();
-    net.train(JSON.parse(event.body).train)
-    const output = net.run(JSON.parse(event.body).run)
-
+    var brain = require("brain.js");
+    // const net = new brain.NeuralNetwork();
+    // net.train(JSON.parse(event.body).train)
+    // const output = net.run(JSON.parse(event.body).run)
+    const output = "Hey there"
 
 
     callback(null, {
