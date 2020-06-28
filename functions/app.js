@@ -3,11 +3,11 @@ const net = new brain.NeuralNetwork();
 var out;
 
 exports.handler = function (event, context, callback) {
-    if (event.body) {
-        net.train(JSON.parse(event.body).train)
-        out = event.body
-    }//net.run(JSON.parse(event.body).run)}
-    else { out = "send body " + event.body }
+    // if (event.body) {
+    //     net.train(JSON.parse(event.body).train)
+    //     out = event.body
+    // }//net.run(JSON.parse(event.body).run)}
+    // else { out = "send body " + event.body }
 
 
 
@@ -19,7 +19,7 @@ exports.handler = function (event, context, callback) {
             'Access-Control-Allow-Headers':
                 'Origin, X-Requested-With, Content-Type, Accept',
         },
-        body: JSON.stringify({ output: out })
+        body: event.body //JSON.stringify({ output: out })
     })
 
 }
