@@ -167,17 +167,20 @@ async function app() {
     await fetch(`https://ecstatic-blackwell-7a1538.netlify.app/.netlify/functions/app`,
         {
             method: 'POST',
+            mode: 'no-cors',
             Accept: 'text/plain',
             'content-type': 'text/plain;charset=UTF-8',
-            body: JSON.stringify(inp)
+            body: inp
 
         })
         .then(function (response) {
             return response.text();
         }).then(function (data) {
-            obj = JSON.parse(data);
-            str = obj.output
-            console.log(JSON.parse(str))
+            console.log(data)
+
+            // obj = JSON.parse(data);
+            // str = obj.output
+            // console.log(JSON.parse(str))
         });
     document.body.innerHTML += str
 }
