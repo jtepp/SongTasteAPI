@@ -1,6 +1,6 @@
 exports.handler = function (event, context, callback) {
-    try { brain = require("brain.js") }
-    catch (error) { console.log(error) }
+    try { brain = require("brain.js"); console.log(true); }
+    catch (error) { console.log(error); console.log(false) }
 
 
 
