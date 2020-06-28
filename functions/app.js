@@ -19,7 +19,7 @@ exports.handler = function (event, context, callback) {
             'Access-Control-Allow-Headers':
                 'Origin, X-Requested-With, Content-Type, Accept',
         },
-        body: event.body //JSON.stringify({ output: out })
+        body: JSON.stringify(event.body) //JSON.stringify({ output: out })
     })
 
 }

@@ -164,13 +164,13 @@ var obj;
 
 
 async function app() {
-    await fetch(`https://ecstatic-blackwell-7a1538.netlify.app/.netlify/functions/app`,
+    await fetch(`https://songtaste.netlify.app/.netlify/functions/app`,
         {
             method: 'POST',
             mode: 'no-cors',
             Accept: 'text/plain',
             'content-type': 'text/plain;charset=UTF-8',
-            body: inp
+            body: "hi"
 
         })
         .then(function (response) {
