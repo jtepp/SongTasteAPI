@@ -1,12 +1,11 @@
 exports.handler = function (event, context, callback) {
     var brain;
     var fetch
+    var output = "Hey there"
     try { brain = require("brain.js"); }
-    catch (e) { console.log('false' + e) }
-    try { fetch = require("node-fetch"); }
-    catch (e) { console.log('false2' + e) }
+    catch (e) { output = 'false ' + e }
 
-    const output = "Hey there"
+
 
 
     callback(null, {
