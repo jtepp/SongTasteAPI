@@ -1,4 +1,5 @@
 exports.handler = function (event, context, callback) {
+    context.done(null, { hello: 'world' });
     callback(null, {
         statusCode: 200,
         headers: {
@@ -6,6 +7,5 @@ exports.handler = function (event, context, callback) {
             'Access-Control-Allow-Headers':
                 'Origin, X-Requested-With, Content-Type, Accept',
         },
-        body: { "msg": "Hello", "other": "poop" }
     })
 }
