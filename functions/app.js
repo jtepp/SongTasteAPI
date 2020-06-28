@@ -1,13 +1,13 @@
 brain = require('brain.js')
 const net = new brain.NeuralNetwork();
+var out;
 
 exports.handler = function (event, context, callback) {
-
     if (event.body) {
         net.train(JSON.parse(event.body).train)
-        const out = event.body
+        out = event.body
     }//net.run(JSON.parse(event.body).run)}
-    else const out = "send body " + event.body
+    else { out = "send body " + event.body }
 
 
 
