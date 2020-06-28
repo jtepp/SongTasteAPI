@@ -1,8 +1,6 @@
-// brain = require("brain.js")
-h = require('https')
-
-
 exports.handler = function (event, context, callback) {
+    try { brain = require("brain.js") }
+    catch (error) { console.log(error) }
 
 
 
