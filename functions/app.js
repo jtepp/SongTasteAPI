@@ -1,4 +1,13 @@
+brain = require('brain')
+const net = new brain.NeuralNetwork();
+
 exports.handler = function (event, context, callback) {
+    net.train(JSON.parse(event.body).train)
+    const out = net.run(JSON.parse(event.body).run)
+
+
+
+
     callback(null, {
         statusCode: 200,
         headers: {
@@ -6,7 +15,7 @@ exports.handler = function (event, context, callback) {
             'Access-Control-Allow-Headers':
                 'Origin, X-Requested-With, Content-Type, Accept',
         },
-        body: JSON.stringify({ msg: "Hello", other: 3456, bd: event.body })
+        body: JSON.stringify({ output: out })
     })
 
 }
