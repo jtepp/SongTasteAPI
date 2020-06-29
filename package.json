@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "build:lambda": "./node_modules/.bin/netlify-lambda build src"
+    "build": "./node_modules/.bin/netlify-lambda build src",
+    "serve": "./node_modules/.bin/netlify-lambda serve src"
   },
   "author": "",
   "license": "ISC",
