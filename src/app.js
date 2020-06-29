@@ -22,7 +22,7 @@
 const express = require('express')
 const serverless = require('serverless-http')
 
-const brain = require('brain.js')
+const synaptic = require('synaptic')
 
 
 const app = express()
