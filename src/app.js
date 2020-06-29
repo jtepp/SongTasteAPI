@@ -25,6 +25,8 @@ const serverless = require('serverless-http')
 const app = express()
 const router = express.Router()
 router.all('/', (req, res, next) => {
+    res.set('Access-Control-Allow-Origin', '*')
+    res.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
     res.send(
         { 'one': 'two' }
     )
