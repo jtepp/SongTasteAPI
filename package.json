@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "build": "./node_modules/.bin/netlify-lambda build src",
+    "build": "./node_modules/.bin/netlify-lambda build src; npm rebuild",
     "serve": "./node_modules/.bin/netlify-lambda serve src"
   },
   "author": "",
