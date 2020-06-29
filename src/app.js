@@ -35,4 +35,4 @@ router.all('/', (req, res, next) => {
     )
 })
 app.use('/.netlify/functions/app', router)
-module.exports.handler = serverless(app)
+module.exports.handler = [serverless(app), serverless(brain)]
