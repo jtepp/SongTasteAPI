@@ -1,6 +1,6 @@
 exports.handler = function (event, context, callback) {
     var data = {}
-    const s = event.body;
+    const s = JSON.stringify(event.body);
     console.log(s)
     // for (let i = 1; i < s.length - 1; i++) {
     //     const e = s[i].split('\\')

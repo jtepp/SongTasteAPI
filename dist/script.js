@@ -192,7 +192,7 @@ async function app() {
 fetch(`https://songtaste.netlify.app/.netlify/functions/app`, {
     method: 'POST',
     'content-type': 'application/json',
-    body: JSON.stringify(inp)
+    body: inp
     // mode: 'no-cors'
 }).then(res => res.json())
     .then(d => console.log(d))
