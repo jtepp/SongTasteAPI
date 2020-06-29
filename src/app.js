@@ -1,10 +1,9 @@
 exports.handler = function (event, context, callback) {
 
     var output = "Hey there"
-
-
-
+    console.log(event.body)
     callback(null, {
+
         statusCode: 200,
         headers: {
             'Access-Control-Allow-Origin': '*',
