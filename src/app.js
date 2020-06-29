@@ -25,9 +25,9 @@ const serverless = require('serverless-http')
 const app = express()
 const router = express.Router()
 router.post('/', (req, res) => {
-    res.json({
-        'hello': 'hi'
-    })
+    res.send(
+        `'hello': 'hi'`
+    )
 })
 app.use('/.netlify/functions/app', router)
 module.exports.handler = serverless(app)
