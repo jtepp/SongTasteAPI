@@ -155,7 +155,7 @@ header > img:hover{
     .footer{
         flex-direction: column;
         align-items: center;
-        justify-content: space-around;
+        justify-content: center;
     }
     .message{
         color: white;
@@ -195,7 +195,7 @@ header > img:hover{
 .FR-footer{
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
 }
 .FR-message{
     color: white;
