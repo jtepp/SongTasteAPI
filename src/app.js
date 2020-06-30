@@ -8,16 +8,13 @@ exports.handler = function (event, context, callback) {
     const a = JSON.stringify(event.body).split("\\").join('').split(',"break":"break",').join();
     const b = a.slice(1, a.length - 1)
     const data = JSON.parse(b)
-    const x = data
-    console.log(x)
 
 
     const net = new Architect.Perceptron(9, 7, 6, 1)
     const trainer = new Trainer(net)
-    var trainingSet = data.train
-    trainer.train(trainingSet)
-    var aa = net.activate(data.run)
-
+    trainer.train(data.train)
+    const aa = net.activate(data.run)
+    console.log(aa)
     callback(null, {
         statusCode: 200,
         headers: {
