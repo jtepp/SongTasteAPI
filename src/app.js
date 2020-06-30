@@ -38,7 +38,7 @@ exports.handler = function (event, context, callback) {
             },
             body: JSON.stringify({
                 "error": "please make sure your input JSON follows this template",
-                "template": JSON.parse(`{ "train": [ { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" } ], "run": "[Array]" }`)
+                "template": JSON.parse(`{ "train": [ { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" } ], "break":"break", "run": "[Array]" }`)
             })
 
 
