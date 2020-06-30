@@ -29,7 +29,7 @@ exports.handler = function (event, context, callback) {
         })
     } catch (e) {
         callback(null, {
-            statusCode: 400,
+            statusCode: 206,
             headers: {
 
                 'Access-Control-Allow-Origin': '*',
