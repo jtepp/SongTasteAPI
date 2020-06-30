@@ -1,30 +1,61 @@
 exports.handler = function (event, context, callback) {
-    const synaptic = require('synaptic'); // this line is not needed in the browser
-    const Neuron = synaptic.Neuron,
-        Layer = synaptic.Layer,
-        Network = synaptic.Network,
-        Trainer = synaptic.Trainer,
-        Architect = synaptic.Architect;
-    const a = JSON.stringify(event.body).split("\\").join('').split(',"break":"break",').join();
-    const b = a.slice(1, a.length - 1)
-    const data = JSON.parse(b)
+    try {
+
+        const synaptic = require('synaptic'); // this line is not needed in the browser
+        const Neuron = synaptic.Neuron,
+            Layer = synaptic.Layer,
+            Network = synaptic.Network,
+            Trainer = synaptic.Trainer,
+            Architect = synaptic.Architect;
+        const a = JSON.stringify(event.body).split("\\").join('').split(',"break":"break",').join();
+        const b = a.slice(1, a.length - 1)
+        const data = JSON.parse(b)
 
 
-    const net = new Architect.Perceptron(9, 7, 6, 1)
-    const trainer = new Trainer(net)
-    trainer.train(data.train)
-    const aa = net.activate(data.run)
-    console.log(aa)
-    callback(null, {
-        statusCode: 200,
-        headers: {
+        const net = new Architect.Perceptron(9, 7, 6, 1)
+        const trainer = new Trainer(net)
+        trainer.train(data.train)
+        const aa = net.activate(data.run)
+        console.log(aa)
+        callback(null, {
+            statusCode: 200,
+            headers: {
 
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers':
-                'Origin, X-Requested-With, Content-Type, Accept',
-        },
-        body: JSON.stringify(aa[0])
-    })
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers':
+                    'Origin, X-Requested-With, Content-Type, Accept',
+            },
+            body: JSON.stringify(aa[0])
+        })
+    } catch (e) {
+        callback(null, {
+            statusCode: 400,
+            headers: {
+
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers':
+                    'Origin, X-Requested-With, Content-Type, Accept',
+            },
+            body: `BAD REQUEST:
+            
+Please make sure your input JSON follows this template:
+{
+    train: [
+        { input: [Array], output: [Array] },
+        { input: [Array], output: [Array] },
+        { input: [Array], output: [Array] },
+        { input: [Array], output: [Array] },
+        { input: [Array], output: [Array] },
+        { input: [Array], output: [Array] },
+        { input: [Array], output: [Array] },
+        { input: [Array], output: [Array] },
+        { input: [Array], output: [Array] },
+        { input: [Array], output: [Array] }
+    ],
+    run: [Array]
+    }`
+        })
+    }
 
 }
 
