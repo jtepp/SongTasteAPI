@@ -18,7 +18,7 @@ document.body.onresize()
 function responsive(wide, narrow) {
     const w = document.getElementsByClassName(wide)
     const n = document.getElementsByClassName(narrow)
-    if (screen.width < 750) {
+    if (screen.width < 750 && screen.orientation != 'landscape-primary' && screen.orientation != 'landscape-secondary') {
         for (e of w) {
             e.classList.remove(wide)
             e.classList.add(narrow)
