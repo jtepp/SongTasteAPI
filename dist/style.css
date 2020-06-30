@@ -178,7 +178,7 @@ header > img:hover{
     }
     .message{
         color: white;
-        font-size:50pt;
+        font-size:30pt;
     }
     .home-song-info{
         text-align: center;
@@ -200,7 +200,7 @@ header > img:hover{
 .FR-message{
     color: white;
     text-align: center;
-    font-size: 18pt;
+    font-size: 30pt;
 }
 .FR-home-song-bar{
     flex-direction: column;
