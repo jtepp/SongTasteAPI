@@ -1,5 +1,5 @@
 @font-face {
-    font-family: 'keep_calm_medregular';
+    font-family: 'keepcalm';
     src: url('/assets/keepcalm-medium-webfont.woff2') format('woff2'),
          url('/assets/keepcalm-medium-webfont.woff') format('woff');
     font-weight: normal;
@@ -7,14 +7,35 @@
 
 }
 
-
-
-
 @font-face {
-    font-family: 'neufreitextrabold';
+    font-family: 'neufreit';
     src: url('/assets/neufreit-extrabold-webfont.woff2') format('woff2'),
          url('/assets/neufreit-extrabold-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
 }
+*{
+    margin:0;
+    padding:0;
+}
+.container{
+    background: darkslategray;
+    height: 4000px;
+    font-size: xx-large;
+}
+header{
+    width: 100%;
+    background: yellow;
+    position: fixed;
+    top: 0;
+    transition: all ease 0.4s;
+    
+}
+
+header > img{
+    
+    max-height: 210px;
+    transition: all ease 0.4s;
+}
+

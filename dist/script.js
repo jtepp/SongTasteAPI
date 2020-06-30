@@ -14,6 +14,13 @@ async function test() {
         .then(d => console.log(d))
 }
 
-test()
+// test()
 
-
+window.onscroll = () => {
+    const banner = document.getElementById('banner')
+    if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+        banner.style.height = "70px";
+    } else {
+        banner.style.height = "210px";
+    }
+}
