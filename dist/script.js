@@ -1,8 +1,37 @@
 var inp = {};
 var train = []
 var run = []
+const resClasses = ['header', 'footer', 'message', 'home-song-bar', 'home-song-box', 'nav-top', 'message', 'home-song-info']
 const banner = document.getElementById('banner')
 const spacer = document.getElementById("spacer")
+document.body.onresize = () => {
+    // console.log(screen.width)
+    resClasses.forEach(c => {
+        responsive(c, 'FR-' + c)
+    })
+}
+document.body.onload = document.body.onresize
+document.body.onresize()
+document.body.onresize()
+document.body.onresize()
+document.body.onresize()
+function responsive(wide, narrow) {
+    const w = document.getElementsByClassName(wide)
+    const n = document.getElementsByClassName(narrow)
+    if (screen.width < 750) {
+        for (e of w) {
+            e.classList.remove(wide)
+            e.classList.add(narrow)
+        }
+
+    } else {
+        for (e of n) {
+            e.classList.remove(narrow)
+            e.classList.add(add)
+        }
+    }
+}
+
 
 {// banner.style.height = "210px";
     // spacer.style.height = "210px";
