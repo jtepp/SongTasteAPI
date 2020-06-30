@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'keep_calm_medregular';
+    src: url('keepcalm-medium-webfont.woff2') format('woff2'),
+         url('keepcalm-medium-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'neufreitextrabold';
+    src: url('neufreit-extrabold-webfont.woff2') format('woff2'),
+         url('neufreit-extrabold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
