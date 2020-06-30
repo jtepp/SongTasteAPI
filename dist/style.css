@@ -1,10 +1,151 @@
+*{
+    margin:0;
+    padding:0;
+    font-family: 'tommy-soft';
+    font-weight: 2;
+}
+:root{
+    --bg: whitesmoke;
+}
+.container{
+    display: flex;
+    background: var(--bg);
+    height: 80vh;
+    justify-content: center;
+    overflow: hidden;
+}
+.contbox{
+    display: flex;
+    flex-direction: column;
+    background: silver;
+    width: 92vw;
+    margin-top: 20px;
+    margin-left: 4vw;
+    margin-right: 4vw;
+    min-width: 445px;
+    height: 70vh;
+    min-height: 400px;
+    /* max-height: fit-content; */
+}
+#footer{
+    background: RGB(150,150,150);
+
+transition: all ease 0.4s;
+font-size: 18pt;
+display: flex;
+flex-direction: row;
+justify-content: space-evenly;
+height: fit-content;
+}
+#footer:hover{
+    background: rgb(100, 100, 100);
+}
+.message{
+    line-height: 65px;
+}
+.message > b{
+    font-weight: 6;
+}
+
+.button{
+    color: white;
+    font-size: 18pt;
+    font-weight:2;
+    background: RGB(207, 0, 0);
+    border: solid black 1px;
+    height: 40px;
+    padding: 5px;
+    line-height: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: fit-content;
+    border-radius: 8px;
+    transition: all ease 0.4s;
+}
+.button:hover{
+    font-size: 22pt;
+    cursor: pointer;
+}
+@media(max-width:630px){
+    #footer{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}
+.rotate-box{
+    animation: rotation 2s infinite linear;
+    -webkit-animation: rotation 2s infinite linear;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+    top: 0;
+    height: fit-content;
+    background: whitesmoke;
+    /* background: rgb(255,255,0);
+    border-bottom: solid 2px black; */
+    transition: all ease 0.4s;
+    
+}
+
+@media(max-width: 750px){
+    header{
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+
+header:hover{
+    background: silver;
+    
+}
+
+header > img{
+    width:50vh;
+    height: 20vh;
+    /* transition: all ease 0.4s; */
+}
+
+header > img:hover{
+    cursor: pointer;
+    
+}
+#bar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.centerVertical{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.nav-top{
+    padding-right: 20px;
+    font-weight: 6;
+    font-style: oblique;
+    font-size: 20pt;
+    /* transition: all ease 0.4s; */
+    /* line-height: 6vh; */
+}
+
+.nav-top:hover{
+    font-style: normal;
+    cursor: pointer;
+}
+
 @font-face {
     font-family: 'keepcalm';
-    src: url('/assets/keepcalm-medium-webfont.woff2') format('woff2'),
-         url('/assets/keepcalm-medium-webfont.woff') format('woff');
+    src: url('assets/keepcalm-medium-webfont.woff2') format('woff2'),
+    url('assets/keepcalm-medium-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-
+    
 }
 
 @font-face {
@@ -15,27 +156,152 @@
     font-style: normal;
 
 }
-*{
-    margin:0;
-    padding:0;
-}
-.container{
-    background: darkslategray;
-    height: 4000px;
-    font-size: xx-large;
-}
-header{
-    width: 100%;
-    background: yellow;
-    position: fixed;
-    top: 0;
-    transition: all ease 0.4s;
-    
+@font-face {
+    font-family: 'tommy-soft';
+    src: url('assets/made_tommy_soft_black_outline_personal_use-webfont.woff2') format('woff2'),
+         url('assets/made_tommy_soft_black_outline_personal_use-webfont.woff') format('woff');
+    font-weight: 7;
+    font-style: oblique;
+
 }
 
-header > img{
-    
-    max-height: 210px;
-    transition: all ease 0.4s;
+
+
+
+@font-face {
+    font-family: 'tommy-soft';
+    src: url('assets/made_tommy_soft_black_personal_use-webfont.woff2') format('woff2'),
+         url('assets/made_tommy_soft_black_personal_use-webfont.woff') format('woff');
+    font-weight: 7;
+    font-style: normal;
+
 }
 
+
+
+
+@font-face {
+    font-family: 'tommy-soft';
+    src: url('assets/made_tommy_soft_bold_outline_personal_use-webfont.woff2') format('woff2'),
+         url('assets/made_tommy_soft_bold_outline_personal_use-webfont.woff') format('woff');
+    font-weight: 6;
+    font-style: oblique;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'tommy-soft';
+    src: url('assets/made_tommy_soft_bold_personal_use-webfont.woff2') format('woff2'),
+         url('assets/made_tommy_soft_bold_personal_use-webfont.woff') format('woff');
+    font-weight: 6;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'tommy-soft';
+    src: url('assets/made_tommy_soft_extrabold_outline_personal_use-webfont.woff2') format('woff2'),
+         url('assets/made_tommy_soft_extrabold_outline_personal_use-webfont.woff') format('woff');
+    font-weight: 5;
+    font-style: oblique;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'tommy-soft';
+    src: url('assets/made_tommy_soft_extrabold_personal_use-webfont.woff2') format('woff2'),
+         url('assets/made_tommy_soft_extrabold_personal_use-webfont.woff') format('woff');
+    font-weight: 5;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'tommy-soft';
+    src: url('assets/made_tommy_soft_light_outline_personal_use-webfont.woff2') format('woff2'),
+         url('assets/made_tommy_soft_light_outline_personal_use-webfont.woff') format('woff');
+    font-weight: 4;
+    font-style: oblique;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'tommy-soft';
+    src: url('assets/made_tommy_soft_light_personal_use-webfont.woff2') format('woff2'),
+         url('assets/made_tommy_soft_light_personal_use-webfont.woff') format('woff');
+    font-weight: 4;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'tommy-soft';
+    src: url('assets/made_tommy_soft_medium_outline_personal_use-webfont.woff2') format('woff2'),
+         url('assets/made_tommy_soft_medium_outline_personal_use-webfont.woff') format('woff');
+    font-weight: 3;
+    font-style: oblique;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'tommy-soft';
+    src: url('assets/made_tommy_soft_medium_personal_use-webfont.woff2') format('woff2'),
+         url('assets/made_tommy_soft_medium_personal_use-webfont.woff') format('woff');
+    font-weight: 3;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'tommy-soft';
+    src: url('assets/made_tommy_soft_regular_personal_use-webfont.woff2') format('woff2'),
+         url('assets/made_tommy_soft_regular_personal_use-webfont.woff') format('woff');
+    font-weight: 2;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'tommy-soft';
+    src: url('assets/made_tommy_soft_thin_personal_use-webfont.woff2') format('woff2'),
+         url('assets/made_tommy_soft_thin_personal_use-webfont.woff') format('woff');
+    font-weight: 1;
+    font-style: normal;
+
+}
+
+@keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  }
