@@ -36,10 +36,9 @@ exports.handler = function (event, context, callback) {
                 'Access-Control-Allow-Headers':
                     'Origin, X-Requested-With, Content-Type, Accept',
             },
-            body: `BAD REQUEST:
-            
-Please make sure your input JSON follows this template:
-{
+            body: JSON.stringify({
+                "error": "please make sure your input JSON follows this template",
+                "template": `{
     train: [
         { input: [Array], output: [Array] },
         { input: [Array], output: [Array] },
@@ -54,6 +53,9 @@ Please make sure your input JSON follows this template:
     ],
     run: [Array]
     }`
+            })
+
+
         })
     }
 
