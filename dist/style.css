@@ -41,7 +41,7 @@
     color: white;
     text-align: center;
 }
-.message > b{
+b{
     font-weight: 6;
 }
 
@@ -155,7 +155,7 @@ header > img:hover{
     .footer{
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: space-around;
     }
     .message{
         color: white;
@@ -195,7 +195,7 @@ header > img:hover{
 .FR-footer{
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 }
 .FR-message{
     color: white;
