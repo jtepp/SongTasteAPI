@@ -17,7 +17,7 @@
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    background: silver;
+    background: RGB(238, 238, 238);
     width: 90vw;
     margin-top: 20px;
     margin-left: 5vw;
@@ -68,24 +68,30 @@ b{
 .home-song-bar{
     display: flex;
     flex-direction: row;
+    overflow: hidden;
 }
 .home-song-box{
+    overflow: hidden;
     /* width: 100%; */
     /* justify-content: center; */
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    background: #eee;
+    background: RGB(238, 238, 238);
     height: fit-content;
-    transition: all ease 0.4s;
     align-items: center;
+    max-width: 30vw;
 }
 .home-song-box:hover{
-   background: #ccc;
+    background: RGB(200, 200, 200);
 }
 
+#song0{background-image: url('assets/BigLogo.png');}
+#song1{background-image: url('assets/BigLogo.png');}
+#song2{background-image: url('assets/BigLogo.png');}
+audio{display: none;}
 .song-image{
-    background-image: url('assets/BigLogo.png');
+    /*background-image: url('assets/BigLogo.png');*/
     width: 30vw;
     height: 351px;
     background-position: center;
@@ -93,11 +99,17 @@ b{
     border-radius: 50%;
     overflow: hidden;
     background-repeat: no-repeat;
+    
+    transition: all ease 0.4s;
+}
+.song-image:hover{
+    animation: rotation 6s linear infinite;
 }
 
 .home-song-info{
     text-align: center;
     font-size:18pt;
+    max-width: 30vw;
 }
 
 .rotate-box{
@@ -176,10 +188,12 @@ header > img:hover{
     }
     .home-song-bar{
         flex-direction: column;
+        overflow: hidden;
     }
     .home-song-box{
         width: 100%;
         height: 100%;
+        overflow: hidden;
     }
     .nav-top{
         padding-right: 20px;
@@ -195,10 +209,11 @@ header > img:hover{
     }
     .home-song-info{
         text-align: center;
-        font-size: 28pt;
+    font-size:28pt;
+    max-width: 30vw;
     }
     .song-image{
-        background-image: url('assets/BigLogo.png');
+        /*background-image: url('assets/BigLogo.png');*/
         width: 351px;
         height: 351px;
         background-position: center;
@@ -228,10 +243,12 @@ header > img:hover{
 }
 .FR-home-song-bar{
     flex-direction: column;
+    overflow: hidden;
 }
 .FR-home-song-box{
     width: 100%;
     height: 100%;
+    overflow: hidden;
 }
 .FR-nav-top{
     padding-right: 20px;
@@ -246,10 +263,11 @@ header > img:hover{
 }
 .FR-home-song-info{
     text-align: center;
-    font-size: 28pt;
+    font-size:28pt;
+    max-width: 30vw;
 }
 .FR-song-image{
-    background-image: url('assets/BigLogo.png');
+    /*background-image: url('assets/BigLogo.png');*/
     width: 351px;
     height: 351px;
     background-position: center;
@@ -271,8 +289,8 @@ header > img:hover{
 
 @font-face {
     font-family: 'neufreit';
-    src: url('/assets/neufreit-extrabold-webfont.woff2') format('woff2'),
-         url('/assets/neufreit-extrabold-webfont.woff') format('woff');
+    src: url('assets/neufreit-extrabold-webfont.woff2') format('woff2'),
+         url('assets/neufreit-extrabold-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
