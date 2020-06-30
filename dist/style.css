@@ -83,6 +83,18 @@ b{
 .home-song-box:hover{
    background: #ccc;
 }
+
+.song-image{
+    background-image: url('assets/BigLogo.png');
+    width: 30vw;
+    height: 351px;
+    background-position: center;
+    background-size: contain;
+    border-radius: 50%;
+    overflow: hidden;
+    background-repeat: no-repeat;
+}
+
 .home-song-info{
     text-align: center;
     font-size:18pt;
@@ -153,6 +165,7 @@ header > img:hover{
         align-items: center;
     }
     .footer{
+        background: RGB(150,150,150);
         flex-direction: column;
         align-items: center;
         justify-content: center;
@@ -184,6 +197,16 @@ header > img:hover{
         text-align: center;
         font-size: 28pt;
     }
+    .song-image{
+        background-image: url('assets/BigLogo.png');
+        width: 351px;
+        height: 351px;
+        background-position: center;
+        background-size: contain;
+        border-radius: 50%;
+        overflow: hidden;
+        background-repeat: no-repeat;
+    }
 }
 
 /* FORCED RESPONSIVENESS */
@@ -193,6 +216,7 @@ header > img:hover{
     align-items: center;
 }
 .FR-footer{
+    background: RGB(150,150,150);
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -224,7 +248,16 @@ header > img:hover{
     text-align: center;
     font-size: 28pt;
 }
-
+.FR-song-image{
+    background-image: url('assets/BigLogo.png');
+    width: 351px;
+    height: 351px;
+    background-position: center;
+    background-size: contain;
+    border-radius: 50%;
+    overflow: hidden;
+    background-repeat: no-repeat;
+}
 /* FORCED RESPONSIVENESS */
 
 @font-face {

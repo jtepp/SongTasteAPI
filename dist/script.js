@@ -1,7 +1,7 @@
 var inp = {};
 var train = []
 var run = []
-const resClasses = ['header', 'footer', 'message', 'home-song-bar', 'home-song-box', 'nav-top', 'message', 'home-song-info']
+const resClasses = ['header', 'footer', 'message', 'home-song-bar', 'home-song-box', 'nav-top', 'message', 'home-song-info', 'song-image']
 const banner = document.getElementById('banner')
 const spacer = document.getElementById("spacer")
 document.body.onresize = () => {
@@ -15,6 +15,25 @@ document.body.onresize()
 document.body.onresize()
 document.body.onresize()
 document.body.onresize()
+document.body.onresize()
+
+
+
+
+
+if (window.location.href.includes('index.html')) { //HOMEPAGE STARTUP
+
+}
+async function testSong() {
+    await fetch(`https://songtaste.netlify.app/.netlify/functions/app`, {
+        method: 'POST',
+        'content-type': 'application/json',
+        body: JSON.stringify(inp)
+        // mode: 'no-cors'
+    }).then(res => res.json())
+        .then(d => console.log(d))
+}
+
 function responsive(wide, narrow) {
     const w = document.getElementsByClassName(wide)
     const n = document.getElementsByClassName(narrow)
@@ -31,30 +50,3 @@ function responsive(wide, narrow) {
         }
     }
 }
-
-
-{// banner.style.height = "210px";
-    // spacer.style.height = "210px";
-    // window.onscroll = () => {
-
-    //     if (document.documentElement.scrollTop > 50) {
-    //         banner.style.height = "70px";
-    //         spacer.style.height = "120px";
-    //     } else {
-    //         banner.style.height = "210px";
-    //         spacer.style.height = "260px";
-    //     }
-    // }
-    // window.scrollTo(0, 0)}
-
-    async function test() {
-        await fetch(`https://songtaste.netlify.app/.netlify/functions/app`, {
-            method: 'POST',
-            'content-type': 'application/json',
-            body: JSON.stringify(inp)
-            // mode: 'no-cors'
-        }).then(res => res.json())
-            .then(d => console.log(d))
-    }
-}
-// test()
