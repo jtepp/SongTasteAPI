@@ -485,3 +485,7 @@ width: 100vw;
     zoom:1.0;
     width: 100vw;
 }
+
+body{
+    background: whitesmoke;
+}

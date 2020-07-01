@@ -5,7 +5,7 @@
 <head>
     <meta charset=“UTF-8”>
     <link rel="stylesheet" href="style.css">
-    <title>SongTaste</title>
+    <title>Home | SongTaste</title>
 </head>
 
 <body>
@@ -13,44 +13,44 @@
         <img src="assets/SongTasteBanner.png" alt="SongTaste" id="banner">
         <div class='centerVertical'>
             <div id="bar">
-                <div class="nav-top">Start</div>
-                <div class="nav-top">Guide</div>
-                <div class="nav-top">About</div>
-                <div class="nav-top">Contact</div>
+                <div class="nav-top" onclick='location.href = "app.html?s=random"'>Start</div>
+                <div class="nav-top" onclick='location.href = "guide.html"'>Guide</div>
+                <div class="nav-top" onclick='location.href = "about.html"'>About</div>
+                <div class="nav-top" onclick='location.href = "contact.html"'>Contact</div>
             </div>
         </div>
     </header>
-    <div class="container">
-        <div class="contbox">
-            <div class="footer" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                <div class="message">Start with one of these songs</div>
+
+    <div class="contbox">
+        <div class="footer" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+            <div class="message">Start with one of these songs</div>
+        </div>
+        <div class="home-song-bar">
+            <div class="home-song-box" id="box0">
+                <div class="song-image" id="song0"></div>
+                <div class="home-song-info" id="info0">Song Info<br>Artist Info</div>
             </div>
-            <div class="home-song-bar">
-                <div class="home-song-box">
-                    <div class="song-image" id="song0"></div>
-                    <div class="home-song-info" id="info0">Song Info<br>Artist Info</div>
-                </div>
-                <div class="home-song-box">
-                    <div class="song-image" id="song1"></div>
-                    <div class="home-song-info" id="info1">Song Info<br>Artist Info</div>
-                </div>
-                <div class="home-song-box">
-                    <div class="song-image" id="song2"></div>
-                    <div class="home-song-info" id="info2">Song Info<br>Artist Info</div>
-                </div>
+            <div class="home-song-box" id="box1">
+                <div class="song-image" id="song1"></div>
+                <div class="home-song-info" id="info1">Song Info<br>Artist Info</div>
+            </div>
+            <div class="home-song-box" id="box2">
+                <div class="song-image" id="song2"></div>
+                <div class="home-song-info" id="info2">Song Info<br>Artist Info</div>
+            </div>
 
 
-            </div>
-            <div class='centerVertical' style="margin-top: auto;">
-                <div class="footer" style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
-                    <div class="message">Harness the power of <b>Deep Learning</b></div>
-                    <center>
-                        <div class="button">Learn More</div>
-                    </center>
-                </div>
+        </div>
+        <div class='centerVertical' style="margin-top: auto;">
+            <div class="footer" style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+                <div class="message">Harness the power of <b>Deep Learning</b></div>
+                <center>
+                    <div class="button" onclick='location.href = "about.html"'>Learn More</div>
+                </center>
             </div>
         </div>
     </div>
+
     </div>
 
     <audio id="audio0"></audio>

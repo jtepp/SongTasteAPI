@@ -92,6 +92,8 @@ async function retrieveSong(q, spot, ind) {
                 frame.onmouseout = () => preview.pause()
                 label.innerHTML += '🔊'
             }
+            const box = document.getElementById('box' + ind)
+            box.onclick = () => location.href = "app.html?s=" + spot.id
         })
 }
 
