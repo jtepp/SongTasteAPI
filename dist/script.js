@@ -6,6 +6,8 @@ var inp = {};
 var train = []
 var run = []
 var IDList = []
+var mName = '';
+var mArtist = '';
 var allSongs = {
     "train": [],
     "break": "break",
@@ -14,7 +16,7 @@ var allSongs = {
 var responding = false;
 var homePreview = []
 var mainBox = {}
-const resClasses = ['header', 'footer', 'message', 'home-song-bar', 'home-song-box', 'nav-top', 'message', 'home-song-info', 'song-image', 'iframe']
+const resClasses = ['header', 'footer', 'message', 'home-song-bar', 'box', 'lame-image', 'home-song-box', 'nav-top', 'message', 'home-song-info', 'song-image', 'iframe', 'flexbutton']
 const banner = document.getElementById('banner')
 const spacer = document.getElementById("spacer")
 document.body.onresize = () => {
@@ -24,6 +26,7 @@ document.body.onresize = () => {
     })
 }
 document.body.onload = document.body.onresize
+document.body.onresize()
 document.body.onresize()
 document.body.onresize()
 document.body.onresize()
@@ -44,12 +47,16 @@ else if (window.location.href.includes('app.html')) {
 }
 
 async function asyncApp() {
+    await getToken()
     const initial = new URLSearchParams(window.location.search).get('s')
     if (initial == 'random') {
         await searchNew(randomWord(3))
     } else currentID = initial
-    embed('box', currentID)
+    embed('box-iframe', currentID)
     await retrieveFeatures(currentID, mainBox)
+    resClasses.forEach(c => {
+        responsive(c, 'FR-' + c)
+    })
 }
 
 async function APIcall() {
@@ -150,6 +157,7 @@ async function retrieveFeatures(id, spot) {
 function embed(container, id) {
     document.getElementById(container).innerHTML = `<iframe class="iframe" src="https://open.spotify.com/embed/track/${id}" class="top-frames"
 frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
+    console.log('done')
 
 }
 
@@ -186,3 +194,4 @@ function enable(b) {
     if (b) { e.style.top = '40%' }
     else e.style.top = '300%'
 }
+
