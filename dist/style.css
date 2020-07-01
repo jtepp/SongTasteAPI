@@ -82,11 +82,13 @@ b{
     height: fit-content;
     align-items: center;
     max-width: 30vw;
+    transition: all ease 0.4s;
 }
 .home-song-box:hover{
     background: RGB(200, 200, 200);
 }
 
+#song{background-image: url('assets/BigLogo.png');}
 #song0{background-image: url('assets/BigLogo.png');}
 #song1{background-image: url('assets/BigLogo.png');}
 #song2{background-image: url('assets/BigLogo.png');}
@@ -117,7 +119,7 @@ audio{display: none;}
 }
 
 
-header{
+.header{
     display: flex;
     justify-content: space-between;
     flex-direction: row;
@@ -181,6 +183,16 @@ header > img:hover{
     transition: all ease 0.4s;
 }
 
+
+.iframe{
+    width:30vw;
+    height:415px
+}
+
+
+
+
+
 @media(max-width: 750px){
     .header{
         flex-direction: column;
@@ -211,6 +223,7 @@ header > img:hover{
         height: fit-content;
         align-items: center;
         max-width: 100%;
+        transition: all ease 0.4s;
     }
     .nav-top{
         padding-right: 20px;
@@ -273,6 +286,7 @@ header > img:hover{
     flex-direction: column;
     height: fit-content;
     align-items: center;
+    transition: all ease 0.4s;
 }
 .FR-nav-top{
     padding-right: 20px;

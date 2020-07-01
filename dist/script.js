@@ -1,12 +1,20 @@
 const creds = "NGRjZDczOTlmNDk1NGUyYzhjNjc5ZjM4ZDFiYjE0MTk6ZWNmOWExODVjYzZjNDI4NmJkMjA3NTNhMThmZTVmYzU=";
 var wordLength = 3;
+var currentID = '';
 var key = "";
 var inp = {};
 var train = []
 var run = []
+var IDList = []
+var allSongs = {
+    "train": [],
+    "break": "break",
+    "run": []
+}
 var responding = false;
 var homePreview = []
-const resClasses = ['header', 'footer', 'message', 'home-song-bar', 'home-song-box', 'nav-top', 'message', 'home-song-info', 'song-image']
+var mainBox = {}
+const resClasses = ['header', 'footer', 'message', 'home-song-bar', 'home-song-box', 'nav-top', 'message', 'home-song-info', 'song-image', 'iframe']
 const banner = document.getElementById('banner')
 const spacer = document.getElementById("spacer")
 document.body.onresize = () => {
@@ -29,9 +37,21 @@ if (window.location.href.includes('index.html') || window.location.pathname == '
     retrieveSong(randomWord(wordLength), homePreview[0], '0')
     retrieveSong(randomWord(wordLength), homePreview[1], '1')
     retrieveSong(randomWord(wordLength), homePreview[2], '2')
-
+}
+else if (window.location.href.includes('app.html')) {
+    asyncApp()
 
 }
+
+async function asyncApp() {
+    const initial = new URLSearchParams(window.location.search).get('s')
+    if (initial == 'random') {
+        await searchNew(randomWord(3))
+    } else currentID = initial
+    embed('box', currentID)
+    await retrieveFeatures(currentID, mainBox)
+}
+
 async function APIcall() {
     await fetch(`https://songtaste.netlify.app/.netlify/functions/app`, {
         method: 'POST',
@@ -53,6 +73,21 @@ async function getToken() {
         .then(res => res.json())
         .then(data => { key = data['access_token'] })
     // console.log(key)
+}
+async function searchNew(q) {
+    await getToken()
+    await fetch(`https://api.spotify.com/v1/search?q=${q}&type=track&limit=1`, {//&offset=${Math.floor(Math.random() * 20)}`, {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "content-type": "application/json",
+            Authorization: `Bearer ${key}`,
+        }
+    })
+        .then(r => r.json())
+        .then(data => {
+            currentID = data.tracks.items[0].id
+        })
 }
 async function retrieveSong(q, spot, ind) {
     await getToken()
@@ -95,6 +130,27 @@ async function retrieveSong(q, spot, ind) {
             const box = document.getElementById('box' + ind)
             box.onclick = () => location.href = "app.html?s=" + spot.id
         })
+}
+
+async function retrieveFeatures(id, spot) {
+    await getToken()
+    await fetch(`https://api.spotify.com/v1/audio-features/${id}`, {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "content-type": "application/json",
+            Authorization: `Bearer ${key}`,
+        }
+    })
+        .then(r => r.json())
+        .then(data => spot = data)
+
+}
+
+function embed(container, id) {
+    document.getElementById(container).innerHTML = `<iframe class="iframe" src="https://open.spotify.com/embed/track/${id}" class="top-frames"
+frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
+
 }
 
 
