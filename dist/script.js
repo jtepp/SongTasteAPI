@@ -81,7 +81,6 @@ async function retrieveSong(q, spot, ind) {
             spot = data
 
             console.log(spot.album.images[0].url)
-            if (responding) { cls = 'FR-' + cls }
             const frame = document.getElementById('song' + ind)
             frame.setAttribute('style', 'background-image:url("' + spot.album.images[0].url + '")')
             const label = document.getElementById('info' + ind)
