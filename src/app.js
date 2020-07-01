@@ -17,7 +17,7 @@ exports.handler = function (event, context, callback) {
         const trainer = new Trainer(net)
         trainer.train(data.Atrain)
         const aa = net.activate(data.Crun)
-        console.log(true)
+        // console.log(true)
         console.log(aa)
         callback(null, {
             statusCode: 200,

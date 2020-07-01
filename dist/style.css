@@ -250,8 +250,9 @@ header > img:hover{
 
 
 .guess-box{
+    padding:5px;
     font-size: 20pt;
-    height: 40px;
+    height: fit-content;
     width: auto;
     margin-left: 35vw;
     margin-right: 35vw;
@@ -426,8 +427,9 @@ header > img:hover{
      transition: all ease 0.4s;
 }
 .FR-guess-box{
+    padding: 10px;
     font-size: 40pt;
-    height: 80px;
+    height: fit-content;
     width: auto;
     margin-left: 20vw;
     margin-right: 20vw;

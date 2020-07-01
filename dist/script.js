@@ -1,20 +1,37 @@
 const creds = "NGRjZDczOTlmNDk1NGUyYzhjNjc5ZjM4ZDFiYjE0MTk6ZWNmOWExODVjYzZjNDI4NmJkMjA3NTNhMThmZTVmYzU=";
 var failed = false;
+var searchClickCount = 0;
 var wordLength = 3;
 var currentID = '';
 var needMore = 3;
 var key = "";
 var inp = {};
+const threshold = 0.55
+var message = '';
 var train = []
 var run = []
 var IDList = []
 var mName = '';
 var mArtist = '';
 var returnedGuess = ''
+const searchID = document.getElementById('searchID');
 var allSongs = {
     "Atrain": [],
     "break": "break",
     "Crun": []
+}
+const responses = {
+    true: [
+        "You might like this one...",
+        "Give this one a listen!",
+        "I would recommend this one"
+    ],
+    false: [
+        "Not so sure about this one...",
+        "I'd skip this one if I were you",
+        "You might not like this one"
+    ]
+
 }
 var responding = false;
 var homePreview = []
@@ -137,6 +154,8 @@ async function searchSpecific(q) {
             .then(r => r.json())
             .then(data => {
                 currentID = data.tracks.items[0].id
+                embed('box-iframe', currentID)
+                retrieveFeatures(currentID)
                 if (IDList.includes(currentID)) { wordLength++; console.log('duplicate ID'); q = randomWord(wordLength) }
             })
     } while (IDList.includes(currentID))
@@ -287,11 +306,27 @@ async function songReact(like) {
     await retrieveFeatures(currentID)
     if (needMore >= 1) {
         needMore--;
-        document.getElementById('guessID').innerHTML = needMore + " more..."
+        document.getElementById('guessID').innerHTML = (needMore + 1) + " more..."
     } else {
-        console.log('here')
         await APIcall()
-        console.log(returnedGuess)
+        let curArray;
+        const liker = returnedGuess > threshold
+        if (liker) curArray = responses.true; else curArray = responses.false
+        console.log(liker)
+        do { message = curArray[Math.floor(Math.random() * curArray.length)] } while (message != document.getElementById('guessID').innerHTML)
+        document.getElementById('guessID').innerHTML = message
     }
     // console.log(allSongs)
 }
+
+searchID.addEventListener('click', () => {
+    if (searchClickCount == 0) { searchClickCount++; searchID.innerHTML = '' }
+})
+
+searchID.addEventListener('keypress', (e) => {
+    if (e.keyCode == 13) {
+        e.preventDefault()
+        searchSpecific(searchID.innerHTML)
+        searchID.innerHTML = ''
+    }
+})
