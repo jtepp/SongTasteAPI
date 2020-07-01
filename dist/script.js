@@ -36,7 +36,7 @@ const responses = {
 var responding = false;
 var homePreview = []
 var mainBox = {}
-const resClasses = ['header', 'footer', 'message', 'home-song-bar', 'box', 'guess-box', 'lame-image', 'home-song-box', 'nav-top', 'message', 'home-song-info', 'song-image', 'iframe', 'flexbutton']
+const resClasses = ['header', 'footer', 'home-song-bar', 'box', 'guess-box', 'lame-image', 'home-song-box', 'nav-top', 'message', 'home-song-info', 'song-image', 'iframe', 'flexbutton']
 const banner = document.getElementById('banner')
 const spacer = document.getElementById("spacer")
 document.body.onresize = () => {
@@ -53,7 +53,7 @@ document.body.onresize()
 document.body.onresize()
 document.body.onresize()
 
-
+document.getElementById('guessID').innerHTML = (needMore + 1) + " more..."
 
 
 if (window.location.href.includes('index.html') || window.location.pathname == '/') { //HOMEPAGE STARTUP
@@ -235,8 +235,9 @@ async function retrieveFeatures(id) {
 }
 
 function embed(container, id) {
-    document.getElementById(container).innerHTML = `<iframe class="iframe" src="https://open.spotify.com/embed/track/${id}" class="top-frames"
+    document.getElementById(container).innerHTML = `<iframe class="iframe" src="https://open.spotify.com/embed/track/${id}" class="${responding ? 'FR-' : ''}iframe"
 frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
+    document.body.onresize()
 
 }
 
@@ -312,8 +313,11 @@ async function songReact(like) {
         let curArray;
         const liker = returnedGuess > threshold
         if (liker) curArray = responses.true; else curArray = responses.false
+        if (liker) document.getElementById('guessID').style.backgroundColor = "RGB(0,230,0)"
+        else document.getElementById('guessID').style.backgroundColor = "RGB(230,0,0)"
         console.log(liker)
-        do { message = curArray[Math.floor(Math.random() * curArray.length)] } while (message != document.getElementById('guessID').innerHTML)
+        do { message = curArray[Math.floor(Math.random() * curArray.length)] } while (message == document.getElementById('guessID').innerHTML)
+        console.log(message)
         document.getElementById('guessID').innerHTML = message
     }
     // console.log(allSongs)
