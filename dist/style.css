@@ -221,10 +221,32 @@ header > img:hover{
 }
 #like{
     background: RGB(0, 230, 0);
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
 }
 #dislike{
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
     background: RGB(230,0,0);
 }
+
+#guessID{
+    font-family: neufreit;
+    color:white;
+    text-align: center;
+}
+
+.guess-box{
+    font-size: 20pt;
+    background-color: silver;
+    height: 40px;
+    width: auto;
+    margin-left: 35vw;
+    margin-right: 35vw;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
 
 @media(max-width: 750px){
     .header{
@@ -391,6 +413,16 @@ header > img:hover{
      background-repeat: no-repeat;
      
      transition: all ease 0.4s;
+}
+.FR-guess-box{
+    font-size: 40pt;
+    background-color: silver;
+    height: 80px;
+    width: auto;
+    margin-left: 20vw;
+    margin-right: 20vw;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
 }
 /* FORCED RESPONSIVENESS */
 

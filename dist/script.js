@@ -1,6 +1,8 @@
 const creds = "NGRjZDczOTlmNDk1NGUyYzhjNjc5ZjM4ZDFiYjE0MTk6ZWNmOWExODVjYzZjNDI4NmJkMjA3NTNhMThmZTVmYzU=";
+var failed = false;
 var wordLength = 3;
 var currentID = '';
+var needMore = 3;
 var key = "";
 var inp = {};
 var train = []
@@ -8,6 +10,7 @@ var run = []
 var IDList = []
 var mName = '';
 var mArtist = '';
+var returnedGuess = ''
 var allSongs = {
     "Atrain": [],
     "break": "break",
@@ -16,7 +19,7 @@ var allSongs = {
 var responding = false;
 var homePreview = []
 var mainBox = {}
-const resClasses = ['header', 'footer', 'message', 'home-song-bar', 'box', 'lame-image', 'home-song-box', 'nav-top', 'message', 'home-song-info', 'song-image', 'iframe', 'flexbutton']
+const resClasses = ['header', 'footer', 'message', 'home-song-bar', 'box', 'guess-box', 'lame-image', 'home-song-box', 'nav-top', 'message', 'home-song-info', 'song-image', 'iframe', 'flexbutton']
 const banner = document.getElementById('banner')
 const spacer = document.getElementById("spacer")
 document.body.onresize = () => {
@@ -63,10 +66,10 @@ async function APIcall() {
     await fetch(`https://songtaste.netlify.app/.netlify/functions/app`, {
         method: 'POST',
         'content-type': 'application/json',
-        body: JSON.stringify(inp)
+        body: JSON.stringify(allSongs)
         // mode: 'no-cors'
     }).then(res => res.json())
-        .then(d => console.log(d))
+        .then(d => returnedGuess = d)
 }
 async function getToken() {
     await fetch(`https://accounts.spotify.com/api/token`, {
@@ -99,8 +102,9 @@ async function searchNew(q) {
 
 async function searchLater(q) {
     do {
+        failed = false;
         await getToken()
-        await fetch(`https://api.spotify.com/v1/search?q=${q}&type=track&limit=1&offset=${Math.floor(Math.random() * 20)}`, {
+        await fetch(`https://api.spotify.com/v1/search?q=${q}&type=track&limit=1&offset=${Math.floor(Math.random() * 30)}`, {
             method: "GET",
             headers: {
                 Accept: "application/json",
@@ -111,7 +115,29 @@ async function searchLater(q) {
             .then(r => r.json())
             .then(data => {
                 currentID = data.tracks.items[0].id
-                if (IDList.includes(currentID)) wordLength++;
+                if (IDList.includes(currentID)) { wordLength++; console.log('duplicate ID'); q = randomWord(wordLength) }
+            }).catch(() => {
+                failed = true;
+                q = randomWord(wordLength);
+            }
+            )
+    } while (IDList.includes(currentID) || failed)
+}
+async function searchSpecific(q) {
+    do {
+        await getToken()
+        await fetch(`https://api.spotify.com/v1/search?q=${q}&type=track&limit=1`, {
+            method: "GET",
+            headers: {
+                Accept: "application/json",
+                "content-type": "application/json",
+                Authorization: `Bearer ${key}`,
+            }
+        })
+            .then(r => r.json())
+            .then(data => {
+                currentID = data.tracks.items[0].id
+                if (IDList.includes(currentID)) { wordLength++; console.log('duplicate ID'); q = randomWord(wordLength) }
             })
     } while (IDList.includes(currentID))
 }
@@ -159,7 +185,7 @@ async function retrieveSong(q, spot, ind) {
         })
 }
 
-async function retrieveFeatures(id, spot) {
+async function retrieveFeatures(id) {
     await getToken()
     await fetch(`https://api.spotify.com/v1/audio-features/${id}`, {
         method: "GET",
@@ -170,14 +196,28 @@ async function retrieveFeatures(id, spot) {
         }
     })
         .then(r => r.json())
-        .then(data => spot = data)
+        .then(data => {
+            console.log(data)
+            mainBox = data;
+            allSongs.Crun = [
+                data.acousticness,
+                data.danceability,
+                data.duration_ms,
+                data.energy,
+                data.instrumentalness,
+                data.liveness,
+                data.speechiness,
+                data.tempo,
+                data.valence
+            ]
+
+        })
 
 }
 
 function embed(container, id) {
     document.getElementById(container).innerHTML = `<iframe class="iframe" src="https://open.spotify.com/embed/track/${id}" class="top-frames"
 frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
-    console.log('done')
 
 }
 
@@ -243,7 +283,15 @@ async function songReact(like) {
         ]
     })
     await searchLater(randomWord(wordLength))
-    await retrieveFeatures(currentID, mainBox)
     embed('box-iframe', currentID)
-    console.log(allSongs)
+    await retrieveFeatures(currentID)
+    if (needMore >= 1) {
+        needMore--;
+        document.getElementById('guessID').innerHTML = needMore + " more..."
+    } else {
+        console.log('here')
+        await APIcall()
+        console.log(returnedGuess)
+    }
+    // console.log(allSongs)
 }

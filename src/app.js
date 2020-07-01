@@ -1,4 +1,5 @@
 exports.handler = function (event, context, callback) {
+    console.log(event.body)
     try {
 
         const synaptic = require('synaptic'); // this line is not needed in the browser
