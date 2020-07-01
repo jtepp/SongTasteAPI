@@ -231,20 +231,31 @@ header > img:hover{
 }
 
 #guessID{
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
     font-family: neufreit;
     color:white;
     text-align: center;
+    background-color: RGB(146, 146, 146);
 }
+
+#searchID{
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    font-family: neufreit;
+    color:white;
+    text-align: center;
+    background-color: RGB(146, 146, 146);
+}
+
 
 .guess-box{
     font-size: 20pt;
-    background-color: silver;
     height: 40px;
     width: auto;
     margin-left: 35vw;
     margin-right: 35vw;
-    border-bottom-right-radius: 30px;
-    border-bottom-left-radius: 30px;
+
 }
 
 
@@ -416,13 +427,10 @@ header > img:hover{
 }
 .FR-guess-box{
     font-size: 40pt;
-    background-color: silver;
     height: 80px;
     width: auto;
     margin-left: 20vw;
     margin-right: 20vw;
-    border-bottom-right-radius: 30px;
-    border-bottom-left-radius: 30px;
 }
 /* FORCED RESPONSIVENESS */
 

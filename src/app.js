@@ -17,6 +17,7 @@ exports.handler = function (event, context, callback) {
         const trainer = new Trainer(net)
         trainer.train(data.train)
         const aa = net.activate(data.run)
+        console.log(true)
         console.log(aa)
         callback(null, {
             statusCode: 200,
@@ -29,6 +30,7 @@ exports.handler = function (event, context, callback) {
             body: JSON.stringify(aa[0])
         })
     } catch (e) {
+        console.log("failed")
         callback(null, {
             statusCode: 206,
             headers: {
