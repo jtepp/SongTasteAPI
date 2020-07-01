@@ -53,7 +53,6 @@ document.body.onresize()
 document.body.onresize()
 document.body.onresize()
 
-document.getElementById('guessID').innerHTML = (needMore + 1) + " more..."
 
 
 if (window.location.href.includes('index.html') || window.location.pathname == '/') { //HOMEPAGE STARTUP
@@ -62,6 +61,7 @@ if (window.location.href.includes('index.html') || window.location.pathname == '
     retrieveSong(randomWord(wordLength), homePreview[2], '2')
 }
 else if (window.location.href.includes('app.html')) {
+    document.getElementById('guessID').innerHTML = (needMore + 1) + " more..."
     asyncApp()
 
 }
