@@ -208,15 +208,32 @@ header > img:hover{
 }
 .flexbutton{
     width: 35vw;
-    line-height: 100%;
-    background: blue;
+    line-height: 415px;
+    font-family: neufreit;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    font-size: 4vw;
+    transition: all ease 0.4s;
 }
-
+.flexbutton:hover{
+    font-size: 6vw;
+}
+#like{
+    background: RGB(0, 230, 0);
+}
+#dislike{
+    background: RGB(230,0,0);
+}
 
 @media(max-width: 750px){
     .header{
         flex-direction: column;
         align-items: center;
+    }
+    #banner{
+        width:100%;
+        height:auto;
     }
     .footer{
         background: RGB(150,150,150);
@@ -273,7 +290,7 @@ header > img:hover{
         background-repeat: no-repeat;
     }
     .iframe{
-        width:60vw;
+        width:30vw;
         height:415px
     }
 }
@@ -349,9 +366,20 @@ header > img:hover{
 }
 .FR-flexbutton{
     width: 20vw;
-    line-height: 100%;
-    background: blue;
+    line-height: 600px;
+    font-family: neufreit;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    font-size: 3vw;
+    transition: all ease 0.4s;
+    word-wrap: break-word;
 }
+.FR-flexbutton:hover{
+    font-size: 4vw;
+}
+
+
 .FR-lame-image{
      /*background-image: url('assets/BigLogo.png');*/
      width: 60vw;

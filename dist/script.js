@@ -9,9 +9,9 @@ var IDList = []
 var mName = '';
 var mArtist = '';
 var allSongs = {
-    "train": [],
+    "Atrain": [],
     "break": "break",
-    "run": []
+    "Crun": []
 }
 var responding = false;
 var homePreview = []
@@ -96,6 +96,26 @@ async function searchNew(q) {
             currentID = data.tracks.items[0].id
         })
 }
+
+async function searchLater(q) {
+    do {
+        await getToken()
+        await fetch(`https://api.spotify.com/v1/search?q=${q}&type=track&limit=1&offset=${Math.floor(Math.random() * 20)}`, {
+            method: "GET",
+            headers: {
+                Accept: "application/json",
+                "content-type": "application/json",
+                Authorization: `Bearer ${key}`,
+            }
+        })
+            .then(r => r.json())
+            .then(data => {
+                currentID = data.tracks.items[0].id
+                if (IDList.includes(currentID)) wordLength++;
+            })
+    } while (IDList.includes(currentID))
+}
+
 async function retrieveSong(q, spot, ind) {
     await getToken()
     await fetch(`https://api.spotify.com/v1/search?q=${q}&type=track&limit=1`, {//&offset=${Math.floor(Math.random() * 20)}`, {
@@ -194,4 +214,36 @@ function enable(b) {
     if (b) { e.style.top = '40%' }
     else e.style.top = '300%'
 }
+// acousticness: 0.00321,
+//     danceability: 0.451,
+//         duration_ms: 226336,
+//             energy: 0.661,
+//                 instrumentalness: 0,
+//                     liveness: 0.108,
+//                         speechiness: 0.0976,
+//                             tempo: 180.133,
+//                                 valence: 0.444
 
+async function songReact(like) {
+    IDList.push(currentID)
+    allSongs.Atrain.push({
+        "input": [
+            mainBox.acousticness,
+            mainBox.danceability,
+            mainBox.duration_ms,
+            mainBox.energy,
+            mainBox.instrumentalness,
+            mainBox.liveness,
+            mainBox.speechiness,
+            mainBox.tempo,
+            mainBox.valence
+        ],
+        "output": [
+            like
+        ]
+    })
+    await searchLater(randomWord(wordLength))
+    await retrieveFeatures(currentID, mainBox)
+    embed('box-iframe', currentID)
+    console.log(allSongs)
+}
