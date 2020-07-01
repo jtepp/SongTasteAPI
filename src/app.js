@@ -15,8 +15,8 @@ exports.handler = function (event, context, callback) {
 
         const net = new Architect.Perceptron(9, 7, 6, 1)
         const trainer = new Trainer(net)
-        trainer.train(data.train)
-        const aa = net.activate(data.run)
+        trainer.train(data.Atrain)
+        const aa = net.activate(data.Crun)
         console.log(true)
         console.log(aa)
         callback(null, {
