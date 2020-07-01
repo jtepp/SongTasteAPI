@@ -24,8 +24,8 @@ document.body.onresize()
 
 
 
-console.log(window)
-if (window.location.href.includes('index.html')) { //HOMEPAGE STARTUP
+
+if (window.location.href.includes('index.html') || window.location.pathname == '/') { //HOMEPAGE STARTUP
     retrieveSong(randomWord(wordLength), homePreview[0], '0')
     retrieveSong(randomWord(wordLength), homePreview[1], '1')
     retrieveSong(randomWord(wordLength), homePreview[2], '2')
