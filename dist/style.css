@@ -46,6 +46,7 @@ b{
 }
 
 .button{
+    text-align: center;
     color: white;
     font-size: 18pt;
     font-weight:2;
@@ -169,6 +170,16 @@ header > img:hover{
     cursor: pointer;
 }
 
+#enable{
+    padding: 20px;
+    position: fixed;
+    top:300%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    width:fit-content;
+    height: fit-content;
+    transition: all ease 0.4s;
+}
 
 @media(max-width: 750px){
     .header{

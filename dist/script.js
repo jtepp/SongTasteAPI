@@ -85,10 +85,10 @@ async function retrieveSong(q, spot, ind) {
             frame.setAttribute('style', 'background-image:url("' + spot.album.images[0].url + '")')
             const label = document.getElementById('info' + ind)
             label.innerHTML = `${spot.name}<br>${spot.artists[0].name}`
-            if (spot.preview_url) {
+            if (spot.preview_url && !responding) {
                 const preview = document.getElementById('audio' + ind)
                 preview.setAttribute('src', spot.preview_url)
-                frame.onmouseenter = () => preview.play().catch((e) => { alert("Click before playing preview") })
+                frame.onmouseenter = () => preview.play().catch((e) => { enable(true) })
                 frame.onmouseout = () => preview.pause()
                 label.innerHTML += '🔊'
             }
@@ -122,4 +122,9 @@ function randomWord(len) {
         str += lows[Math.floor(Math.random() * lows.length)]
     }
     return str;
+}
+function enable(b) {
+    const e = document.getElementById('enable')
+    if (b) { e.style.top = '40%' }
+    else e.style.top = '300%'
 }
