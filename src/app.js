@@ -30,7 +30,7 @@ exports.handler = function (event, context, callback) {
             body: JSON.stringify(aa[0])
         })
     } catch (e) {
-        console.log("failed")
+        console.log("failed" + e)
         callback(null, {
             statusCode: 206,
             headers: {
