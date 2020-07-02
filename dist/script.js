@@ -3,19 +3,20 @@ var failed = false;
 var searchClickCount = 0;
 var wordLength = 3;
 var currentID = '';
-var needMore = 3;
+var needMore = 4;
+var needPlaylist = 9;
 var key = "";
 var inp = {};
 const threshold = 0.55
 var message = '';
 var train = []
 var run = []
-var IDList = []
 var mName = '';
 var mArtist = '';
 var returnedGuess = ''
 const searchID = document.getElementById('searchID');
 var allSongs = {
+    "IDList": [],
     "Atrain": [],
     "break": "break",
     "Crun": []
@@ -62,6 +63,18 @@ if (window.location.href.includes('index.html') || window.location.pathname == '
 }
 else if (window.location.href.includes('app.html')) {
     document.getElementById('guessID').innerHTML = (needMore + 1) + " more..."
+
+    searchID.addEventListener('click', () => {
+        if (searchClickCount == 0) { searchClickCount++; searchID.innerHTML = '' }
+    })
+
+    searchID.addEventListener('keypress', (e) => {
+        if (e.keyCode == 13) {
+            e.preventDefault()
+            searchSpecific(searchID.innerHTML)
+            searchID.innerHTML = ''
+        }
+    })
     asyncApp()
 
 }
@@ -132,13 +145,13 @@ async function searchLater(q) {
             .then(r => r.json())
             .then(data => {
                 currentID = data.tracks.items[0].id
-                if (IDList.includes(currentID)) { wordLength++; console.log('duplicate ID'); q = randomWord(wordLength) }
+                if (allSongs.IDList.includes(currentID)) { wordLength++; console.log('duplicate ID'); q = randomWord(wordLength) }
             }).catch(() => {
                 failed = true;
                 q = randomWord(wordLength);
             }
             )
-    } while (IDList.includes(currentID) || failed)
+    } while (allSongs.IDList.includes(currentID) || failed)
 }
 async function searchSpecific(q) {
     do {
@@ -154,11 +167,25 @@ async function searchSpecific(q) {
             .then(r => r.json())
             .then(data => {
                 currentID = data.tracks.items[0].id
-                embed('box-iframe', currentID)
-                retrieveFeatures(currentID)
-                if (IDList.includes(currentID)) { wordLength++; console.log('duplicate ID'); q = randomWord(wordLength) }
+                if (allSongs.IDList.includes(currentID)) { wordLength++; console.log('duplicate ID'); q = randomWord(wordLength) } else {
+
+                    embed('box-iframe', currentID)
+                    retrieveFeatures(currentID)
+                    if (needMore < 1) {
+                        APIcall()
+                        let curArray;
+                        const liker = returnedGuess > threshold
+                        if (liker) curArray = responses.true; else curArray = responses.false
+                        if (liker) document.getElementById('guessID').style.backgroundColor = "RGB(0,230,0)"
+                        else document.getElementById('guessID').style.backgroundColor = "RGB(230,0,0)"
+                        // console.log(liker)
+                        do { message = curArray[Math.floor(Math.random() * curArray.length)] } while (message == document.getElementById('guessID').innerHTML)
+                        console.log(message)
+                        document.getElementById('guessID').innerHTML = message
+                    }
+                }
             })
-    } while (IDList.includes(currentID))
+    } while (allSongs.IDList.includes(currentID))
 }
 
 async function retrieveSong(q, spot, ind) {
@@ -285,7 +312,7 @@ function enable(b) {
 //                                 valence: 0.444
 
 async function songReact(like) {
-    IDList.push(currentID)
+    allSongs.IDList.push(currentID)
     allSongs.Atrain.push({
         "input": [
             mainBox.acousticness,
@@ -303,7 +330,6 @@ async function songReact(like) {
         ]
     })
     await searchLater(randomWord(wordLength))
-    embed('box-iframe', currentID)
     await retrieveFeatures(currentID)
     if (needMore >= 1) {
         needMore--;
@@ -315,22 +341,38 @@ async function songReact(like) {
         if (liker) curArray = responses.true; else curArray = responses.false
         if (liker) document.getElementById('guessID').style.backgroundColor = "RGB(0,230,0)"
         else document.getElementById('guessID').style.backgroundColor = "RGB(230,0,0)"
-        console.log(liker)
+        // console.log(liker)
         do { message = curArray[Math.floor(Math.random() * curArray.length)] } while (message == document.getElementById('guessID').innerHTML)
         console.log(message)
         document.getElementById('guessID').innerHTML = message
     }
+    embed('box-iframe', currentID)
     // console.log(allSongs)
 }
+document.getElementById('input-file')
+    .addEventListener('change', getFile)
 
-searchID.addEventListener('click', () => {
-    if (searchClickCount == 0) { searchClickCount++; searchID.innerHTML = '' }
-})
-
-searchID.addEventListener('keypress', (e) => {
-    if (e.keyCode == 13) {
-        e.preventDefault()
-        searchSpecific(searchID.innerHTML)
-        searchID.innerHTML = ''
+function getFile(event) {
+    const input = event.target
+    if ('files' in input && input.files.length > 0) {
+        placeFileContent(
+            null,
+            input.files[0])
     }
-})
+}
+
+function placeFileContent(target, file) {
+    readFileContent(file).then(content => {
+        allSongs = JSON.parse(content);
+        console.log(allSongs)
+    }).catch(error => console.log(error))
+}
+
+function readFileContent(file) {
+    const reader = new FileReader()
+    return new Promise((resolve, reject) => {
+        reader.onload = event => resolve(event.target.result)
+        reader.onerror = error => reject(error)
+        reader.readAsText(file)
+    })
+}
