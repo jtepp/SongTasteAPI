@@ -29,7 +29,12 @@
         <div id="like" class="flexbutton" onclick="songReact(1)">Like</div>
     </div>
     <center>
-        <div class="guess-box" id="guessID">10 more...</div>
+        <div class="guess-box" id="guessID">
+            <div id="guessTEXT"></div>
+            <center>
+                <div class="button" id="automate">12 more...</div>
+            </center>
+        </div>
     </center>
     <center>
         <div id="download" class="button" onclick="download('SongTaste.json',JSON.stringify(allSongs))">Download current

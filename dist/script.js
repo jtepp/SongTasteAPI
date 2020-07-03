@@ -4,7 +4,7 @@ var searchClickCount = 0;
 var wordLength = 3;
 var currentID = '';
 var needMore = 4;
-var needPlaylist = 9;
+var needPlaylist = 11;
 var key = "";
 var inp = {};
 const threshold = 0.55
@@ -15,6 +15,7 @@ var mName = '';
 var mArtist = '';
 var returnedGuess = ''
 const searchID = document.getElementById('searchID');
+const automate = document.getElementById('automate');
 var allSongs = {
     "IDList": [],
     "Atrain": [],
@@ -62,7 +63,8 @@ if (window.location.href.includes('index.html') || window.location.pathname == '
     retrieveSong(randomWord(wordLength), homePreview[2], '2')
 }
 else if (window.location.href.includes('app.html')) {
-    document.getElementById('guessID').innerHTML = (needMore + 1) + " more..."
+    document.getElementById('guessTEXT').innerHTML = (needMore + 1) + " more..."
+    automate.innerHTML = (needPlaylist + 1) + " more..."
 
     searchID.addEventListener('click', () => {
         if (searchClickCount == 0) { searchClickCount++; searchID.innerHTML = '' }
@@ -73,6 +75,13 @@ else if (window.location.href.includes('app.html')) {
             e.preventDefault()
             searchSpecific(searchID.innerHTML)
             searchID.innerHTML = ''
+        }
+    })
+    automate.addEventListener('click', () => {
+        if (needPlaylist < 1) {
+
+
+            location.href = 'playlist.php'
         }
     })
     asyncApp()
@@ -181,7 +190,7 @@ async function searchSpecific(q) {
                         // console.log(liker)
                         do { message = curArray[Math.floor(Math.random() * curArray.length)] } while (message == document.getElementById('guessID').innerHTML)
                         console.log(message)
-                        document.getElementById('guessID').innerHTML = message
+                        document.getElementById('guessTEXT').innerHTML = message
                     }
                 }
             })
@@ -312,17 +321,6 @@ function enable(b) {
 //                                 valence: 0.444
 
 async function songReact(like) {
-    allSongs.Crun = [
-        data.acousticness,
-        data.danceability,
-        data.duration_ms,
-        data.energy,
-        data.instrumentalness,
-        data.liveness,
-        data.speechiness,
-        data.tempo,
-        data.valence
-    ]
     allSongs.IDList.push(currentID)
     allSongs.Atrain.push({
         "input": [
@@ -342,10 +340,26 @@ async function songReact(like) {
     })
     await searchLater(randomWord(wordLength))
     await retrieveFeatures(currentID)
+    automate.innerHTML = "Automate a playlist"
+    if (needPlaylist >= 1) {
+        needPlaylist--;
+        automate.innerHTML = (needPlaylist + 1) + " more..."
+    }
     if (needMore >= 1) {
         needMore--;
-        document.getElementById('guessID').innerHTML = (needMore + 1) + " more..."
+        document.getElementById('guessTEXT').innerHTML = (needMore + 1) + " more..."
     } else {
+        allSongs.Crun = [
+            mainBox.acousticness,
+            mainBox.danceability,
+            mainBox.duration_ms,
+            mainBox.energy,
+            mainBox.instrumentalness,
+            mainBox.liveness,
+            mainBox.speechiness,
+            mainBox.tempo,
+            mainBox.valence
+        ]
         await APIcall()
         let curArray;
         const liker = returnedGuess > threshold
@@ -353,9 +367,9 @@ async function songReact(like) {
         if (liker) document.getElementById('guessID').style.backgroundColor = "RGB(0,230,0)"
         else document.getElementById('guessID').style.backgroundColor = "RGB(230,0,0)"
         // console.log(liker)
-        do { message = curArray[Math.floor(Math.random() * curArray.length)] } while (message == document.getElementById('guessID').innerHTML)
+        do { message = curArray[Math.floor(Math.random() * curArray.length)] } while (message == document.getElementById('guessTEXT').innerHTML)
         console.log(message)
-        document.getElementById('guessID').innerHTML = message
+        document.getElementById('guessTEXT').innerHTML = message
     }
     embed('box-iframe', currentID)
     // console.log(allSongs)
