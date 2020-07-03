@@ -243,6 +243,7 @@ header > img:hover{
     color:white;
     text-align: center;
     background-color: RGB(146, 146, 146);
+    transition: all ease 0.4s;
 }
 
 #searchID{

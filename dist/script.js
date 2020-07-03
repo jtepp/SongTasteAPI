@@ -86,6 +86,8 @@ else if (window.location.href.includes('app.html')) {
     })
     document.getElementById('input-file')
         .addEventListener('change', getFile)
+    document.getElementById('input-file')
+        .addEventListener('change', () => { enable(true) })
     asyncApp()
 
 }
@@ -127,7 +129,7 @@ async function getToken() {
 }
 async function searchNew(q) {
     await getToken()
-    await fetch(`https://api.spotify.com/v1/search?q=${q}&type=track&limit=1`, {//&offset=${Math.floor(Math.random() * 20)}`, {
+    await fetch(`https://api.spotify.com/v1/search?q=${q}&type=track&limit=1&offset=${Math.floor(Math.random() * 5)}`, {
         method: "GET",
         headers: {
             Accept: "application/json",
