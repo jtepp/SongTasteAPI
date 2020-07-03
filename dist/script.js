@@ -14,6 +14,7 @@ var run = []
 var mName = '';
 var mArtist = '';
 var returnedGuess = ''
+const playlist = document.getElementById('playlist-view')
 const searchID = document.getElementById('searchID');
 const automate = document.getElementById('automate');
 var allSongs = {
@@ -63,6 +64,7 @@ if (window.location.href.includes('index.html') || window.location.pathname == '
     retrieveSong(randomWord(wordLength), homePreview[2], '2')
 }
 else if (window.location.href.includes('app.html')) {
+    document.getElementById('options').onmouseout()
     document.getElementById('guessTEXT').innerHTML = (needMore + 1) + " more..."
     automate.innerHTML = (needPlaylist + 1) + " more..."
 
@@ -78,16 +80,15 @@ else if (window.location.href.includes('app.html')) {
         }
     })
     automate.addEventListener('click', () => {
-        if (needPlaylist < 1) {
-
-
-            location.href = 'playlist.php'
-        }
+        playlist.style.height = '100vh'
+        playlist.scrollIntoView(true)
     })
     document.getElementById('input-file')
         .addEventListener('change', getFile)
     document.getElementById('input-file')
-        .addEventListener('change', () => { enable(true) })
+        .addEventListener('change', () => {
+            enable(true);
+        })
     asyncApp()
 
 }
@@ -389,14 +390,48 @@ function getFile(event) {
     }
 }
 
-function placeFileContent(target, file) {
+async function placeFileContent(target, file) {
     readFileContent(file).then(content => {
         allSongs = JSON.parse(content);
+        needMore = 4 - allSongs.IDList.length
+        needPlaylist = 4 - allSongs.IDList.length
+        automate.innerHTML = "Automate a playlist"
+        if (needPlaylist >= 1) {
+            needPlaylist--;
+            automate.innerHTML = (needPlaylist + 1) + " more..."
+        }
+        if (needMore >= 1) {
+            needMore--;
+            document.getElementById('guessTEXT').innerHTML = (needMore + 1) + " more..."
+        } else {
+            allSongs.Crun = [
+                mainBox.acousticness,
+                mainBox.danceability,
+                mainBox.duration_ms,
+                mainBox.energy,
+                mainBox.instrumentalness,
+                mainBox.liveness,
+                mainBox.speechiness,
+                mainBox.tempo,
+                mainBox.valence
+            ]
+            APIcall()
+            let curArray;
+            const liker = returnedGuess > threshold
+            if (liker) curArray = responses.true; else curArray = responses.false
+            if (liker) document.getElementById('guessID').style.backgroundColor = "RGB(0,230,0)"
+            else document.getElementById('guessID').style.backgroundColor = "RGB(230,0,0)"
+            // console.log(liker)
+            do { message = curArray[Math.floor(Math.random() * curArray.length)] } while (message == document.getElementById('guessTEXT').innerHTML)
+            console.log(message)
+            document.getElementById('guessTEXT').innerHTML = message
+        }
+
         console.log(allSongs)
     }).catch(error => console.log(error))
 }
 
-function readFileContent(file) {
+async function readFileContent(file) {
     const reader = new FileReader()
     return new Promise((resolve, reject) => {
         reader.onload = event => resolve(event.target.result)
