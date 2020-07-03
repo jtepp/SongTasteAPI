@@ -37,7 +37,7 @@ const responses = {
 var responding = false;
 var homePreview = []
 var mainBox = {}
-const resClasses = ['header', 'footer', 'home-song-bar', 'box', 'guess-box', 'lame-image', 'home-song-box', 'nav-top', 'message', 'home-song-info', 'song-image', 'iframe', 'flexbutton']
+const resClasses = ['header', 'footer', 'home-song-bar', 'button', 'box', 'guess-box', 'lame-image', 'home-song-box', 'nav-top', 'message', 'home-song-info', 'song-image', 'iframe', 'flexbutton']
 const banner = document.getElementById('banner')
 const spacer = document.getElementById("spacer")
 document.body.onresize = () => {
@@ -312,6 +312,17 @@ function enable(b) {
 //                                 valence: 0.444
 
 async function songReact(like) {
+    allSongs.Crun = [
+        data.acousticness,
+        data.danceability,
+        data.duration_ms,
+        data.energy,
+        data.instrumentalness,
+        data.liveness,
+        data.speechiness,
+        data.tempo,
+        data.valence
+    ]
     allSongs.IDList.push(currentID)
     allSongs.Atrain.push({
         "input": [
@@ -375,4 +386,16 @@ function readFileContent(file) {
         reader.onerror = error => reject(error)
         reader.readAsText(file)
     })
+}
+function download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
 }

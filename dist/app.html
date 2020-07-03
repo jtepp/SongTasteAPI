@@ -20,16 +20,25 @@
             </div>
         </div>
     </header>
-    <center><input type="file" name="" id="input-file" accept="application/JSON">
-        <a href="data:application/JSON" download="songs.json">Download current data</a>
+    <center>
+        <div class="guess-box" id="searchID" contenteditable="true">Search for a song...</div>
     </center>
-    <div class="guess-box" id="searchID" contenteditable="true">Search for a song...</div>
     <div class="box">
         <div id="dislike" class="flexbutton" onclick="songReact(0)">Don't Like</div>
         <div id="box-iframe" class="lame-image" style="background-image: url('assets/BigLogo.png');"></div>
         <div id="like" class="flexbutton" onclick="songReact(1)">Like</div>
     </div>
-    <div class="guess-box" id="guessID">10 more...</div>
+    <center>
+        <div class="guess-box" id="guessID">10 more...</div>
+    </center>
+    <center>
+        <div id="download" class="button" onclick="download('SongTaste.json',JSON.stringify(allSongs))">Download current
+            data</div>
+        <div class="button">
+            <label for="input-file">Upload data</label>
+            <input type="file" name="" id="input-file" accept="application/JSON" style="display: none;">
+        </div>
+    </center>
 
     <script src="script.js"></script>
 </body>

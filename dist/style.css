@@ -97,6 +97,7 @@ audio{display: none;}
     /*background-image: url('assets/BigLogo.png');*/
     width: 30vw;
     height: 30vw;
+    max-height: 351px;
     background-position: center;
     background-size: contain;
     /* border-radius: 50%; */
@@ -253,9 +254,10 @@ header > img:hover{
     padding:5px;
     font-size: 20pt;
     height: fit-content;
-    width: auto;
-    margin-left: 35vw;
-    margin-right: 35vw;
+    width: calc(30vw - 10px);
+
+    /* margin-left: 35vw; */
+    /* margin-right: 35vw; */
 
 }
 
@@ -412,12 +414,30 @@ header > img:hover{
 .FR-flexbutton:hover{
     font-size: 4vw;
 }
+.FR-button{
 
+    text-align: center;
+    color: white;
+    font-size: 36pt;
+    font-weight:2;
+    background: RGB(207, 0, 0);
+    border: solid black 1px;
+    height: 40px;
+    padding: 5px;
+    line-height: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: fit-content;
+    border-radius: 8px;
+    transition: all ease 0.4s;
+
+}
 
 .FR-lame-image{
      /*background-image: url('assets/BigLogo.png');*/
      width: 60vw;
      height: 60vw;
+     max-height: 351px;
      background-position: center;
      background-size: contain;
      /* border-radius: 50%; */
