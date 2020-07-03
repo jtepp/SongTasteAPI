@@ -45,6 +45,11 @@ b{
     font-weight: 6;
 }
 
+.formstuff{
+    margin-left: 2vw;
+    font-size: 20pt;
+}
+
 .button{
     text-align: center;
     color: white;
@@ -454,6 +459,11 @@ header > img:hover{
     margin-left: 20vw;
     margin-right: 20vw;
 }
+
+.FR-formstuff{
+    margin-left: 5vw;
+    font-size: 30pt;
+}
 /* FORCED RESPONSIVENESS */
 
 @font-face {
@@ -643,3 +653,8 @@ width: 100vw;
 body{
     background: whitesmoke;
 }
+
+div:empty:before {
+    content:attr(data-placeholder);
+    color:white
+  }

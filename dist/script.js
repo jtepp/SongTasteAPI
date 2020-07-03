@@ -38,7 +38,7 @@ const responses = {
 var responding = false;
 var homePreview = []
 var mainBox = {}
-const resClasses = ['header', 'footer', 'home-song-bar', 'button', 'box', 'guess-box', 'lame-image', 'home-song-box', 'nav-top', 'message', 'home-song-info', 'song-image', 'iframe', 'flexbutton']
+const resClasses = ['header', 'footer', 'home-song-bar', 'formstuff', 'button', 'box', 'guess-box', 'lame-image', 'home-song-box', 'nav-top', 'message', 'home-song-info', 'song-image', 'iframe', 'flexbutton']
 const banner = document.getElementById('banner')
 const spacer = document.getElementById("spacer")
 document.body.onresize = () => {
@@ -84,6 +84,8 @@ else if (window.location.href.includes('app.html')) {
             location.href = 'playlist.php'
         }
     })
+    document.getElementById('input-file')
+        .addEventListener('change', getFile)
     asyncApp()
 
 }
@@ -374,8 +376,7 @@ async function songReact(like) {
     embed('box-iframe', currentID)
     // console.log(allSongs)
 }
-document.getElementById('input-file')
-    .addEventListener('change', getFile)
+
 
 function getFile(event) {
     const input = event.target
