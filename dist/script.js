@@ -118,6 +118,11 @@ else if (window.location.href.includes('app.html')) {
             v.setAttribute('style', 'top: 3000px')
         }
     })
+    document.addEventListener('touchstart', (event) => {
+        if (v.getAttribute('style') == 'top: 50px' && !event.path.includes(v) && !event.path.includes(document.getElementById('viewdatabutton'))) {
+            v.setAttribute('style', 'top: 3000px')
+        }
+    })
     asyncApp()
 
 }
