@@ -122,7 +122,7 @@ else if (window.location.href.includes('app.html')) {
         //     if (v.getAttribute('style') == 'top: 50px' && !event.path.includes(v) && !event.path.includes(document.getElementById('viewdatabutton'))) {
         //         v.setAttribute('style', 'top: 3000px')
         //     }
-        alert(event.path)
+        alert(event.touches + " _ " + event.targetTouches)
     })
     asyncApp()
 
