@@ -119,10 +119,9 @@ else if (window.location.href.includes('app.html')) {
         }
     })
     document.addEventListener('touchstart', (event) => {
-        if (v.getAttribute('style') == 'top: 50px' && !event.touches[0].target.classList.includes('tap')) {
+        if (v.getAttribute('style') == 'top: 50px' && !event.touches[0].target.getAttribute('class').includes('tap')) {
             v.setAttribute('style', 'top: 3000px')
         }
-
     })
     asyncApp()
 
