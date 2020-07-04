@@ -114,12 +114,14 @@ else if (window.location.href.includes('app.html')) {
 
         })
     document.addEventListener('click', (event) => {
-        if (v.getAttribute('style') == 'top: 50px' && !event.path.includes(v) && !event.path.includes(document.getElementById('viewdatabutton'))) {
-            v.setAttribute('style', 'top: 3000px')
-        }
+        // if (v.getAttribute('style') == 'top: 50px' && !event.path.includes(v) && !event.path.includes(document.getElementById('viewdatabutton'))) {
+        //     v.setAttribute('style', 'top: 3000px')
+        // }
     })
     document.addEventListener('touchstart', (event) => {
-        if (v.getAttribute('style') == 'top: 50px' && !event.touches[0].target.getAttribute('class').includes('tap')) {
+        let tapp = false;
+        try { tapp = event.touches[0].target.getAttribute('class').includes('tap') } catch (e) { tapp = false; }
+        if (v.getAttribute('style') == 'top: 50px' && !tapp) {
             v.setAttribute('style', 'top: 3000px')
         }
     })
