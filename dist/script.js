@@ -109,13 +109,13 @@ else if (window.location.href.includes('app.html')) {
     document.getElementById('input-file')
         .addEventListener('change', () => {
             // enable(true);
-            v.innerHTML = `<center>
+            v.innerHTML = ` <center>
             <div id="currentheader" class="tap">Your info</div>
         </center>
-        <div id="currentflex"class=" tap">
+        <div id="currentflex" class="tap">
             <div id="badlist" class="dataviewlist tap">
 
-                <h1>Disliked
+                <h1 class="tap" id="dislikedh1">Disliked
                 </h1>
 
 
@@ -123,7 +123,7 @@ else if (window.location.href.includes('app.html')) {
 
             </div>
             <div id="goodlist" class="dataviewlist tap">
-                <h1>Liked
+                <h1 class="tap" id="likedh1">Liked
                 </h1>
             </div>
 
@@ -132,6 +132,8 @@ else if (window.location.href.includes('app.html')) {
         })
     document.getElementById('viewdatabutton').addEventListener('mouseup', () => {
         toggleDataview()
+        document.getElementById('likedh1').innerHTML = `Liked (${likelist.length})`
+        document.getElementById('dislikedh1').innerHTML = `Disiked (${hatelist.length})`
     })
 
     document.addEventListener('mousedown', (event) => {
@@ -580,18 +582,35 @@ function download(filename, text) {
     document.body.removeChild(element);
 }
 
+//remove from likelist, IDList (index), Atrain (index)
+function removeFromView(id) {
+    document.getElementById(id).parentNode.removeChild(document.getElementById(id))
+    likelist = likelist.filter(e => e.id != id)
+    hatelist = hatelist.filter(e => e.id != id)
+    document.getElementById('likedh1').innerHTML = `Liked (${likelist.length})`
+    document.getElementById('dislikedh1').innerHTML = `Disiked (${hatelist.length})`
+    const i = allSongs.IDList.indexOf(id)
+    allSongs.IDList = allSongs.IDList.slice(0, i).concat(allSongs.IDList.slice(i + 1, allSongs.IDList.length))
+    allSongs.Atrain = allSongs.Atrain.slice(0, i).concat(allSongs.Atrain.slice(i + 1, allSongs.Atrain.length))
+}
+
+
 function returnHTMLfordataview(obj) {
+    const aa = document.createElement('div')
+    aa.setAttribute('style', 'display: flex; flex-direction:row;')
+
     const di = document.createElement('div')
     di.setAttribute('class', 'dataitem tap')
-    di.setAttribute('data-id', obj.id)
-    di.onclick = () => window.open(`https://open.spotify.com/track/${obj.id}`, '_blank').focus()
+    di.setAttribute('id', obj.id)
 
     const dp = document.createElement('div')
     dp.setAttribute('class', 'datapicture')
     dp.setAttribute('style', 'background-image:url(' + obj.img + ')')
+    dp.onclick = () => window.open(`https://open.spotify.com/track/${obj.id}`, '_blank').focus()
 
     const dt = document.createElement('div')
     dt.setAttribute('class', 'datatext')
+    dt.onclick = () => window.open(`https://open.spotify.com/track/${obj.id}`, '_blank').focus()
 
     const t = document.createElement('div')
     t.setAttribute('class', 'top')
@@ -602,11 +621,20 @@ function returnHTMLfordataview(obj) {
     b.innerHTML = obj.artist
 
 
+    const x = document.createElement('div')
+    x.setAttribute('class', 'tap datax')
+    const ff = document.createElement('div')
+    ff.setAttribute('class', 'centrevert')
+    ff.appendChild(x)
+    ff.onclick = () => removeFromView(obj.id)
+
     dt.appendChild(t)
     dt.appendChild(b)
 
-    di.appendChild(dp)
-    di.appendChild(dt)
+    aa.appendChild(dp)
+    aa.appendChild(dt)
+    di.appendChild(aa)
+    di.appendChild(ff)
 
     return di
 
@@ -623,19 +651,38 @@ function toggleDataview() {
 }
 
 async function startPlaylist(len) {
+    let counter = 0;
     listplay = []
     loadingPL = true;
     document.getElementById('loadingBar').style.display = 'block';
     while (listplay.length < len) {
+        if (counter >= 6 && listplay.length == 0) {
+            for (let i = 0; i < len; i++) {
+                listplay.push(null)
+            }
+            alert('Insufficient Data for Playlist Automation')
+        }
         barLength = (listplay.length / len) * 100
         console.log(barLength)
-        document.getElementById('barbar').style.width = 0 + '%'
+        document.getElementById('barbar').style.width = String(barLength) + '%'
         await getToken()
         await searchLater(randomWord(wordLength + 1))
         await retrieveFeatures(currentID)
+        allSongs.Crun = [
+            mainBox.acousticness,
+            mainBox.danceability,
+            mainBox.duration_ms,
+            mainBox.energy,
+            mainBox.instrumentalness,
+            mainBox.liveness,
+            mainBox.speechiness,
+            mainBox.tempo,
+            mainBox.valence
+        ]
         await APIcall()
         console.log(returnedGuess)
-        if (returnedGuess >= threshold) { listplay.push(currentID) } else console.log('didnt like ' + currentID)
+        if (returnedGuess >= 0.5) { listplay.push(currentID) } else console.log('didnt like ' + currentID)
+        counter++
     }
     loadingPL = false;
     document.getElementById('loadingBar').style.display = 'none';

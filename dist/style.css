@@ -351,6 +351,7 @@ header > img:hover{
     width: 50px;
     height: 50px;
     background-size: contain;
+    cursor: pointer;
 }
 .dataitem{
     border-radius: 10px;
@@ -358,14 +359,36 @@ header > img:hover{
     margin: 8px;
     display: flex;
     flex-direction: row;
-    cursor: pointer;
+    justify-content: space-between;
 }
 .datatext{
+    cursor: pointer;
     color: white;
     padding: 10px;
     display: flex;
     flex-direction: column;
     font-size: 14pt;
+}
+.top{
+    font-weight: 3;
+}
+.bottom{
+    font-weight: 1;
+}
+.datax{
+    cursor: pointer;
+    margin: 10px;
+    background-image: url(assets/xbutt.png);
+    height: 20px;
+    width: 20px;
+    background-position: center;
+    background-size: contain;
+}
+.centrevert{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    
 }
 #currentflex{
     display: grid;
