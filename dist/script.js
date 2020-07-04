@@ -119,10 +119,9 @@ else if (window.location.href.includes('app.html')) {
         }
     })
     document.addEventListener('touchstart', (event) => {
-        //     if (v.getAttribute('style') == 'top: 50px' && !event.path.includes(v) && !event.path.includes(document.getElementById('viewdatabutton'))) {
-        //         v.setAttribute('style', 'top: 3000px')
-        //     }
-        alert(event.touches + " _ " + event.targetTouches)
+        if (v.getAttribute('style') == 'top: 50px' && !event.touches[0].includes(v) && !event.touches[0].includes(document.getElementById('viewdatabutton'))) {
+            v.setAttribute('style', 'top: 3000px')
+        }
     })
     asyncApp()
 
