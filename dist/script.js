@@ -119,9 +119,10 @@ else if (window.location.href.includes('app.html')) {
         }
     })
     document.addEventListener('touchstart', (event) => {
-        if (v.getAttribute('style') == 'top: 50px' && !event.touches[0].target == (v) && !event.touches[0].target == (document.getElementById('viewdatabutton'))) {
-            v.setAttribute('style', 'top: 3000px')
-        }
+        // if (v.getAttribute('style') == 'top: 50px' && !event.touches[0].target == (v) && !event.touches[0].target == (document.getElementById('viewdatabutton'))) {
+        //     v.setAttribute('style', 'top: 3000px')
+        // }
+        console.log(event.touches[0].target)
     })
     asyncApp()
 
