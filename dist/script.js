@@ -3,8 +3,11 @@ var failed = false;
 var searchClickCount = 0;
 var wordLength = 3;
 var currentID = '';
+var barLength = 0;
+var loadingPL = false;
 var needMore = 4;
 var needPlaylist = 11;
+var listplay = []
 var key = "";
 var inp = {};
 const threshold = 0.55
@@ -68,6 +71,8 @@ if (window.location.href.includes('index.html') || window.location.pathname == '
     retrieveSong(randomWord(wordLength), homePreview[2], '2')
 }
 else if (window.location.href.includes('app.html')) {
+
+
     document.getElementById('options').onmouseout()
     document.getElementById('guessTEXT').innerHTML = (needMore + 1) + " more..."
     automate.innerHTML = (needPlaylist + 1) + " more..."
@@ -83,17 +88,29 @@ else if (window.location.href.includes('app.html')) {
             searchID.innerHTML = ''
         }
     })
+
+
     automate.addEventListener('click', () => {
-        playlist.style.height = '100vh'
-        playlist.scrollIntoView(true)
+        if (needPlaylist < 1) {
+            playlist.style.height = '100vh'
+            document.getElementById('playlistcontainer').style.height = '100vh'
+            document.getElementById('loadingBar').style.display = 'block'
+            playlist.scrollIntoView(true)
+            startPlaylist(10)
+        }
     })
+
+
+
+
+
     document.getElementById('input-file')
         .addEventListener('change', getFile)
     document.getElementById('input-file')
         .addEventListener('change', () => {
-            enable(true);
+            // enable(true);
             v.innerHTML = `<center>
-            <div id="currentheader tap">Your info</div>
+            <div id="currentheader" class="tap">Your info</div>
         </center>
         <div id="currentflex"class=" tap">
             <div id="badlist" class="dataviewlist tap">
@@ -113,8 +130,19 @@ else if (window.location.href.includes('app.html')) {
         </div>`;
 
         })
-    document.addEventListener('click', (event) => {
-        if (v.getAttribute('style') == 'top: 50px' && !event.path.includes(v) && !event.path.includes(document.getElementById('viewdatabutton'))) {
+    document.getElementById('viewdatabutton').addEventListener('mouseup', () => {
+        toggleDataview()
+    })
+
+    document.addEventListener('mousedown', (event) => {
+        // if (v.getAttribute('style') == 'top: 50px' && !event.path.includes(v) && !event.path.includes(document.getElementById('viewdatabutton'))) {
+        //     v.setAttribute('style', 'top: 3000px')
+        // }
+        let clicc = false;
+        let ass = event.target.getAttribute('class');
+        try { clicc = event.target.getAttribute('class').includes('tap') } catch (e) { clicc = false; }
+
+        if (v.getAttribute('style') == 'top: 50px' && !clicc) {
             v.setAttribute('style', 'top: 3000px')
         }
     })
@@ -125,6 +153,13 @@ else if (window.location.href.includes('app.html')) {
             v.setAttribute('style', 'top: 3000px')
         }
     })
+    document.getElementById('enable').addEventListener('click', () => {
+
+        enable();
+
+    })
+
+
     asyncApp()
 
 }
@@ -230,7 +265,7 @@ async function searchSpecific(q) {
                     if (needMore < 1) {
                         APIcall()
                         let curArray;
-                        const liker = returnedGuess > threshold
+                        const liker = returnedGuess >= threshold
                         if (liker) curArray = responses.true; else curArray = responses.false
                         if (liker) document.getElementById('guessID').style.backgroundColor = "RGB(0,230,0)"
                         else document.getElementById('guessID').style.backgroundColor = "RGB(230,0,0)"
@@ -323,6 +358,13 @@ frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
     document.body.onresize()
 
 }
+function embedPLAYLIST(container, id) {
+    document.getElementById(container).innerHTML += `<br><iframe class="playlist-iframe" src="https://open.spotify.com/embed/track/${id}" class="${responding ? 'FR-' : ''}iframe"
+frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe><br>`;
+    document.body.onresize()
+
+}
+
 
 
 
@@ -448,7 +490,7 @@ async function songReact(like) {
             ]
             await APIcall()
             let curArray;
-            const liker = returnedGuess > threshold
+            const liker = returnedGuess >= threshold
             if (liker) curArray = responses.true; else curArray = responses.false
             if (liker) document.getElementById('guessID').style.backgroundColor = "RGB(0,230,0)"
             else document.getElementById('guessID').style.backgroundColor = "RGB(230,0,0)"
@@ -500,7 +542,7 @@ async function placeFileContent(target, file) {
             ]
             APIcall()
             let curArray;
-            const liker = returnedGuess > threshold
+            const liker = returnedGuess >= threshold
             if (liker) curArray = responses.true; else curArray = responses.false
             if (liker) document.getElementById('guessID').style.backgroundColor = "RGB(0,230,0)"
             else document.getElementById('guessID').style.backgroundColor = "RGB(230,0,0)"
@@ -512,6 +554,7 @@ async function placeFileContent(target, file) {
         for (let i = 0; i < allSongs.IDList.length; i++) {
             reactingList(allSongs.IDList[i], allSongs.Atrain[i].output == 1 ? true : false)
         }
+        toggleDataview()
         console.log(allSongs)
     }).catch(error => console.log(error))
 }
@@ -539,7 +582,7 @@ function download(filename, text) {
 
 function returnHTMLfordataview(obj) {
     const di = document.createElement('div')
-    di.setAttribute('class', 'dataitem')
+    di.setAttribute('class', 'dataitem tap')
     di.setAttribute('data-id', obj.id)
     di.onclick = () => window.open(`https://open.spotify.com/track/${obj.id}`, '_blank').focus()
 
@@ -572,9 +615,31 @@ function returnHTMLfordataview(obj) {
 function toggleDataview() {
     switch (v.getAttribute('style')) {
         case 'top: 3000px': v.setAttribute('style', 'top: 50px'); break;
-        default:
+        default: console.log('defaulted')
         case 'top: 50px': v.setAttribute('style', 'top: 3000px');
     }
 
 
+}
+
+async function startPlaylist(len) {
+    listplay = []
+    loadingPL = true;
+    document.getElementById('loadingBar').style.display = 'block';
+    while (listplay.length < len) {
+        barLength = (listplay.length / len) * 100
+        console.log(barLength)
+        document.getElementById('barbar').style.width = 0 + '%'
+        await getToken()
+        await searchLater(randomWord(wordLength + 1))
+        await retrieveFeatures(currentID)
+        await APIcall()
+        console.log(returnedGuess)
+        if (returnedGuess >= threshold) { listplay.push(currentID) } else console.log('didnt like ' + currentID)
+    }
+    loadingPL = false;
+    document.getElementById('loadingBar').style.display = 'none';
+    listplay.forEach(id => {
+        embedPLAYLIST('playlistcontainer', id)
+    })
 }

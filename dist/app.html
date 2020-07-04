@@ -65,7 +65,7 @@
                 </div>
 
 
-                <div class="button opt" id="viewdatabutton" onclick="toggleDataview()">
+                <div class="button opt" id="viewdatabutton">
                     View current data
                 </div>
                 <div id="download" class="button opt" onclick="download('SongTaste.json',JSON.stringify(allSongs))">
@@ -79,17 +79,26 @@
             </div>
         </div>
     </center>
-    <div id="playlist-view"></div>
+    <div id="playlist-view">
+        <div id="loadingBar">
+            <div id="barbar" style="height:100%;background-color: rgb(22, 163, 22);"></div>
+        </div>
+        <div id="playlistcontainer">
+
+
+        </div>
+
+    </div>
 
     <div id="dataview" class="tap" style='top: 3000px'>
 
         <center>
             <div id="currentheader" class="tap">Your info</div>
         </center>
-        <div id="currentflex" class=" tap">
+        <div id="currentflex" class="tap">
             <div id="badlist" class="dataviewlist tap">
 
-                <h1>Disliked
+                <h1 class="tap">Disliked
                 </h1>
 
 
@@ -97,7 +106,7 @@
 
             </div>
             <div id="goodlist" class="dataviewlist tap">
-                <h1>Liked
+                <h1 class="tap">Liked
                 </h1>
             </div>
 
@@ -105,7 +114,7 @@
 
 
     </div>
-    <div class="button" id="enable" style="background-color: rgb(0, 230, 0);" onclick="enable()">
+    <div class="button" id="enable" style="background-color: rgb(0, 230, 0);">
         <h1>Sucess!</h1> <br>
         <p>Your SongTaste preferences<br>file was uploaded successfully<br>All previous data has been replaced</p>
     </div>
