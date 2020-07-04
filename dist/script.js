@@ -119,10 +119,9 @@ else if (window.location.href.includes('app.html')) {
         }
     })
     document.addEventListener('touchstart', (event) => {
-        // if (v.getAttribute('style') == 'top: 50px' && !event.touches[0].target == (v) && !event.touches[0].target == (document.getElementById('viewdatabutton'))) {
-        //     v.setAttribute('style', 'top: 3000px')
-        // }
-        alert(event.touches[0].target.id)
+        if (v.getAttribute('style') == 'top: 50px' && event.touches[0].targetid == 'dataview' && event.touches[0].target.id != 'viewdatabutton') {
+            v.setAttribute('style', 'top: 3000px')
+        }
     })
     asyncApp()
 
