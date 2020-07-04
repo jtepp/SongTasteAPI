@@ -92,11 +92,11 @@ else if (window.location.href.includes('app.html')) {
     document.getElementById('input-file')
         .addEventListener('change', () => {
             enable(true);
-            v.innerHTML = ` <center>
-            <div id="currentheader">Your info</div>
+            v.innerHTML = `<center>
+            <div id="currentheader tap">Your info</div>
         </center>
-        <div id="currentflex">
-            <div id="badlist" class="dataviewlist">
+        <div id="currentflex"class=" tap">
+            <div id="badlist" class="dataviewlist tap">
 
                 <h1>Disliked
                 </h1>
@@ -105,7 +105,7 @@ else if (window.location.href.includes('app.html')) {
 
 
             </div>
-            <div id="goodlist" class="dataviewlist">
+            <div id="goodlist" class="dataviewlist tap">
                 <h1>Liked
                 </h1>
             </div>
@@ -119,10 +119,9 @@ else if (window.location.href.includes('app.html')) {
         }
     })
     document.addEventListener('touchstart', (event) => {
-        // if (v.getAttribute('style') == 'top: 50px' && !event.touches[0].target.classlist.includes('datapicture') && !event.touches[0].target.classlist.includes('datatext') && !event.touches[0].target.classlist.includes('dataitem') && !event.touches[0].target.classlist.includes('dataview') && event.touches[0].target.id != 'dataview' && event.touches[0].target.id != 'viewdatabutton') {
-        //     v.setAttribute('style', 'top: 3000px')
-        // }
-        alert(event.touches[0].target.classList.toString())
+        if (v.getAttribute('style') == 'top: 50px' && !event.touches[0].tagert.classList.includes('tap')) {
+            v.setAttribute('style', 'top: 3000px')
+        }
     })
     asyncApp()
 
