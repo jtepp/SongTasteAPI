@@ -122,7 +122,7 @@ else if (window.location.href.includes('app.html')) {
         // if (v.getAttribute('style') == 'top: 50px' && !event.touches[0].target.classlist.includes('datapicture') && !event.touches[0].target.classlist.includes('datatext') && !event.touches[0].target.classlist.includes('dataitem') && !event.touches[0].target.classlist.includes('dataview') && event.touches[0].target.id != 'dataview' && event.touches[0].target.id != 'viewdatabutton') {
         //     v.setAttribute('style', 'top: 3000px')
         // }
-        alert(event.touches[0].target.classList.join(', '))
+        alert(event.touches[0].target.classList.toString())
     })
     asyncApp()
 
