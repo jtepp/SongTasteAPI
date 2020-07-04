@@ -38,47 +38,73 @@
     </center>
     <center>
 
-        <div id="options" onmouseover="
-        for(e of document.getElementsByClassName('pa')){
-            e.classList.remove('pa')
-            e.classList.add('pb')
-        }
-        for(e of document.getElementsByClassName('opt')){
-            e.style.opacity = '1'
-        }
-        document.getElementById('options').style.height = '230px'
-        " onmouseout="
-        for(e of document.getElementsByClassName('pb')){
-            e.classList.remove('pb')
-            e.classList.add('pa')
-        }
-        for(e of document.getElementsByClassName('opt')){
-            e.style.opacity = '0'
-        }
-        document.getElementById('options').style.height = 'calc(20pt + 10px)'
-        ">
-            <div style="display: grid; grid-template-columns: 25px auto 25px;">
-                <img src="assets/pointer.png" width="15px" id="pointer" class="pa">
-                <div id="options-title" class="closed">Data options</div>
-                <div style="width:15px"></div>
-            </div>
+        <div style="height: 230px;">
+            <div id="options" onmouseover="
+            for(e of document.getElementsByClassName('pa')){
+                e.classList.remove('pa')
+                e.classList.add('pb')
+            }
+            for(e of document.getElementsByClassName('opt')){
+                e.style.opacity = '1'
+            }
+            document.getElementById('options').style.height = '230px'
+            " onmouseout="
+            for(e of document.getElementsByClassName('pb')){
+                e.classList.remove('pb')
+                e.classList.add('pa')
+            }
+            for(e of document.getElementsByClassName('opt')){
+                e.style.opacity = '0'
+            }
+            document.getElementById('options').style.height = 'calc(20pt + 10px)'
+            ">
+                <div style="display: grid; grid-template-columns: 25px auto 25px;">
+                    <img src="assets/pointer.png" width="15px" id="pointer" class="pa">
+                    <div id="options-title" class="closed">Data options</div>
+                    <div style="width:15px"></div>
+                </div>
 
 
-            <div class="button opt">
-                View current data
-            </div>
-            <div id="download" class="button opt" onclick="download('SongTaste.json',JSON.stringify(allSongs))">Download
-                current
-                data</div>
-            <div class="button opt">
-                <label for="input-file">Upload data</label>
-                <input type="file" name="" id="input-file" accept="application/JSON" style="display: none;">
+                <div class="button opt" id="viewdatabutton" onclick="toggleDataview()">
+                    View current data
+                </div>
+                <div id="download" class="button opt" onclick="download('SongTaste.json',JSON.stringify(allSongs))">
+                    Download
+                    current
+                    data</div>
+                <div class="button opt">
+                    <label for="input-file">Upload data</label>
+                    <input type="file" name="" id="input-file" accept="application/JSON" style="display: none;">
+                </div>
             </div>
         </div>
     </center>
     <div id="playlist-view"></div>
 
+    <div id="dataview">
 
+        <center>
+            <div id="currentheader">Your info</div>
+        </center>
+        <div id="currentflex">
+            <div id="badlist" class="dataviewlist">
+
+                <h1>Disliked
+                </h1>
+
+
+
+
+            </div>
+            <div id="goodlist" class="dataviewlist">
+                <h1>Liked
+                </h1>
+            </div>
+
+        </div>
+
+
+    </div>
     <div class="button" id="enable" style="background-color: rgb(0, 230, 0);" onclick="enable()">
         <h1>Sucess!</h1> <br>
         <p>Your SongTaste preferences<br>file was uploaded successfully</p>

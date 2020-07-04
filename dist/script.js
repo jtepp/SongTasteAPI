@@ -9,11 +9,15 @@ var key = "";
 var inp = {};
 const threshold = 0.55
 var message = '';
+var likelist = []
+var hatelist = []
 var train = []
 var run = []
+var reactready = true
 var mName = '';
 var mArtist = '';
 var returnedGuess = ''
+const v = document.getElementById('dataview'); v.setAttribute('style', 'top: 3000px')
 const playlist = document.getElementById('playlist-view')
 const searchID = document.getElementById('searchID');
 const automate = document.getElementById('automate');
@@ -89,9 +93,20 @@ else if (window.location.href.includes('app.html')) {
         .addEventListener('change', () => {
             enable(true);
         })
+    document.addEventListener('click', (event) => {
+        if (v.getAttribute('style') == 'top: 50px' && !event.path.includes(v) && !event.path.includes(document.getElementById('viewdatabutton'))) {
+            v.setAttribute('style', 'top: 3000px')
+        }
+    })
     asyncApp()
 
 }
+
+
+
+
+
+
 
 async function asyncApp() {
     await getToken()
@@ -325,59 +340,100 @@ function enable(b) {
 //                             tempo: 180.133,
 //                                 valence: 0.444
 
-async function songReact(like) {
-    allSongs.IDList.push(currentID)
-    allSongs.Atrain.push({
-        "input": [
-            mainBox.acousticness,
-            mainBox.danceability,
-            mainBox.duration_ms,
-            mainBox.energy,
-            mainBox.instrumentalness,
-            mainBox.liveness,
-            mainBox.speechiness,
-            mainBox.tempo,
-            mainBox.valence
-        ],
-        "output": [
-            like
-        ]
+async function reactingList(id, like) {
+    await getToken()
+    await fetch(`https://api.spotify.com/v1/tracks/${id}`, {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "content-type": "application/json",
+            Authorization: `Bearer ${key}`,
+        }
     })
-    await searchLater(randomWord(wordLength))
-    await retrieveFeatures(currentID)
-    automate.innerHTML = "Automate a playlist"
-    if (needPlaylist >= 1) {
-        needPlaylist--;
-        automate.innerHTML = (needPlaylist + 1) + " more..."
+        .then(r => r.json())
+        .then(data => {
+            if (like == 1) {
+                const nfo = {
+                    "name": data.name,
+                    "artist": data.artists[0].name,
+                    "id": id,
+                    "img": data.album.images[0].url
+                }
+                likelist.push(nfo)
+                document.getElementById('goodlist').appendChild(returnHTMLfordataview(nfo))
+            } else if (like == 0) {
+                const nfo = {
+                    "name": data.name,
+                    "artist": data.artists[0].name,
+                    "id": id,
+                    "img": data.album.images[0].url
+                }
+                hatelist.push(nfo)
+                document.getElementById('badlist').appendChild(returnHTMLfordataview(nfo))
+            }
+        })
+
+}
+
+
+async function songReact(like) {
+    if (reactready) {
+        reactready = false
+        allSongs.IDList.push(currentID)
+        allSongs.Atrain.push({
+            "input": [
+                mainBox.acousticness,
+                mainBox.danceability,
+                mainBox.duration_ms,
+                mainBox.energy,
+                mainBox.instrumentalness,
+                mainBox.liveness,
+                mainBox.speechiness,
+                mainBox.tempo,
+                mainBox.valence
+            ],
+            "output": [
+                like
+            ]
+        })
+        await reactingList(currentID, like)
+        await searchLater(randomWord(wordLength))
+        await retrieveFeatures(currentID)
+        automate.innerHTML = "Automate a playlist"
+        if (needPlaylist >= 1) {
+            needPlaylist--;
+            automate.innerHTML = (needPlaylist + 1) + " more..."
+        }
+        if (needMore >= 1) {
+            needMore--;
+            document.getElementById('guessTEXT').innerHTML = (needMore + 1) + " more..."
+        } else {
+            allSongs.Crun = [
+                mainBox.acousticness,
+                mainBox.danceability,
+                mainBox.duration_ms,
+                mainBox.energy,
+                mainBox.instrumentalness,
+                mainBox.liveness,
+                mainBox.speechiness,
+                mainBox.tempo,
+                mainBox.valence
+            ]
+            await APIcall()
+            let curArray;
+            const liker = returnedGuess > threshold
+            if (liker) curArray = responses.true; else curArray = responses.false
+            if (liker) document.getElementById('guessID').style.backgroundColor = "RGB(0,230,0)"
+            else document.getElementById('guessID').style.backgroundColor = "RGB(230,0,0)"
+            // console.log(liker)
+            do { message = curArray[Math.floor(Math.random() * curArray.length)] } while (message == document.getElementById('guessTEXT').innerHTML)
+            console.log(message)
+            document.getElementById('guessTEXT').innerHTML = message
+        }
+        embed('box-iframe', currentID)
+        reactready = true
+        // console.log(allSongs)
     }
-    if (needMore >= 1) {
-        needMore--;
-        document.getElementById('guessTEXT').innerHTML = (needMore + 1) + " more..."
-    } else {
-        allSongs.Crun = [
-            mainBox.acousticness,
-            mainBox.danceability,
-            mainBox.duration_ms,
-            mainBox.energy,
-            mainBox.instrumentalness,
-            mainBox.liveness,
-            mainBox.speechiness,
-            mainBox.tempo,
-            mainBox.valence
-        ]
-        await APIcall()
-        let curArray;
-        const liker = returnedGuess > threshold
-        if (liker) curArray = responses.true; else curArray = responses.false
-        if (liker) document.getElementById('guessID').style.backgroundColor = "RGB(0,230,0)"
-        else document.getElementById('guessID').style.backgroundColor = "RGB(230,0,0)"
-        // console.log(liker)
-        do { message = curArray[Math.floor(Math.random() * curArray.length)] } while (message == document.getElementById('guessTEXT').innerHTML)
-        console.log(message)
-        document.getElementById('guessTEXT').innerHTML = message
-    }
-    embed('box-iframe', currentID)
-    // console.log(allSongs)
 }
 
 
@@ -450,4 +506,45 @@ function download(filename, text) {
     element.click();
 
     document.body.removeChild(element);
+}
+
+function returnHTMLfordataview(obj) {
+    const di = document.createElement('div')
+    di.setAttribute('class', 'dataitem')
+    di.onclick = () => window.open(`https://open.spotify.com/track/${obj.id}`, '_blank').focus()
+
+    const dp = document.createElement('div')
+    dp.setAttribute('class', 'datapicture')
+    dp.setAttribute('style', 'background-image:url(' + obj.img + ')')
+
+    const dt = document.createElement('div')
+    dt.setAttribute('class', 'datatext')
+
+    const t = document.createElement('div')
+    t.setAttribute('class', 'top')
+    t.innerHTML = obj.name
+
+    const b = document.createElement('div')
+    b.setAttribute('class', 'bottom')
+    b.innerHTML = obj.artist
+
+
+    dt.appendChild(t)
+    dt.appendChild(b)
+
+    di.appendChild(dp)
+    di.appendChild(dt)
+
+    return di
+
+}
+
+function toggleDataview() {
+    switch (v.getAttribute('style')) {
+        case 'top: 3000px': v.setAttribute('style', 'top: 50px'); break;
+        default:
+        case 'top: 50px': v.setAttribute('style', 'top: 3000px');
+    }
+
+
 }
