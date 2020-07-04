@@ -92,6 +92,26 @@ else if (window.location.href.includes('app.html')) {
     document.getElementById('input-file')
         .addEventListener('change', () => {
             enable(true);
+            v.innerHTML = ` <center>
+            <div id="currentheader">Your info</div>
+        </center>
+        <div id="currentflex">
+            <div id="badlist" class="dataviewlist">
+
+                <h1>Disliked
+                </h1>
+
+
+
+
+            </div>
+            <div id="goodlist" class="dataviewlist">
+                <h1>Liked
+                </h1>
+            </div>
+
+        </div>`;
+
         })
     document.addEventListener('click', (event) => {
         if (v.getAttribute('style') == 'top: 50px' && !event.path.includes(v) && !event.path.includes(document.getElementById('viewdatabutton'))) {
@@ -482,7 +502,9 @@ async function placeFileContent(target, file) {
             console.log(message)
             document.getElementById('guessTEXT').innerHTML = message
         }
-
+        for (let i = 0; i < allSongs.IDList.length; i++) {
+            reactingList(allSongs.IDList[i], allSongs.Atrain[i].output == 1 ? true : false)
+        }
         console.log(allSongs)
     }).catch(error => console.log(error))
 }
@@ -511,6 +533,7 @@ function download(filename, text) {
 function returnHTMLfordataview(obj) {
     const di = document.createElement('div')
     di.setAttribute('class', 'dataitem')
+    di.setAttribute('data-id', obj.id)
     di.onclick = () => window.open(`https://open.spotify.com/track/${obj.id}`, '_blank').focus()
 
     const dp = document.createElement('div')
