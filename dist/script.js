@@ -1,6 +1,7 @@
 const code = new URLSearchParams(window.location.search).get('code')
 const unauthorized = new URLSearchParams(window.location.search).get('code') == null && new URLSearchParams(window.location.search).get('err') == null
 const redirect = `https://songtaste.netlify.app/app`;
+const clientID = `4dcd7399f4954e2c8c679f38d1bb1419`
 if (unauthorized) { window.location.href(`https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=code&redirect_uri=${encodeURIComponent(redirect)}&scope=playlist-modify-private%20playlist-modify-public%20ugc-image-upload&show_dialog=false`) }
 const creds = "NGRjZDczOTlmNDk1NGUyYzhjNjc5ZjM4ZDFiYjE0MTk6ZWNmOWExODVjYzZjNDI4NmJkMjA3NTNhMThmZTVmYzU=";
 const err = new URLSearchParams(window.location.search).get('error') == null
