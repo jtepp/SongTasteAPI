@@ -63,14 +63,12 @@ document.body.onresize()
 document.body.onresize()
 document.body.onresize()
 
-
-
 if (window.location.href.includes('index.html') || window.location.pathname == '/') { //HOMEPAGE STARTUP
     retrieveSong(randomWord(wordLength), homePreview[0], '0')
     retrieveSong(randomWord(wordLength), homePreview[1], '1')
     retrieveSong(randomWord(wordLength), homePreview[2], '2')
 }
-else if (window.location.href.includes('/app')) {
+else if (window.location.pathname == '/app') {
 
 
     document.getElementById('options').onmouseout()
@@ -167,7 +165,9 @@ else if (window.location.href.includes('/app')) {
     asyncApp()
 
 }
-
+else if (window.location.pathname = '/app:playlist') {
+    console.log(true)
+}
 
 
 
