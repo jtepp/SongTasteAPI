@@ -177,9 +177,7 @@ else if (window.location.href.includes('/app')) {
 async function asyncApp() {
     await getToken()
     const initial = new URLSearchParams(window.location.search).get('s')
-    console.log(initial)
-    console.log(window.location)
-    if (initial == 'random' || initial == '') {
+    if (initial == 'random' || initial == null) {
         await searchNew(randomWord(3))
     } else currentID = initial
     embed('box-iframe', currentID)
