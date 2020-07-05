@@ -92,6 +92,8 @@ else if (window.location.href.includes('app.html')) {
 
     automate.addEventListener('click', () => {
         if (needPlaylist < 1) {
+            listplay = []
+            playlist.innerHTML = '';
             playlist.style.height = '100vh'
             document.getElementById('playlistcontainer').style.height = '100vh'
             document.getElementById('loadingBar').style.display = 'block'
