@@ -1,6 +1,7 @@
 const creds = "NGRjZDczOTlmNDk1NGUyYzhjNjc5ZjM4ZDFiYjE0MTk6ZWNmOWExODVjYzZjNDI4NmJkMjA3NTNhMThmZTVmYzU=";
 const err = new URLSearchParams(window.location.search).get('error') == null
 const code = new URLSearchParams(window.location.search).get('code')
+const IDList = new URLSearchParams(window.location.search).get('ids').split(',')
 const playlistJSON = {
     "name": 'SongTaste Favorites',
     "public": true,
@@ -13,23 +14,18 @@ const imgData = {
 var tokenObj = {}
 var userObj = {}
 var plObj = {}
-// if (err) window.location.href = 'https://songtaste.netlify.app/app'
-// else {
 
-run()
-
-
-
-
-// }
-
+document.getElementById('automate').addEventListener('click', () => { run() })
 
 async function run() {
-    tokenObj = await token()
-    console.log(tokenObj)
-    userObj = await user()
-    console.log(userObj)
-    await createPlaylist(playlistJSON)
+    if (err) { } else {
+
+        tokenObj = await token()
+        console.log(tokenObj)
+        userObj = await user()
+        console.log(userObj)
+        await createPlaylist(playlistJSON)
+    }
 
 }
 
@@ -76,3 +72,5 @@ async function createPlaylist(bodyJSON) {
         body: imgData.data
     })
 }
+
+async function ammendPlaylist() { }
