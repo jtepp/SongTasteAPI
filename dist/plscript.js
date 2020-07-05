@@ -74,5 +74,5 @@ async function createPlaylist(bodyJSON) {
             'Authorization': `Bearer ${tokenObj.access_token}`
         },
         body: imgData.data
-    }).then(res => res.json()).then(data => console.log(data))
+    })
 }
