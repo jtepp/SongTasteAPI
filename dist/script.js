@@ -3,7 +3,6 @@ const unauthorized = new URLSearchParams(window.location.search).get('code') == 
 const redirect = `https://songtaste.netlify.app/app`;
 if (unauthorized) { window.location.href(`https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=code&redirect_uri=${encodeURIComponent(redirect)}&scope=playlist-modify-private%20playlist-modify-public%20ugc-image-upload&show_dialog=false`) }
 const creds = "NGRjZDczOTlmNDk1NGUyYzhjNjc5ZjM4ZDFiYjE0MTk6ZWNmOWExODVjYzZjNDI4NmJkMjA3NTNhMThmZTVmYzU=";
-const creds = "NGRjZDczOTlmNDk1NGUyYzhjNjc5ZjM4ZDFiYjE0MTk6ZWNmOWExODVjYzZjNDI4NmJkMjA3NTNhMThmZTVmYzU=";
 const err = new URLSearchParams(window.location.search).get('error') == null
 const IDList = new URLSearchParams(window.location.search).get('ids').split(',')
 const playlistJSON = {
