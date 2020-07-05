@@ -18,6 +18,6 @@ async function token() {
             'Authorization': `Basic ${creds}`
         },
         body: `grant_type=authorization_code&code=${code}&redirect_uri=https://songtaste.netlify.app/app:playlist`
-    })
+    }).then(res => res.json()).then(data => console.log(data))
 
 }
