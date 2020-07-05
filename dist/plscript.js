@@ -50,7 +50,7 @@ async function user() {
         headers: {
             'Authorization': `Bearer ${tokenObj.access_token}`
         }
-    }).then(res => res.json)
+    }).then(res => res.json())
 }
 
 async function createPlaylist(bodyJSON) {
