@@ -177,6 +177,8 @@ else if (window.location.href.includes('/app')) {
 async function asyncApp() {
     await getToken()
     const initial = new URLSearchParams(window.location.search).get('s')
+    console.log(initial)
+    console.log(window.location)
     if (initial == 'random' || initial == '') {
         await searchNew(randomWord(3))
     } else currentID = initial
