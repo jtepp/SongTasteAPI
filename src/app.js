@@ -11,17 +11,15 @@ exports.handler = function (event, context, callback) {
         const a = JSON.stringify(event.body).split("\\").join('').split(',"break":"break",').join();
         const b = a.slice(1, a.length - 1)
         const data = JSON.parse(b)
-        for (let i = 0; i < data.Atrain.length; i++) {
-            for (let j = 0; j < data.Atrain[i].length; j++) {
-                data.Atrain[i][j] *= 100;
+        // for (let i = 0; i < data.Atrain.length; i++) {
+        //     for (let j = 0; j < data.Atrain[i].length; j++) {
+        //         data.Atrain[i][j] *= 100;
+        //     }
+        // }
 
 
-            }
-
-        }
-
-
-        const net = new Architect.Perceptron(9, 7, 6, 1)
+        // const net = new Architect.Perceptron(9, 7, 6, 1)
+        const net = new Architect.Perceptron(9, 6, 1)
         const trainer = new Trainer(net)
         trainer.train(data.Atrain)
         const aa = net.activate(data.Crun)
