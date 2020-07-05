@@ -70,7 +70,7 @@ if (window.location.href.includes('index.html') || window.location.pathname == '
     retrieveSong(randomWord(wordLength), homePreview[1], '1')
     retrieveSong(randomWord(wordLength), homePreview[2], '2')
 }
-else if (window.location.href.includes('app.html')) {
+else if (window.location.href.includes('/app')) {
 
 
     document.getElementById('options').onmouseout()
@@ -177,7 +177,7 @@ else if (window.location.href.includes('app.html')) {
 async function asyncApp() {
     await getToken()
     const initial = new URLSearchParams(window.location.search).get('s')
-    if (initial == 'random') {
+    if (initial == 'random' || initial == '') {
         await searchNew(randomWord(3))
     } else currentID = initial
     embed('box-iframe', currentID)
