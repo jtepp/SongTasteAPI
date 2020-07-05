@@ -684,7 +684,7 @@ async function startPlaylist(len) {
         ]
         await APIcall()
         console.log(returnedGuess)
-        if (returnedGuess >= 0.5) { listplay.push(currentID) } else console.log('didnt like ' + currentID)
+        if (returnedGuess >= threshold) { listplay.push(currentID) } else console.log('didnt like ' + currentID)
         counter++
     }
     loadingPL = false;
