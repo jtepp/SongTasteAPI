@@ -186,10 +186,6 @@ else if (window.location.pathname == '/app') {
     asyncApp()
 
 }
-else if (window.location.pathname = '/app:playlist') {
-    console.log(true)
-}
-
 
 
 
@@ -736,7 +732,7 @@ async function token() {
             'Content-Type': 'application/x-www-form-urlencoded',
             'Authorization': `Basic ${creds}`
         },
-        body: `grant_type=authorization_code&code=${code}&redirect_uri=https://songtaste.netlify.app/app:playlist`
+        body: `grant_type=authorization_code&code=${code}&redirect_uri=https://songtaste.netlify.app/app`
     }).then(res => res.json())
 
 }
