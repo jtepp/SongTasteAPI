@@ -15,6 +15,7 @@ async function token() {
     fetch("https://accounts.spotify.com/api/token", {
         method: "POST",
         headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
             'Authorization': `Basic ${creds}`
         },
         body: `grant_type=authorization_code&code=${code}&redirect_uri=https://songtaste.netlify.app/app:playlist`
