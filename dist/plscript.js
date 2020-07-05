@@ -9,6 +9,7 @@ const playlistJSON = {
 
 }
 var tokenObj = {}
+var userObj = {}
 // if (err) window.location.href = 'https://songtaste.netlify.app/app'
 // else {
 
@@ -23,7 +24,9 @@ run()
 async function run() {
     tokenObj = await token()
     console.log(tokenObj)
-    await createPlaylist(playlistJSON, tokenObj.access_token)
+    userObj = await user()
+    console.log(userObj)
+    await createPlaylist(playlistJSON)
 
 }
 
@@ -41,13 +44,21 @@ async function token() {
 
 }
 
-async function createPlaylist(bodyJSON, access_token) {
-    const user_id = 'me'
-    await fetch(`https://api.spotify.com/v1/users/${user_id}/playlists`, {
+async function user() {
+    return await fetch(`https://api.spotify.com/v1/me`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${tokenObj.access_token}`
+        }
+    })
+}
+
+async function createPlaylist(bodyJSON) {
+    await fetch(`https://api.spotify.com/v1/users/${userObj.id}/playlists`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/JSON',
-            'Authorization': `Bearer ${access_token}`
+            'Authorization': `Bearer ${tokenObj.access_token}`
         },
         body: JSON.stringify(bodyJSON)
     }).then(res => res.json()).then(data => console.log(data))
