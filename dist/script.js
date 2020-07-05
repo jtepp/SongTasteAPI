@@ -112,6 +112,8 @@ else if (window.location.href.includes('/app')) {
     automate.addEventListener('click', () => {
         if (needPlaylist < 1) {
             listplay = []
+            playlistrun()
+
             // playlist.innerHTML = '';
             // playlist.style.height = '100vh'
             // document.getElementById('playlistcontainer').style.height = '100vh'
@@ -713,7 +715,7 @@ async function startPlaylist(len) {
 }
 
 
-async function run() {
+async function playlistrun() {
     if (err) {
         tokenObj = await token()
         console.log(tokenObj)
