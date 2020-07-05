@@ -1,11 +1,9 @@
-const code = new URLSearchParams(window.location.search).get('code')
-const unauthorized = new URLSearchParams(window.location.search).get('code') == null && new URLSearchParams(window.location.search).get('err') == null
 const redirect = `https://songtaste.netlify.app/app`;
 const clientID = `4dcd7399f4954e2c8c679f38d1bb1419`
-if (unauthorized) { window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=code&redirect_uri=${encodeURIComponent(redirect)}&scope=playlist-modify-private%20playlist-modify-public%20ugc-image-upload&show_dialog=false` }
 const creds = "NGRjZDczOTlmNDk1NGUyYzhjNjc5ZjM4ZDFiYjE0MTk6ZWNmOWExODVjYzZjNDI4NmJkMjA3NTNhMThmZTVmYzU=";
-const err = new URLSearchParams(window.location.search).get('error') == null
-const IDList = new URLSearchParams(window.location.search).get('ids').split(',')
+var code;
+var unauthorized;
+var err;
 const playlistJSON = {
     "name": 'SongTaste Favorites',
     "public": true,
@@ -89,7 +87,10 @@ if (window.location.href.includes('index.html') || window.location.pathname == '
     retrieveSong(randomWord(wordLength), homePreview[2], '2')
 }
 else if (window.location.pathname == '/app') {
-
+    code = new URLSearchParams(window.location.search).get('code')
+    unauthorized = new URLSearchParams(window.location.search).get('code') == null && new URLSearchParams(window.location.search).get('err') == null
+    if (unauthorized) { window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=code&redirect_uri=${encodeURIComponent(redirect)}&scope=playlist-modify-private%20playlist-modify-public%20ugc-image-upload&show_dialog=false` }
+    err = new URLSearchParams(window.location.search).get('error') == null
 
     document.getElementById('options').onmouseout()
     document.getElementById('guessTEXT').innerHTML = (needMore + 1) + " more..."
