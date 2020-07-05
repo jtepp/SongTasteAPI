@@ -598,6 +598,7 @@ function removeFromView(id) {
 function returnHTMLfordataview(obj) {
     const aa = document.createElement('div')
     aa.setAttribute('style', 'display: flex; flex-direction:row;')
+    aa.setAttribute('class', 'tap')
 
     const di = document.createElement('div')
     di.setAttribute('class', 'dataitem tap')
@@ -624,7 +625,7 @@ function returnHTMLfordataview(obj) {
     const x = document.createElement('div')
     x.setAttribute('class', 'tap datax')
     const ff = document.createElement('div')
-    ff.setAttribute('class', 'centrevert')
+    ff.setAttribute('class', 'centrevert tap')
     ff.appendChild(x)
     ff.onclick = () => removeFromView(obj.id)
 
