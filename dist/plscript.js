@@ -49,6 +49,6 @@ async function createPlaylist(bodyJSON, access_token) {
             'Content-Type': 'application/JSON',
             'Authorization': `Bearer ${access_token}`
         },
-        body: bodyJSON
+        body: JSON.stringify(bodyJSON)
     }).then(res => res.json()).then(data => console.log(data))
 }
