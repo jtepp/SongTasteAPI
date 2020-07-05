@@ -23,7 +23,7 @@ run()
 async function run() {
     tokenObj = await token()
     console.log(tokenObj)
-    await createPlaylist(playlistJSON)
+    await createPlaylist(playlistJSON, tokenObj.access_token)
 
 }
 
@@ -41,13 +41,13 @@ async function token() {
 
 }
 
-async function createPlaylist(bodyJSON) {
+async function createPlaylist(bodyJSON, access_token) {
     const user_id = 'me'
     await fetch(`https://api.spotify.com/v1/users/${user_id}/playlists`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/JSON',
-            'Authorization': `Basic ${creds}`
+            'Authorization': `Bearer ${access_token}`
         },
         body: bodyJSON
     }).then(res => res.json()).then(data => console.log(data))
