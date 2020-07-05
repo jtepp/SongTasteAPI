@@ -43,12 +43,12 @@ async function token() {
 
 async function createPlaylist(bodyJSON) {
     const user_id = 'me'
-    await fetch(`https://api.spotify.com/v1/users/${user_id}/playlists`{
+    await fetch(`https://api.spotify.com/v1/users/${user_id}/playlists`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/JSON',
             'Authorization': `Basic ${creds}`
         },
         body: bodyJSON
-    })
+    }).then(res => res.json()).then(data => console.log(data))
 }
