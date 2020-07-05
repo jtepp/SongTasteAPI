@@ -67,7 +67,7 @@ async function createPlaylist(bodyJSON) {
         body: JSON.stringify(bodyJSON)
     }).then(res => res.json()).then(data => { plObj = data; console.log(data) })
     //image
-    await fetch(`https://api.spotify.com/v1/playlists/${plObj.id}/playlists/images`, {
+    await fetch(`https://api.spotify.com/v1/playlists/${plObj.id}/images`, {
         method: "PUT",
         headers: {
             'Content-Type': 'image/jpeg',
