@@ -86,7 +86,7 @@ if (window.location.href.includes('index.html') || window.location.pathname == '
     retrieveSong(randomWord(wordLength), homePreview[1], '1')
     retrieveSong(randomWord(wordLength), homePreview[2], '2')
 }
-else if (window.location.pathname == '/app') {
+else if (window.location.href.includes('/app')) {
     code = new URLSearchParams(window.location.search).get('code')
     unauthorized = new URLSearchParams(window.location.search).get('code') == null && new URLSearchParams(window.location.search).get('err') == null
     if (unauthorized) { window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=code&redirect_uri=${encodeURIComponent(redirect)}&scope=playlist-modify-private%20playlist-modify-public%20ugc-image-upload&show_dialog=false` }
