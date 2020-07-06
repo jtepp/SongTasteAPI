@@ -730,6 +730,8 @@ async function playlistrun() {
         userObj = await user()
         console.log(userObj)
         await createPlaylist(playlistJSON)
+        tokenObj.access_token = await refresh().access_token
+        await ammend()
     }
 }
 
@@ -775,8 +777,21 @@ async function createPlaylist(bodyJSON) {
         },
         body: imgData.data
     })
-    let URIS = '['
-    // for (u of goodURI)
+}
+
+async function refresh() {
+    return await fetch("https://accounts.spotify.com/api/token", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': `Basic ${creds}`
+        },
+        body: `grant_type=refresh_token&refresh_token=${code}`
+    }).then(res => res.json())
+}
+
+
+async function ammend() {
     await fetch(`https://api.spotify.com/v1/playlists/${plObj.id}/tracks`, {
         method: "PUT",
         "Authorization": 'Bearer ' + tokenObj.access_token,
