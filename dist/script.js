@@ -42,12 +42,13 @@ const v = document.getElementById('dataview');
 const playlist = document.getElementById('playlist-view')
 const searchID = document.getElementById('searchID');
 const automate = document.getElementById('automate');
-var allSongs = JSON.parse(window.localStorage.getItem('all')) || {
+var allSongs = {
     "IDList": [],
     "Atrain": [],
     "break": "break",
     "Crun": []
 }
+try { allSongs = JSON.parse(window.localStorage.getItem('all')) } catch (e) { console.log(e) }
 const responses = {
     true: [
         "You might like this one...",
