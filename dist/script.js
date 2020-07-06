@@ -810,7 +810,7 @@ async function ammend() {
         method: "PUT",
         "Authorization": 'Bearer ' + tokenObj.access_token,
         "Content-Type": "application/JSON"
-    })
+    }).then(res => { console.log(res); res.json() }).then(data => console.log(data)).catch(e => console.log('errorrrr  ' + e))
 }
 
 
