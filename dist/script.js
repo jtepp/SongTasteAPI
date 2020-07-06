@@ -731,6 +731,7 @@ async function playlistrun() {
         console.log(userObj)
         await createPlaylist(playlistJSON)
         tokenObj.access_token = await refresh().access_token
+        console.log(tokenObj)
         await ammend()
     }
 }
@@ -786,18 +787,15 @@ async function refresh() {
             'Content-Type': 'application/x-www-form-urlencoded',
             'Authorization': `Basic ${creds}`
         },
-        body: `grant_type=refresh_token&refresh_token=${code}`
+        body: `grant_type=refresh_token&refresh_token=${tokenObj.refresh_token}`
     }).then(res => res.json())
 }
 
 
 async function ammend() {
-    await fetch(`https://api.spotify.com/v1/playlists/${plObj.id}/tracks`, {
+    await fetch(`https://api.spotify.com/v1/playlists/${plObj.id}/tracks?uris=${goodURI.join(',')}`, {
         method: "PUT",
         "Authorization": 'Bearer ' + tokenObj.access_token,
-        "Content-Type": "application/JSON",
-        body: JSON.stringify({
-            "uris": ["spotify:track:5TVirkSwFEXF1nLJEebe2I"]
-        })
+        "Content-Type": "application/JSON"
     })
 }
