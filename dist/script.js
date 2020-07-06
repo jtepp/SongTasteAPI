@@ -209,7 +209,10 @@ else if (window.location.href.includes('/app')) {
                 </h1>
             </div>
 
-        </div>`;
+        </div>
+        <center>
+            <div class="button tap" id="clear">Clear data<div>
+        </center>`;
 
         })
     document.getElementById('viewdatabutton').addEventListener('mouseup', () => {
