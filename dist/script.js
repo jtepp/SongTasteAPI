@@ -49,7 +49,7 @@ var allSongs = {
     "Crun": []
 }
 console.log(window.localStorage.getItem('all'))
-console.log(JSON.parse(window.localStorage.getItem('all')))
+try { console.log(JSON.parse(window.localStorage.getItem('all'))) } catch (e) { console.log(e) }
 try { allSongs = JSON.parse(window.localStorage.getItem('all')) } catch (e) { console.log(e) }
 const responses = {
     true: [
@@ -554,7 +554,7 @@ function getFile(event) {
 async function placeFileContent(target, file) {
     readFileContent(file).then(content => {
         allSongs = JSON.parse(content);
-        window.localStorage.setItem('all', allSongs)
+        window.localStorage.setItem('all', JSON.stringify(allSongs))
         needMore = 4 - allSongs.IDList.length
         needPlaylist = 4 - allSongs.IDList.length
         automate.innerHTML = "Save playlist"
