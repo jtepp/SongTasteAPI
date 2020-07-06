@@ -16,7 +16,7 @@ const imgData = {
 var tokenObj = {}
 var userObj = {}
 var plObj = {}
-var goodIDs = []
+var goodURI = []
 var failed = false;
 var searchClickCount = 0;
 var wordLength = 3;
@@ -42,7 +42,7 @@ const v = document.getElementById('dataview');
 const playlist = document.getElementById('playlist-view')
 const searchID = document.getElementById('searchID');
 const automate = document.getElementById('automate');
-var allSongs = {
+var allSongs = window.localStorage.getItem('all') || {
     "IDList": [],
     "Atrain": [],
     "break": "break",
@@ -200,7 +200,7 @@ else if (window.location.href.includes('/app')) {
 async function asyncApp() {
     await getToken()
     // const initial = new URLSearchParams(window.location.search).get('s')
-    const initial = window.localStorage.getItem('id')
+    const initial = window.localStorage.getItem('id') || new URLSearchParams(window.location.search).get('s')
     if (initial == 'random' || initial == null) {
         await searchNew(randomWord(3))
     } else currentID = initial
@@ -457,7 +457,7 @@ async function reactingList(id, like) {
                     "img": data.album.images[0].url
                 }
                 likelist.push(nfo)
-                goodIDs.push(nfo.id)
+                goodURI.push('spotify:track:' + nfo.id)
                 document.getElementById('goodlist').appendChild(returnHTMLfordataview(nfo))
             } else if (like == 0) {
                 const nfo = {
@@ -532,6 +532,7 @@ async function songReact(like) {
         reactready = true
         // console.log(allSongs)
     }
+    window.localStorage.setItem('all', allSongs)
 }
 
 
@@ -547,6 +548,7 @@ function getFile(event) {
 async function placeFileContent(target, file) {
     readFileContent(file).then(content => {
         allSongs = JSON.parse(content);
+        window.localStorage.setItem('all', allSongs)
         needMore = 4 - allSongs.IDList.length
         needPlaylist = 4 - allSongs.IDList.length
         automate.innerHTML = "Automate a playlist"
@@ -727,6 +729,7 @@ async function playlistrun() {
         userObj = await user()
         console.log(userObj)
         await createPlaylist(playlistJSON)
+        await ammendPlaylist()
     }
 }
 
@@ -774,4 +777,14 @@ async function createPlaylist(bodyJSON) {
     })
 }
 
-async function ammendPlaylist() { }
+async function ammendPlaylist() {
+    await fetch(`https://api.spotify.com/v1/playlists/${plObj.id}/tracks`, {
+        method: "PUT",
+        "Authorization": 'Bearer ' + tokenObj.access_token,
+        "Content-Type": "application/JSON",
+        body: JSON.stringify({
+            "uris": goodURI
+        })
+    })
+
+}
