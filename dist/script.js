@@ -150,6 +150,40 @@ else if (window.location.href.includes('/app')) {
             "break": "break",
             "Crun": []
         }
+        needMore = 4 - allSongs.IDList
+        needPlaylist = 12 - allSongs.IDList
+        automate.innerHTML = "Save playlist"
+        if (needPlaylist >= 1) {
+            needPlaylist--;
+            automate.innerHTML = (needPlaylist + 1) + " more..."
+        }
+        if (needMore >= 1) {
+            needMore--;
+            document.getElementById('guessTEXT').innerHTML = (needMore + 1) + " more..."
+        } else {
+            allSongs.Crun = [
+                mainBox.acousticness,
+                mainBox.danceability,
+                mainBox.duration_ms,
+                mainBox.energy,
+                mainBox.instrumentalness,
+                mainBox.liveness,
+                mainBox.speechiness,
+                mainBox.tempo,
+                mainBox.valence
+            ]
+            await APIcall()
+            let curArray;
+            const liker = returnedGuess >= threshold
+            if (liker) curArray = responses.true; else curArray = responses.false
+            if (liker) document.getElementById('guessID').style.backgroundColor = "RGB(0,230,0)"
+            else document.getElementById('guessID').style.backgroundColor = "RGB(230,0,0)"
+            // console.log(liker)
+            do { message = curArray[Math.floor(Math.random() * curArray.length)] } while (message == document.getElementById('guessTEXT').innerHTML)
+            console.log(message)
+            document.getElementById('guessTEXT').innerHTML = message
+        }
+
     })
     searchID.addEventListener('keypress', (e) => {
         if (e.keyCode == 13) {
