@@ -48,6 +48,8 @@ var allSongs = {
     "break": "break",
     "Crun": []
 }
+console.log(window.localStorage.getItem('all'))
+console.log(JSON.parse(window.localStorage.getItem('all')))
 try { allSongs = JSON.parse(window.localStorage.getItem('all')) } catch (e) { console.log(e) }
 const responses = {
     true: [
