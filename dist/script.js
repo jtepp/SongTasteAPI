@@ -23,8 +23,6 @@ var wordLength = 3;
 var currentID = '';
 var barLength = 0;
 var loadingPL = false;
-var needMore = 4;
-var needPlaylist = 11;
 var listplay = []
 var key = "";
 var inp = {};
@@ -55,6 +53,8 @@ console.log(allSongs);
 for (let i = 0; i < allSongs.IDList.length; i++) {
     reactingList(allSongs.IDList[i], allSongs.Atrain[i].output == 1 ? true : false)
 }
+var needMore = 4 - allSongs.IDList.length;
+var needPlaylist = 11 - allSongs.IDList.length;
 const responses = {
     true: [
         "You might like this one...",
@@ -805,4 +805,16 @@ async function ammend() {
         "Authorization": 'Bearer ' + tokenObj.access_token,
         "Content-Type": "application/JSON"
     })
+}
+
+
+
+function clear() {
+    for (e of allSongs.IDList) removeFromView(e)
+    allSongs = {
+        "IDList": [],
+        "Atrain": [],
+        "break": "break",
+        "Crun": []
+    }
 }
