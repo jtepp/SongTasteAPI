@@ -51,7 +51,7 @@ console.log(window.localStorage.getItem('all'))
 try { console.log(JSON.parse(window.localStorage.getItem('all'))) } catch (e) { console.log(e) }
 try { allSongs = JSON.parse(window.localStorage.getItem('all')) } catch (e) { console.log(e) }
 console.log(allSongs);
-if (window.loacation.href.includes('/app')) {
+if (window.location.href.includes('/app')) {
     for (let i = 0; i < allSongs.IDList.length; i++) {
         reactingList(allSongs.IDList[i], allSongs.Atrain[i].output == 1 ? true : false)
     }
