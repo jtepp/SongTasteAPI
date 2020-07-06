@@ -167,7 +167,7 @@ else if (window.location.href.includes('/app')) {
     automate.addEventListener('click', () => {
         if (needPlaylist < 1 && !saving) {
             window.localStorage.setItem('id', currentID)
-            window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=code&redirect_uri=${encodeURIComponent(redirect)}&scope=playlist-modify-private%20playlist-modify-public%20ugc-image-upload&show_dialog=false`
+            window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=code&redirect_uri=${encodeURIComponent(redirect)}&scope=playlist-modify-private%20playlist-modify-public%20ugc-image-upload&show_dialog=true`
 
 
             // playlistrun()
@@ -309,7 +309,7 @@ async function asyncApp() {
     resClasses.forEach(c => {
         responsive(c, 'FR-' + c)
     })
-    if (saving) playlistrun()
+    if (saving) await playlistrun()
 }
 
 async function APIcall() {
