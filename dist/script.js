@@ -729,6 +729,8 @@ async function playlistrun() {
         userObj = await user()
         console.log(userObj)
         await createPlaylist(playlistJSON)
+        tokenObj = await token()
+        console.log(tokenObj)
         await ammendPlaylist()
     }
 }
