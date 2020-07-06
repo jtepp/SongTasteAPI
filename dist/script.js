@@ -166,7 +166,7 @@ else if (window.location.href.includes('/app')) {
 
     automate.addEventListener('click', () => {
         if (needPlaylist < 1 && !saving) {
-            window.localStorage.setItem('id', currentID)
+            window.sessionStorage.setItem('id', currentID)
             window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=code&redirect_uri=${encodeURIComponent(redirect)}&scope=playlist-modify-private%20playlist-modify-public%20ugc-image-upload&show_dialog=true`
 
 
@@ -300,7 +300,7 @@ async function updateTEXT() {
 async function asyncApp() {
     await getToken()
     // const initial = new URLSearchParams(window.location.search).get('s')
-    const initial = window.localStorage.getItem('id') || new URLSearchParams(window.location.search).get('s')
+    const initial = window.sessionStorage.getItem('id') || new URLSearchParams(window.location.search).get('s')
     if (initial == 'random' || initial == null) {
         await searchNew(randomWord(3))
     } else currentID = initial
@@ -447,7 +447,7 @@ async function retrieveSong(q, spot, ind) {
                 label.innerHTML += '🔊'
             }
             const box = document.getElementById('box' + ind)
-            box.onclick = () => location.href = "app.html?s=" + spot.id
+            box.onclick = () => { location.href = "app?s=" + spot.id; window.sessionStorage.setItem('id', spot.id) }
         })
 }
 
