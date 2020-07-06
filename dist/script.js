@@ -1,4 +1,5 @@
-const redirect = `https://songtaste.netlify.app/app`;
+const saving = new URLSearchParams(window.location.search).get('save') == 'true'
+const redirect = `https://songtaste.netlify.app/app?save=true`;
 const clientID = `4dcd7399f4954e2c8c679f38d1bb1419`
 const creds = "NGRjZDczOTlmNDk1NGUyYzhjNjc5ZjM4ZDFiYjE0MTk6ZWNmOWExODVjYzZjNDI4NmJkMjA3NTNhMThmZTVmYzU=";
 var code;
@@ -130,12 +131,9 @@ else if (window.location.href.includes('/app')) {
     }
 
     code = new URLSearchParams(window.location.search).get('code')
-    unauthorized = new URLSearchParams(window.location.search).get('code') == null && new URLSearchParams(window.location.search).get('err') == null
-    if (unauthorized) {
-        window.localStorage.setItem('id', new URLSearchParams(window.location.search).get('s'))
-        window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=code&redirect_uri=${encodeURIComponent(redirect)}&scope=playlist-modify-private%20playlist-modify-public%20ugc-image-upload&show_dialog=false`
-    }
     err = new URLSearchParams(window.location.search).get('error') == null
+
+    // unauthorized = new URLSearchParams(window.location.search).get('code') == null && new URLSearchParams(window.location.search).get('err') == null
 
     document.getElementById('options').onmouseout()
 
@@ -163,10 +161,14 @@ else if (window.location.href.includes('/app')) {
 
 
     automate.addEventListener('click', () => {
-        if (needPlaylist < 1) {
-            listplay = []
-            playlistrun()
+        if (needPlaylist < 1 && !saving) {
+            window.localStorage.setItem('id', currentID)
+            window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=code&redirect_uri=${encodeURIComponent(redirect)}&scope=playlist-modify-private%20playlist-modify-public%20ugc-image-upload&show_dialog=false`
 
+
+            // playlistrun()
+
+            // listplay = []
             // playlist.innerHTML = '';
             // playlist.style.height = '100vh'
             // document.getElementById('playlistcontainer').style.height = '100vh'
@@ -258,6 +260,7 @@ async function asyncApp() {
     resClasses.forEach(c => {
         responsive(c, 'FR-' + c)
     })
+    if (saving) playlistrun()
 }
 
 async function APIcall() {
