@@ -534,6 +534,9 @@ async function songReact(like) {
         // console.log(allSongs)
     }
     window.localStorage.setItem('all', JSON.stringify(allSongs))
+    console.log(JSON.stringify(allSongs))
+    console.log(window.localStorage.getItem('all'))
+
 }
 
 
@@ -730,7 +733,7 @@ async function playlistrun() {
         userObj = await user()
         console.log(userObj)
         await createPlaylist(playlistJSON)
-        tokenObj.access_token = await refresh().access_token
+        refresh()
         console.log(tokenObj)
         await ammend()
     }
@@ -788,7 +791,7 @@ async function refresh() {
             'Authorization': `Basic ${creds}`
         },
         body: `grant_type=refresh_token&refresh_token=${tokenObj.refresh_token}`
-    }).then(res => res.json())
+    }).then(res => res.json()).then(data => tokenObj.access_token = data.access_token)
 }
 
 
