@@ -51,6 +51,10 @@ var allSongs = {
 console.log(window.localStorage.getItem('all'))
 try { console.log(JSON.parse(window.localStorage.getItem('all'))) } catch (e) { console.log(e) }
 try { allSongs = JSON.parse(window.localStorage.getItem('all')) } catch (e) { console.log(e) }
+console.log(allSongs);
+for (let i = 0; i < allSongs.IDList.length; i++) {
+    reactingList(allSongs.IDList[i], allSongs.Atrain[i].output == 1 ? true : false)
+}
 const responses = {
     true: [
         "You might like this one...",
@@ -536,8 +540,6 @@ async function songReact(like) {
         // console.log(allSongs)
     }
     window.localStorage.setItem('all', JSON.stringify(allSongs))
-    console.log(JSON.stringify(allSongs))
-    console.log(window.localStorage.getItem('all'))
 
 }
 
@@ -556,7 +558,7 @@ async function placeFileContent(target, file) {
         allSongs = JSON.parse(content);
         window.localStorage.setItem('all', JSON.stringify(allSongs))
         needMore = 4 - allSongs.IDList.length
-        needPlaylist = 4 - allSongs.IDList.length
+        needPlaylist = 11 - allSongs.IDList.length
         automate.innerHTML = "Save playlist"
         if (needPlaylist >= 1) {
             needPlaylist--;
