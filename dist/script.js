@@ -143,7 +143,16 @@ else if (window.location.href.includes('/app')) {
     searchID.addEventListener('click', () => {
         if (searchClickCount == 0) { searchClickCount++; searchID.innerHTML = '' }
     })
-
+    document.getElementById('clear').addEventListener('click', () => {
+        console.log("CLEARED")
+        allSongs.IDList.forEach(e => { removeFromView(e) })
+        allSongs = {
+            "IDList": [],
+            "Atrain": [],
+            "break": "break",
+            "Crun": []
+        }
+    })
     searchID.addEventListener('keypress', (e) => {
         if (e.keyCode == 13) {
             e.preventDefault()
@@ -854,12 +863,3 @@ async function replace() {
 
 
 
-function clear() {
-    allSongs.IDList.forEach(e => { removeFromView(e) })
-    allSongs = {
-        "IDList": [],
-        "Atrain": [],
-        "break": "break",
-        "Crun": []
-    }
-}
