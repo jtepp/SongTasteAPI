@@ -42,7 +42,7 @@ const v = document.getElementById('dataview');
 const playlist = document.getElementById('playlist-view')
 const searchID = document.getElementById('searchID');
 const automate = document.getElementById('automate');
-var allSongs = window.localStorage.getItem('all') || {
+var allSongs = JSON.parse(window.localStorage.getItem('all')) || {
     "IDList": [],
     "Atrain": [],
     "break": "break",
@@ -532,7 +532,7 @@ async function songReact(like) {
         reactready = true
         // console.log(allSongs)
     }
-    window.localStorage.setItem('all', allSongs)
+    window.localStorage.setItem('all', JSON.stringify(allSongs))
 }
 
 
@@ -729,9 +729,6 @@ async function playlistrun() {
         userObj = await user()
         console.log(userObj)
         await createPlaylist(playlistJSON)
-        tokenObj = await token()
-        console.log(tokenObj)
-        await ammendPlaylist()
     }
 }
 
@@ -777,16 +774,14 @@ async function createPlaylist(bodyJSON) {
         },
         body: imgData.data
     })
-}
-
-async function ammendPlaylist() {
+    let URIS = '['
+    // for (u of goodURI)
     await fetch(`https://api.spotify.com/v1/playlists/${plObj.id}/tracks`, {
         method: "PUT",
         "Authorization": 'Bearer ' + tokenObj.access_token,
         "Content-Type": "application/JSON",
         body: JSON.stringify({
-            "uris": goodURI
+            "uris": ["spotify:track:5TVirkSwFEXF1nLJEebe2I"]
         })
     })
-
 }
