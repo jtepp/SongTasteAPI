@@ -805,7 +805,7 @@ async function refresh() {
 }
 
 
-async function ammend() {
+async function replace() {
     await fetch(`https://api.spotify.com/v1/playlists/${plObj.id}/tracks?uris=${goodURI.join(',')}`, {
         method: "PUT",
         "Authorization": 'Bearer ' + tokenObj.access_token,
@@ -813,10 +813,20 @@ async function ammend() {
     }).then(res => { console.log(res); res.json() }).then(data => console.log(data)).catch(e => console.log('errorrrr  ' + e))
 }
 
+async function ammend() {
+    await fetch(`https://api.spotify.com/v1/playlists/${plObj.id}/tracks?uris=${goodURI.join(',')}`, {
+        method: "POST",
+        "Authorization": 'Bearer ' + tokenObj.access_token,
+        "Content-Type": "application/JSON"
+    }).then(res => { console.log(res); res.json() }).then(data => console.log(data)).catch(e => console.log('errorrrr  ' + e))
+}
+
+
+
 
 
 function clear() {
-    for (e of allSongs.IDList) removeFromView(e)
+    allSongs.IDList.forEach(e => { removeFromView(e) })
     allSongs = {
         "IDList": [],
         "Atrain": [],

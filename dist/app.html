@@ -58,6 +58,11 @@
             }
             document.getElementById('options').style.height = 'calc(20pt + 10px)'
             ">
+
+                <div class="button" id="clear" onclick="clear()">Clear data<div>
+                    </div>
+                </div>
+
                 <div style="display: grid; grid-template-columns: 25px auto 25px;">
                     <img src="assets/pointer.png" width="15px" id="pointer" class="pa">
                     <div id="options-title" class="closed">Data options</div>
@@ -76,9 +81,7 @@
                     <label for="input-file">Upload data</label>
                     <input type="file" name="" id="input-file" accept="application/JSON" style="display: none;">
                 </div>
-                <div class="button" id="clear" onclick="clear()">Clear data<div>
-                    </div>
-                </div>
+
     </center>
     <div id="playlist-view">
         <div id="loadingBar">
