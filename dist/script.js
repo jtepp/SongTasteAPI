@@ -811,6 +811,7 @@ async function startPlaylist(len) {
 
 async function playlistrun() {
     if (err) {
+        code = new URLSearchParams(window.location.search).get('code')
         tokenObj = await token()
         console.log(tokenObj)
         userObj = await user()
