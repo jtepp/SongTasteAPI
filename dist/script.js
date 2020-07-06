@@ -847,7 +847,7 @@ async function token() {
             'Content-Type': 'application/x-www-form-urlencoded',
             'Authorization': `Basic ${creds}`
         },
-        body: `grant_type=authorization_code&code=${code}&redirect_uri=https://songtaste.netlify.app/app`
+        body: `grant_type=authorization_code&code=${code}&redirect_uri=${encodeURIComponent(redirect)}`
     }).then(res => res.json())
 
 }
