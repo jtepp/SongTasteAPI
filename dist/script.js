@@ -51,8 +51,10 @@ console.log(window.localStorage.getItem('all'))
 try { console.log(JSON.parse(window.localStorage.getItem('all'))) } catch (e) { console.log(e) }
 try { allSongs = JSON.parse(window.localStorage.getItem('all')) } catch (e) { console.log(e) }
 console.log(allSongs);
-for (let i = 0; i < allSongs.IDList.length; i++) {
-    reactingList(allSongs.IDList[i], allSongs.Atrain[i].output == 1 ? true : false)
+if (window.loacation.href.includes('/app')) {
+    for (let i = 0; i < allSongs.IDList.length; i++) {
+        reactingList(allSongs.IDList[i], allSongs.Atrain[i].output == 1 ? true : false)
+    }
 }
 var needMore = 4 - allSongs.IDList.length;
 var needPlaylist = 11 - allSongs.IDList.length;
