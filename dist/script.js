@@ -167,7 +167,7 @@ else if (window.location.href.includes('/app')) {
     automate.addEventListener('click', () => {
         if (needPlaylist < 1 && !saving) {
             window.sessionStorage.setItem('id', currentID)
-            window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=code&redirect_uri=${encodeURIComponent(redirect)}&scope=playlist-modify-private%20playlist-modify-public%20ugc-image-upload&show_dialog=true`
+            window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=code&redirect_uri=${encodeURIComponent(redirect)}&scope=playlist-modify-private%20playlist-modify-public%20ugc-image-upload&show_dialog=false`
 
 
             // playlistrun()
