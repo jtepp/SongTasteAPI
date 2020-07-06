@@ -94,6 +94,8 @@ if (window.location.href.includes('index.html') || window.location.pathname == '
     retrieveSong(randomWord(wordLength), homePreview[2], '2')
 }
 else if (window.location.href.includes('/app')) {
+    if (needMore < 1) APIcall()
+    if (needPlaylist) automate.innerHTML = "Save Playlist"
     code = new URLSearchParams(window.location.search).get('code')
     unauthorized = new URLSearchParams(window.location.search).get('code') == null && new URLSearchParams(window.location.search).get('err') == null
     if (unauthorized) {
