@@ -497,7 +497,7 @@ async function songReact(like) {
         await reactingList(currentID, like)
         await searchLater(randomWord(wordLength))
         await retrieveFeatures(currentID)
-        automate.innerHTML = "Automate a playlist"
+        automate.innerHTML = "Save playlist"
         if (needPlaylist >= 1) {
             needPlaylist--;
             automate.innerHTML = (needPlaylist + 1) + " more..."
@@ -551,7 +551,7 @@ async function placeFileContent(target, file) {
         window.localStorage.setItem('all', allSongs)
         needMore = 4 - allSongs.IDList.length
         needPlaylist = 4 - allSongs.IDList.length
-        automate.innerHTML = "Automate a playlist"
+        automate.innerHTML = "Save playlist"
         if (needPlaylist >= 1) {
             needPlaylist--;
             automate.innerHTML = (needPlaylist + 1) + " more..."
