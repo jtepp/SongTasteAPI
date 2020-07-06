@@ -59,28 +59,28 @@
             document.getElementById('options').style.height = 'calc(20pt + 10px)'
             ">
 
-                <div class="button" id="clear" onclick="clear()">Clear data<div>
-                    </div>
-                </div>
 
-                <div style="display: grid; grid-template-columns: 25px auto 25px;">
-                    <img src="assets/pointer.png" width="15px" id="pointer" class="pa">
-                    <div id="options-title" class="closed">Data options</div>
-                    <div style="width:15px"></div>
-                </div>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 25px auto 25px;">
+            <img src="assets/pointer.png" width="15px" id="pointer" class="pa">
+            <div id="options-title" class="closed">Data options</div>
+            <div style="width:15px"></div>
+        </div>
 
 
-                <div class="button opt" id="viewdatabutton">
-                    View current data
-                </div>
-                <div id="download" class="button opt" onclick="download('SongTaste.json',JSON.stringify(allSongs))">
-                    Download
-                    current
-                    data</div>
-                <div class="button opt">
-                    <label for="input-file">Upload data</label>
-                    <input type="file" name="" id="input-file" accept="application/JSON" style="display: none;">
-                </div>
+        <div class="button opt" id="viewdatabutton">
+            View current data
+        </div>
+        <div id="download" class="button opt" onclick="download('SongTaste.json',JSON.stringify(allSongs))">
+            Download
+            current
+            data</div>
+        <div class="button opt">
+            <label for="input-file">Upload data</label>
+            <input type="file" name="" id="input-file" accept="application/JSON" style="display: none;">
+        </div>
 
     </center>
     <div id="playlist-view">
@@ -115,14 +115,15 @@
             </div>
 
         </div>
+        <div class="button" id="clear" onclick="clear()">Clear data<div>
 
-
-    </div>
-    <div class="button" id="enable" style="background-color: rgb(0, 230, 0);">
-        <h1>Sucess!</h1> <br>
-        <p>Your SongTaste preferences<br>file was uploaded successfully<br>All previous data has been replaced</p>
-    </div>
-    <script src="script.js"></script>
+            </div>
+            <div class="button" id="enable" style="background-color: rgb(0, 230, 0);">
+                <h1>Sucess!</h1> <br>
+                <p>Your SongTaste preferences<br>file was uploaded successfully<br>All previous data has been replaced
+                </p>
+            </div>
+            <script src="script.js"></script>
 </body>
 
 </html>

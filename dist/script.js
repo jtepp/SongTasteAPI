@@ -1,4 +1,3 @@
-var GONOW = false
 const redirect = `https://songtaste.netlify.app/app`;
 const clientID = `4dcd7399f4954e2c8c679f38d1bb1419`
 const creds = "NGRjZDczOTlmNDk1NGUyYzhjNjc5ZjM4ZDFiYjE0MTk6ZWNmOWExODVjYzZjNDI4NmJkMjA3NTNhMThmZTVmYzU=";
@@ -95,6 +94,41 @@ if (window.location.href.includes('index.html') || window.location.pathname == '
     retrieveSong(randomWord(wordLength), homePreview[2], '2')
 }
 else if (window.location.href.includes('/app')) {
+
+    needMore = 4 - allSongs.IDList.length
+    needPlaylist = 11 - allSongs.IDList.length
+    automate.innerHTML = "Save playlist"
+    if (needPlaylist >= 1) {
+        needPlaylist--;
+        automate.innerHTML = (needPlaylist + 1) + " more..."
+    }
+    if (needMore >= 1) {
+        needMore--;
+        document.getElementById('guessTEXT').innerHTML = (needMore + 1) + " more..."
+    } else {
+        allSongs.Crun = [
+            mainBox.acousticness,
+            mainBox.danceability,
+            mainBox.duration_ms,
+            mainBox.energy,
+            mainBox.instrumentalness,
+            mainBox.liveness,
+            mainBox.speechiness,
+            mainBox.tempo,
+            mainBox.valence
+        ]
+        APIcall()
+        let curArray;
+        const liker = returnedGuess >= threshold
+        if (liker) curArray = responses.true; else curArray = responses.false
+        if (liker) document.getElementById('guessID').style.backgroundColor = "RGB(0,230,0)"
+        else document.getElementById('guessID').style.backgroundColor = "RGB(230,0,0)"
+        // console.log(liker)
+        do { message = curArray[Math.floor(Math.random() * curArray.length)] } while (message == document.getElementById('guessTEXT').innerHTML)
+        console.log(message)
+        document.getElementById('guessTEXT').innerHTML = message
+    }
+
     code = new URLSearchParams(window.location.search).get('code')
     unauthorized = new URLSearchParams(window.location.search).get('code') == null && new URLSearchParams(window.location.search).get('err') == null
     if (unauthorized) {
@@ -104,13 +138,7 @@ else if (window.location.href.includes('/app')) {
     err = new URLSearchParams(window.location.search).get('error') == null
 
     document.getElementById('options').onmouseout()
-    if (needMore < 1)
-        document.getElementById('guessTEXT').innerHTML = (needMore + 1) + " more..."
-    else GONOW = true;
-    if (needPlaylist)
-        automate.innerHTML = (needPlaylist + 1) + " more..."
-    else
-        automate.innerHTML = "Save playlist"
+
 
     searchID.addEventListener('click', () => {
         if (searchClickCount == 0) { searchClickCount++; searchID.innerHTML = '' }
@@ -210,7 +238,6 @@ else if (window.location.href.includes('/app')) {
 
 
 async function asyncApp() {
-    if (GONOW) await APIcall()
     await getToken()
     // const initial = new URLSearchParams(window.location.search).get('s')
     const initial = window.localStorage.getItem('id') || new URLSearchParams(window.location.search).get('s')
@@ -745,7 +772,7 @@ async function playlistrun() {
         await createPlaylist(playlistJSON)
         refresh()
         console.log(tokenObj)
-        await ammend()
+        await replace()
     }
 }
 
