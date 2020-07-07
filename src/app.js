@@ -21,14 +21,19 @@ exports.handler = function (event, context, callback) {
         // const net = new Architect.Perceptron(9, 6, 1)
         const net = data.transfernet || new Architect.Perceptron(9, 7, 6, 1)
         const trainer = data.transfertrainer || new Trainer(net)
-        trainer.train(data.Atrain)
+        try { trainer.train(data.Atrain) } catch (ee) {
+            console.log(ee)
+            const net = new Architect.Perceptron(9, 7, 6, 1)
+            const trainer = new Trainer(net)
+        }
         //propagate last result
         try {
             net.activate(data.Atrain[data.Atrain.length - 1].input)
             net.propagate(0.2, data.Atrain[data.Atrain.length - 1].output)
-        } catch (e) { }
+        } catch (e) { console.log(e) }
         const aa = net.activate(data.Crun)
         // console.log(true)
+        console.log(data)
         console.log(aa)
         if (data.returnNet) {
             callback(null, {
