@@ -680,7 +680,7 @@ async function placeFileContent(target, file) {
     readFileContent(file).then(content => {
         allSongs = JSON.parse(content);
         window.localStorage.setItem('all', JSON.stringify(allSongs))
-        await updateTEXT()
+        updateTEXT()
         for (let i = 0; i < allSongs.IDList.length; i++) {
             reactingList(allSongs.IDList[i], allSongs.Atrain[i].output == 1 ? true : false)
         }
