@@ -226,7 +226,9 @@ else if (window.location.href.includes('/app')) {
         .addEventListener('change', () => {
             // enable(true);
             v.innerHTML = ` <center>
-            <div id="currentheader" class="tap">Your info<br>(Try maintain an equal Liked:Disliked ratio!)</div>
+            <div id="currentheader" class="tap">Your info<br>
+                <b class="tap">(Try maintain an equal Liked:Disliked ratio!)</b>
+            </div>
         </center>
         <div id="currentflex" class="tap">
             <div id="badlist" class="dataviewlist tap">
