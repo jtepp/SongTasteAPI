@@ -334,7 +334,7 @@ async function asyncApp() {
     await getToken()
     // const initial = new URLSearchParams(window.location.search).get('s')
     const initial = window.sessionStorage.getItem('id') || new URLSearchParams(window.location.search).get('s')
-    if (initial == 'random' || initial == null) {
+    if (initial == 'random' || initial == null || new URLSearchParams(window.location.search).get('s') == 'random') {
         await searchNew(randomWord(3))
     } else currentID = initial
     embed('box-iframe', currentID)
@@ -343,7 +343,7 @@ async function asyncApp() {
         responsive(c, 'FR-' + c)
     })
     if (saving) {
-        startPlaylist(10)
+        await startPlaylist(10)
         await playlistrun();
         embedPLAYLIST(plObj.id)
     }
