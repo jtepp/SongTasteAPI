@@ -23,8 +23,10 @@
     <center>
         <div class="button"><label for="optimize">Prioritize accuracy over speed: </label>
             <input type="checkbox" id="optimize" checked="true"></div>
-        <div class="button"><label for="longth">Prioritize accuracy over speed: </label>
-            <input type="range" id="longth"></div>
+        <div class="button"><label for="longth">Playlist length: </label>
+            <input type="range" id="longth" value="5" min="5" max="30"
+                oninput="document.getElementById('show').innerHTML='['+document.getElementById('longth').value+']'"><span
+                id="show">[5]</span></div>
     </center>
     <center>
         <div class="guess-box" id="searchID" contenteditable="true" data-placeholder="Search for a song..."></div>

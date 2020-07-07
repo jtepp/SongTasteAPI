@@ -343,7 +343,7 @@ async function asyncApp() {
         responsive(c, 'FR-' + c)
     })
     if (saving) {
-        await startPlaylist(10)
+        await startPlaylist(document.getElementById('longth').value)
         await playlistrun();
         embedPLAYLIST(plObj.id)
     }
