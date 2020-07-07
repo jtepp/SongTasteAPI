@@ -52,7 +52,7 @@ exports.handler = function (event, context, callback) {
                     'Access-Control-Allow-Headers':
                         'Origin, X-Requested-With, Content-Type, Accept',
                 },
-                body: JSON.stringify(aa[0])
+                body: JSON.stringify({ "returnedGuess": aa[0] })
             })
         }
     } catch (e) {
