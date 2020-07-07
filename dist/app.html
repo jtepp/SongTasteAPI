@@ -21,6 +21,10 @@
         </div>
     </header>
     <center>
+        <div class="button"><label for="optimize">Prioritize accuracy over speed: </label>
+            <input type="checkbox" id="optimize" checked="true"></div>
+    </center>
+    <center>
         <div class="guess-box" id="searchID" contenteditable="true" data-placeholder="Search for a song..."></div>
     </center>
     <div class="box">
@@ -28,13 +32,13 @@
         <div id="box-iframe" class="lame-image" style="background-image: url('assets/BigLogo.png');"></div>
         <div id="like" class="flexbutton" onclick="songReact(1)">Like</div>
     </div>
+
     <center>
         <div class="guess-box" id="guessID">
             <div id="guessTEXT"></div>
             <center>
                 <div class="button" id="automate">12 more...</div>
-                <label for="optimize">Prioritize accuracy over speed: </label>
-                <input type="checkbox" id="optimize" checked="true">
+
             </center>
         </div>
     </center>
@@ -100,7 +104,9 @@
     <div id="dataview" class="tap" style='top: 3000px'>
 
         <center>
-            <div id="currentheader" class="tap">Your info</div>
+            <div id="currentheader" class="tap">Your info<br>
+                <b class="tap">(Try maintain an equal Liked:Disliked ratio!)</b>
+            </div>
         </center>
         <div id="currentflex" class="tap">
             <div id="badlist" class="dataviewlist tap">

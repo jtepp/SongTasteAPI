@@ -402,11 +402,17 @@ header > img:hover{
     padding: 5px;
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
-    font-size: 40pt;
+    font-size: 30pt;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
 }
 
+#currentheader>b{
+    font-weight: 2;
+    font-size: 10pt;
+    position: relative;
+    top: -30px;
+}
 
 div>label{cursor: pointer;}
 #options{

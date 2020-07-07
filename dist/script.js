@@ -190,6 +190,10 @@ else if (window.location.href.includes('/app')) {
         }
     })
 
+    document.getElementById('optimize').addEventListener('click', () => {
+        allSongs.returnNet = document.getElementById('optimize').checked
+        console.log(allSongs.returnNet)
+    })
 
     automate.addEventListener('click', () => {
         if (needPlaylist < 1 && !saving) {
@@ -219,7 +223,7 @@ else if (window.location.href.includes('/app')) {
         .addEventListener('change', () => {
             // enable(true);
             v.innerHTML = ` <center>
-            <div id="currentheader" class="tap">Your info</div>
+            <div id="currentheader" class="tap">Your info<br>(Try maintain an equal Liked:Disliked ratio!)</div>
         </center>
         <div id="currentflex" class="tap">
             <div id="badlist" class="dataviewlist tap">
