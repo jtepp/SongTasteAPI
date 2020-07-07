@@ -179,6 +179,7 @@ else if (window.location.href.includes('/app')) {
             "break": "break",
             "Crun": []
         }
+        window.localStorage.setItem('all', allSongs)
         updateTEXT();
 
     })
