@@ -18,6 +18,7 @@ var tokenObj = {}
 var userObj = {}
 var plObj = {}
 var goodURI = []
+var bestURI = []
 var failed = false;
 var searchClickCount = 0;
 var wordLength = 3;
@@ -203,7 +204,6 @@ else if (window.location.href.includes('/app')) {
             window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=code&redirect_uri=${encodeURIComponent(redirect)}&scope=playlist-modify-private%20playlist-modify-public%20ugc-image-upload&show_dialog=false`
 
 
-            // playlistrun()
 
             // listplay = []
             // playlist.innerHTML = '';
@@ -211,7 +211,8 @@ else if (window.location.href.includes('/app')) {
             // document.getElementById('playlistcontainer').style.height = '100vh'
             // document.getElementById('loadingBar').style.display = 'block'
             // playlist.scrollIntoView(true)
-            // startPlaylist(10)
+            startPlaylist(10)
+            playlistrun()
         }
     })
 
@@ -523,8 +524,8 @@ frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
     document.body.onresize()
 
 }
-function embedPLAYLIST(container, id) {
-    document.getElementById(container).innerHTML += `<br><iframe class="playlist-iframe" src="https://open.spotify.com/embed/track/${id}" class="${responding ? 'FR-' : ''}iframe"
+function embedPLAYLIST(id) {
+    document.getElementById("playlist-view").innerHTML += `<br><iframe class="playlist-iframe" src="https://open.spotify.com/embed/playlist/${id}" class="${responding ? 'FR-' : ''}iframe"
 frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe><br>`;
     document.body.onresize()
 
@@ -854,14 +855,12 @@ async function startPlaylist(len) {
         ]
         await APIcall()
         console.log(apiData)
-        if (apiData.returnedGuess >= threshold) { listplay.push(currentID) } else console.log('didnt like ' + currentID)
+        if (apiData.returnedGuess >= threshold) { listplay.push('spotify:track:' + currentID) } else console.log('didnt like ' + currentID)
         counter++
     }
     loadingPL = false;
     document.getElementById('loadingBar').style.display = 'none';
-    listplay.forEach(id => {
-        embedPLAYLIST('playlistcontainer', id)
-    })
+    embedPLAYLIST(plObj.id)
 }
 
 
