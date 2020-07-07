@@ -99,7 +99,7 @@ const responses = {
 var responding = false;
 var homePreview = []
 var mainBox = {}
-const resClasses = ['header', 'footer', 'home-song-bar', 'formstuff', 'button', 'box', 'guess-box', 'lame-image', 'home-song-box', 'nav-top', 'message', 'home-song-info', 'song-image', 'iframe', 'flexbutton']
+const resClasses = ['header', 'footer', 'home-song-bar', 'formstuff', 'button', 'box', 'guess-box', 'lame-image', 'home-song-box', 'nav-top', 'playlist-iframe', 'message', 'home-song-info', 'song-image', 'iframe', 'flexbutton']
 const banner = document.getElementById('banner')
 const spacer = document.getElementById("spacer")
 document.body.onresize = () => {
@@ -125,7 +125,7 @@ else if (window.location.href.includes('/app')) {
 
     needMore = 4 - allSongs.IDList.length
     needPlaylist = 11 - allSongs.IDList.length
-    automate.innerHTML = "Save playlist"
+    automate.innerHTML = "Automate a playlist"
     if (needPlaylist >= 1) {
         needPlaylist--;
         automate.innerHTML = (needPlaylist + 1) + " more..."
@@ -291,7 +291,7 @@ else if (window.location.href.includes('/app')) {
 async function updateTEXT() {
     needMore = 4 - allSongs.IDList.length;
     needPlaylist = 12 - allSongs.IDList.length;
-    automate.innerHTML = "Save playlist";
+    automate.innerHTML = "Automate a playlist";
     if (needPlaylist >= 1) {
         needPlaylist--;
         automate.innerHTML = (needPlaylist + 1) + " more...";
@@ -641,7 +641,7 @@ async function songReact(like) {
         await reactingList(currentID, like)
         await searchLater(randomWord(wordLength))
         await retrieveFeatures(currentID)
-        automate.innerHTML = "Save playlist"
+        automate.innerHTML = "Automate a playlist"
         if (needPlaylist >= 1) {
             needPlaylist--;
             automate.innerHTML = (needPlaylist + 1) + " more..."
@@ -696,7 +696,7 @@ async function placeFileContent(target, file) {
         window.localStorage.setItem('all', JSON.stringify(allSongs))
         needMore = 4 - allSongs.IDList.length
         needPlaylist = 11 - allSongs.IDList.length
-        automate.innerHTML = "Save playlist"
+        automate.innerHTML = "Automate a playlist"
         if (needPlaylist >= 1) {
             needPlaylist--;
             automate.innerHTML = (needPlaylist + 1) + " more..."

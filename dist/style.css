@@ -26,7 +26,7 @@
 }
 .playlist-iframe{
     width: 500px;
-    height: 800px;
+    height: 100vh;
     margin-right: 10px;
     margin-bottom: 10px;
 }
@@ -653,6 +653,12 @@ div>label{cursor: pointer;}
 .FR-formstuff{
     margin-left: 5vw;
     font-size: 30pt;
+}
+.FR-playlist-iframe{
+    width: 100vw;
+    height: 100vh;
+    /* margin-right: 10px; */
+    /* margin-bottom: 10px; */
 }
 /* FORCED RESPONSIVENESS */
 
