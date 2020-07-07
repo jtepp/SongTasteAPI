@@ -42,7 +42,7 @@ const playlist = document.getElementById('playlist-view')
 const searchID = document.getElementById('searchID');
 const automate = document.getElementById('automate');
 var allSongs = {
-    "returnNet": true,
+    "returnnet": true,
     "transfernet": {},
     "transfertrainer": {},
     "IDList": [],
@@ -55,7 +55,7 @@ try { console.log(JSON.parse(window.localStorage.getItem('all'))) } catch (e) { 
 try { allSongs = JSON.parse(window.localStorage.getItem('all')) } catch (e) {
     console.log(e)
     if (allSongs == null || JSON.parse(window.localStorage.getItem('all')) == null) allSongs = {
-        "returnNet": true,
+        "returnnet": true,
         "transfernet": {},
         "transfertrainer": {},
         "IDList": [],
@@ -71,7 +71,7 @@ if (window.location.href.includes('/app') && allSongs != null) {
     }
 } else {
     allSongs = {
-        "returnNet": true,
+        "returnnet": true,
         "transfernet": {},
         "transfertrainer": {},
         "IDList": [],
@@ -171,7 +171,7 @@ else if (window.location.href.includes('/app')) {
         console.log("CLEARED")
         allSongs.IDList.forEach(e => { removeFromView(e) })
         allSongs = {
-            "returnNet": true,
+            "returnnet": true,
             "transfernet": {},
             "transfertrainer": {},
             "IDList": [],
@@ -192,8 +192,8 @@ else if (window.location.href.includes('/app')) {
     })
 
     document.getElementById('optimize').addEventListener('click', () => {
-        allSongs.returnNet = document.getElementById('optimize').checked
-        console.log(allSongs.returnNet)
+        allSongs.returnnet = document.getElementById('optimize').checked
+        console.log(allSongs.returnnet)
     })
 
     automate.addEventListener('click', () => {

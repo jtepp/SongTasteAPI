@@ -39,7 +39,7 @@ exports.handler = function (event, context, callback) {
         // console.log(true)
         console.log(data)
         console.log(aa)
-        if (data.returnNet) {
+        if (data.returnnet) {
             callback(null, {
                 statusCode: 200,
                 headers: {
