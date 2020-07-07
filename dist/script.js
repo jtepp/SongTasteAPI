@@ -145,7 +145,7 @@ else if (window.location.href.includes('/app')) {
             mainBox.valence
         ]
         APIcall()
-        console.log(apiData.returnedGuess)
+
         let curArray;
         const liker = apiData.returnedGuess >= threshold
         if (liker) curArray = responses.true; else curArray = responses.false
@@ -354,6 +354,7 @@ async function APIcall() {
             apiData = d
             allSongs.transfernet = apiData.transfernet
             allSongs.transfertrainer = apiData.transfertrainer
+            console.log(apiData.returnedGuess)
         })
 }
 async function getToken() {
