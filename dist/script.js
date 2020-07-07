@@ -36,12 +36,15 @@ var run = []
 var reactready = true
 var mName = '';
 var mArtist = '';
-var returnedGuess = ''
+var apiData = {}
 const v = document.getElementById('dataview');
 const playlist = document.getElementById('playlist-view')
 const searchID = document.getElementById('searchID');
 const automate = document.getElementById('automate');
 var allSongs = {
+    "returnNet": true,
+    "transfernet": {},
+    "transfertrainer": {},
     "IDList": [],
     "Atrain": [],
     "break": "break",
@@ -122,7 +125,7 @@ else if (window.location.href.includes('/app')) {
         ]
         APIcall()
         let curArray;
-        const liker = returnedGuess >= threshold
+        const liker = apiData.returnedGuess >= threshold
         if (liker) curArray = responses.true; else curArray = responses.false
         if (liker) document.getElementById('guessID').style.backgroundColor = "RGB(0,230,0)"
         else document.getElementById('guessID').style.backgroundColor = "RGB(230,0,0)"
@@ -147,6 +150,9 @@ else if (window.location.href.includes('/app')) {
         console.log("CLEARED")
         allSongs.IDList.forEach(e => { removeFromView(e) })
         allSongs = {
+            "returnNet": true,
+            "transfernet": {},
+            "transfertrainer": {},
             "IDList": [],
             "Atrain": [],
             "break": "break",
@@ -281,7 +287,7 @@ async function updateTEXT() {
         ];
         await APIcall();
         let curArray;
-        const liker = returnedGuess >= threshold;
+        const liker = apiData.returnedGuess >= threshold;
         if (liker)
             curArray = responses.true;
         else
@@ -319,7 +325,7 @@ async function APIcall() {
         body: JSON.stringify(allSongs)
         // mode: 'no-cors'
     }).then(res => res.json())
-        .then(d => returnedGuess = d)
+        .then(d => apiData = d)
 }
 async function getToken() {
     await fetch(`https://accounts.spotify.com/api/token`, {
@@ -394,7 +400,7 @@ async function searchSpecific(q) {
                     if (needMore < 1) {
                         APIcall()
                         let curArray;
-                        const liker = returnedGuess >= threshold
+                        const liker = apiData.returnedGuess >= threshold
                         if (liker) curArray = responses.true; else curArray = responses.false
                         if (liker) document.getElementById('guessID').style.backgroundColor = "RGB(0,230,0)"
                         else document.getElementById('guessID').style.backgroundColor = "RGB(230,0,0)"
@@ -620,7 +626,7 @@ async function songReact(like) {
             ]
             await APIcall()
             let curArray;
-            const liker = returnedGuess >= threshold
+            const liker = apiData.returnedGuess >= threshold
             if (liker) curArray = responses.true; else curArray = responses.false
             if (liker) document.getElementById('guessID').style.backgroundColor = "RGB(0,230,0)"
             else document.getElementById('guessID').style.backgroundColor = "RGB(230,0,0)"
@@ -675,7 +681,7 @@ async function placeFileContent(target, file) {
             ]
             APIcall()
             let curArray;
-            const liker = returnedGuess >= threshold
+            const liker = apiData.returnedGuess >= threshold
             if (liker) curArray = responses.true; else curArray = responses.false
             if (liker) document.getElementById('guessID').style.backgroundColor = "RGB(0,230,0)"
             else document.getElementById('guessID').style.backgroundColor = "RGB(230,0,0)"
@@ -814,8 +820,8 @@ async function startPlaylist(len) {
             mainBox.valence
         ]
         await APIcall()
-        console.log(returnedGuess)
-        if (returnedGuess >= threshold) { listplay.push(currentID) } else console.log('didnt like ' + currentID)
+        console.log(apiData)
+        if (apiData.returnedGuess >= threshold) { listplay.push(currentID) } else console.log('didnt like ' + currentID)
         counter++
     }
     loadingPL = false;
