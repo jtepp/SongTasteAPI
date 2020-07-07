@@ -285,8 +285,8 @@ else if (window.location.href.includes('/app')) {
 
 
 async function updateTEXT() {
-    needMore = 4 - allSongs.IDList;
-    needPlaylist = 12 - allSongs.IDList;
+    needMore = 4 - allSongs.IDList.length;
+    needPlaylist = 12 - allSongs.IDList.length;
     automate.innerHTML = "Save playlist";
     if (needPlaylist >= 1) {
         needPlaylist--;
