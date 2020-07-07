@@ -349,7 +349,11 @@ async function APIcall() {
         body: JSON.stringify(allSongs)
         // mode: 'no-cors'
     }).then(res => res.json())
-        .then(d => apiData = d)
+        .then(d => {
+            apiData = d
+            allSongs.transfernet = apiData.transfernet
+            allSongs.transfertrainer = apiData.transfertrainer
+        })
 }
 async function getToken() {
     await fetch(`https://accounts.spotify.com/api/token`, {

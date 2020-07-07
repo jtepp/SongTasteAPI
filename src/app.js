@@ -19,13 +19,9 @@ exports.handler = function (event, context, callback) {
 
 
         // const net = new Architect.Perceptron(9, 6, 1)
-        const net = data.transfernet || new Architect.Perceptron(9, 7, 6, 1)
-        const trainer = data.transfertrainer || new Trainer(net)
-        try { trainer.train(data.Atrain) } catch (ee) {
-            console.log(ee)
-            const net = new Architect.Perceptron(9, 7, 6, 1)
-            const trainer = new Trainer(net)
-        }
+        const net = data.transfernet == {} || data.transfernet == null ? new Architect.Perceptron(9, 7, 6, 1) : data.transfernet
+        const trainer = data.transfertrainer == {} || data.transfertrainer == null ? new Trainer(net) : data.transfertrainer
+        trainer.train(data.Atrain)
         //propagate last result
         try {
             net.activate(data.Atrain[data.Atrain.length - 1].input)
