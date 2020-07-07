@@ -244,8 +244,6 @@ else if (window.location.href.includes('/app')) {
         })
     document.getElementById('viewdatabutton').addEventListener('mouseup', () => {
         toggleDataview()
-        document.getElementById('likedh1').innerHTML = `Liked (${likelist.length})`
-        document.getElementById('dislikedh1').innerHTML = `Disiked (${hatelist.length})`
     })
 
     document.addEventListener('mousedown', (event) => {
@@ -598,7 +596,8 @@ async function reactingList(id, like) {
                 document.getElementById('badlist').appendChild(returnHTMLfordataview(nfo))
             }
         })
-
+    document.getElementById('likedh1').innerHTML = `Liked (${likelist.length})`
+    document.getElementById('dislikedh1').innerHTML = `Disiked (${hatelist.length})`
 }
 
 
@@ -807,7 +806,8 @@ function toggleDataview() {
         default: console.log('defaulted')
         case 'top: 50px': v.setAttribute('style', 'top: 3000px');
     }
-
+    document.getElementById('likedh1').innerHTML = `Liked (${likelist.length})`
+    document.getElementById('dislikedh1').innerHTML = `Disiked (${hatelist.length})`
 
 }
 
