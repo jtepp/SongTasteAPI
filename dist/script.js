@@ -3,6 +3,7 @@ const redirect = `https://songtaste.netlify.app/app?save=true`;
 const clientID = `4dcd7399f4954e2c8c679f38d1bb1419`
 const creds = "NGRjZDczOTlmNDk1NGUyYzhjNjc5ZjM4ZDFiYjE0MTk6ZWNmOWExODVjYzZjNDI4NmJkMjA3NTNhMThmZTVmYzU=";
 var code;
+var plready = true
 var unauthorized;
 var err;
 const playlistJSON = {
@@ -123,40 +124,7 @@ if (window.location.href.includes('index.html') || window.location.pathname == '
 }
 else if (window.location.href.includes('/app')) {
 
-    needMore = 4 - allSongs.IDList.length
-    needPlaylist = 11 - allSongs.IDList.length
-    automate.innerHTML = "Automate a playlist"
-    if (needPlaylist >= 1) {
-        needPlaylist--;
-        automate.innerHTML = (needPlaylist + 1) + " more..."
-    }
-    if (needMore >= 1) {
-        needMore--;
-        document.getElementById('guessTEXT').innerHTML = (needMore + 1) + " more..."
-    } else {
-        allSongs.Crun = [
-            mainBox.acousticness,
-            mainBox.danceability,
-            mainBox.duration_ms,
-            mainBox.energy,
-            mainBox.instrumentalness,
-            mainBox.liveness,
-            mainBox.speechiness,
-            mainBox.tempo,
-            mainBox.valence
-        ]
-        APIcall()
-
-        let curArray;
-        const liker = apiData.returnedGuess >= threshold
-        if (liker) curArray = responses.true; else curArray = responses.false
-        if (liker) document.getElementById('guessID').style.backgroundColor = "RGB(0,230,0)"
-        else document.getElementById('guessID').style.backgroundColor = "RGB(230,0,0)"
-        // console.log(liker)
-        do { message = curArray[Math.floor(Math.random() * curArray.length)] } while (message == document.getElementById('guessTEXT').innerHTML)
-        console.log(message)
-        document.getElementById('guessTEXT').innerHTML = message
-    }
+    await updateTEXT()
 
     code = new URLSearchParams(window.location.search).get('code')
     err = new URLSearchParams(window.location.search).get('error') == null
@@ -182,7 +150,7 @@ else if (window.location.href.includes('/app')) {
             "Crun": []
         }
         window.localStorage.setItem('all', allSongs)
-        updateTEXT();
+        await updateTEXT();
 
     })
     searchID.addEventListener('keypress', (e) => {
@@ -199,7 +167,7 @@ else if (window.location.href.includes('/app')) {
     })
 
     automate.addEventListener('click', () => {
-        if (needPlaylist < 1 && !saving) {
+        if (needPlaylist < 1 && plready) {// && !saving) {
             window.sessionStorage.setItem('id', currentID)
             window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=code&redirect_uri=${encodeURIComponent(redirect)}&scope=playlist-modify-private%20playlist-modify-public%20ugc-image-upload&show_dialog=false`
 
@@ -343,9 +311,13 @@ async function asyncApp() {
         responsive(c, 'FR-' + c)
     })
     if (saving) {
+        plready = false;
+        automate.style.backgroundColor = 'RGB(148,148,148)'
         await startPlaylist(document.getElementById('longth').value)
         await playlistrun();
         embedPLAYLIST(plObj.id)
+        plready = true;
+        automate.style.backgroundColor = 'RGB(207,0,0)'
     }
 }
 
@@ -694,39 +666,7 @@ async function placeFileContent(target, file) {
     readFileContent(file).then(content => {
         allSongs = JSON.parse(content);
         window.localStorage.setItem('all', JSON.stringify(allSongs))
-        needMore = 4 - allSongs.IDList.length
-        needPlaylist = 11 - allSongs.IDList.length
-        automate.innerHTML = "Automate a playlist"
-        if (needPlaylist >= 1) {
-            needPlaylist--;
-            automate.innerHTML = (needPlaylist + 1) + " more..."
-        }
-        if (needMore >= 1) {
-            needMore--;
-            document.getElementById('guessTEXT').innerHTML = (needMore + 1) + " more..."
-        } else {
-            allSongs.Crun = [
-                mainBox.acousticness,
-                mainBox.danceability,
-                mainBox.duration_ms,
-                mainBox.energy,
-                mainBox.instrumentalness,
-                mainBox.liveness,
-                mainBox.speechiness,
-                mainBox.tempo,
-                mainBox.valence
-            ]
-            APIcall()
-            let curArray;
-            const liker = apiData.returnedGuess >= threshold
-            if (liker) curArray = responses.true; else curArray = responses.false
-            if (liker) document.getElementById('guessID').style.backgroundColor = "RGB(0,230,0)"
-            else document.getElementById('guessID').style.backgroundColor = "RGB(230,0,0)"
-            // console.log(liker)
-            do { message = curArray[Math.floor(Math.random() * curArray.length)] } while (message == document.getElementById('guessTEXT').innerHTML)
-            console.log(message)
-            document.getElementById('guessTEXT').innerHTML = message
-        }
+        await updateTEXT()
         for (let i = 0; i < allSongs.IDList.length; i++) {
             reactingList(allSongs.IDList[i], allSongs.Atrain[i].output == 1 ? true : false)
         }
@@ -768,7 +708,7 @@ function removeFromView(id) {
     const i = allSongs.IDList.indexOf(id)
     allSongs.IDList = allSongs.IDList.slice(0, i).concat(allSongs.IDList.slice(i + 1, allSongs.IDList.length))
     allSongs.Atrain = allSongs.Atrain.slice(0, i).concat(allSongs.Atrain.slice(i + 1, allSongs.Atrain.length))
-    updateTEXT()
+    await updateTEXT()
 }
 
 
