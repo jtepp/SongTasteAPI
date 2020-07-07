@@ -600,69 +600,68 @@ async function reactingList(id, like) {
 
 
 async function songReact(like) {
-    if (needPlaylist < 1) {
-        if (Math.abs(likelist.length - hatelist.length) <= 2) { automate.style.background = 'RGB(148,148,148)' }
-        else {
-            if (reactready) {
-                automate.style.background = 'RGB(207,0,0)'
-                reactready = false
-                allSongs.IDList.push(currentID)
-                allSongs.Atrain.push({
-                    "input": [
-                        mainBox.acousticness,
-                        mainBox.danceability,
-                        mainBox.duration_ms,
-                        mainBox.energy,
-                        mainBox.instrumentalness,
-                        mainBox.liveness,
-                        mainBox.speechiness,
-                        mainBox.tempo,
-                        mainBox.valence
-                    ],
-                    "output": [
-                        like
-                    ]
-                })
-                await reactingList(currentID, like)
-                await searchLater(randomWord(wordLength))
-                await retrieveFeatures(currentID)
-                automate.innerHTML = "Automate a playlist"
-                if (needPlaylist >= 1) {
-                    needPlaylist--;
-                    automate.innerHTML = (needPlaylist + 1) + " more..."
-                }
-                if (needMore >= 1) {
-                    needMore--;
-                    document.getElementById('guessTEXT').innerHTML = (needMore + 1) + " more..."
-                } else {
-                    allSongs.Crun = [
-                        mainBox.acousticness,
-                        mainBox.danceability,
-                        mainBox.duration_ms,
-                        mainBox.energy,
-                        mainBox.instrumentalness,
-                        mainBox.liveness,
-                        mainBox.speechiness,
-                        mainBox.tempo,
-                        mainBox.valence
-                    ]
-                    await APIcall()
-                    let curArray;
-                    const liker = apiData.returnedGuess >= threshold
-                    if (liker) curArray = responses.true; else curArray = responses.false
-                    if (liker) document.getElementById('guessID').style.backgroundColor = "RGB(0,230,0)"
-                    else document.getElementById('guessID').style.backgroundColor = "RGB(230,0,0)"
-                    // console.log(liker)
-                    do { message = curArray[Math.floor(Math.random() * curArray.length)] } while (message == document.getElementById('guessTEXT').innerHTML)
-                    console.log(message)
-                    document.getElementById('guessTEXT').innerHTML = message
-                }
-                embed('box-iframe', currentID)
-                reactready = true
-                // console.log(allSongs)
+    if (Math.abs(likelist.length - hatelist.length) <= 2) { automate.style.background = 'RGB(148,148,148)' }
+    else {
+        if (reactready) {
+            automate.style.background = 'RGB(207,0,0)'
+            reactready = false
+            allSongs.IDList.push(currentID)
+            allSongs.Atrain.push({
+                "input": [
+                    mainBox.acousticness,
+                    mainBox.danceability,
+                    mainBox.duration_ms,
+                    mainBox.energy,
+                    mainBox.instrumentalness,
+                    mainBox.liveness,
+                    mainBox.speechiness,
+                    mainBox.tempo,
+                    mainBox.valence
+                ],
+                "output": [
+                    like
+                ]
+            })
+            await reactingList(currentID, like)
+            await searchLater(randomWord(wordLength))
+            await retrieveFeatures(currentID)
+            automate.innerHTML = "Automate a playlist"
+            if (needPlaylist >= 1) {
+                needPlaylist--;
+                automate.innerHTML = (needPlaylist + 1) + " more..."
             }
+            if (needMore >= 1) {
+                needMore--;
+                document.getElementById('guessTEXT').innerHTML = (needMore + 1) + " more..."
+            } else {
+                allSongs.Crun = [
+                    mainBox.acousticness,
+                    mainBox.danceability,
+                    mainBox.duration_ms,
+                    mainBox.energy,
+                    mainBox.instrumentalness,
+                    mainBox.liveness,
+                    mainBox.speechiness,
+                    mainBox.tempo,
+                    mainBox.valence
+                ]
+                await APIcall()
+                let curArray;
+                const liker = apiData.returnedGuess >= threshold
+                if (liker) curArray = responses.true; else curArray = responses.false
+                if (liker) document.getElementById('guessID').style.backgroundColor = "RGB(0,230,0)"
+                else document.getElementById('guessID').style.backgroundColor = "RGB(230,0,0)"
+                // console.log(liker)
+                do { message = curArray[Math.floor(Math.random() * curArray.length)] } while (message == document.getElementById('guessTEXT').innerHTML)
+                console.log(message)
+                document.getElementById('guessTEXT').innerHTML = message
+            }
+            embed('box-iframe', currentID)
+            reactready = true
+            // console.log(allSongs)
         }
     }
+
     window.localStorage.setItem('all', JSON.stringify(allSongs))
 
 }
