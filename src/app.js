@@ -19,10 +19,10 @@ exports.handler = function (event, context, callback) {
 
 
         // const net = new Architect.Perceptron(9, 6, 1)
-        const net = data.transfernet == {} || data.transfernet == null ? new Architect.Perceptron(9, 7, 6, 1) : data.transfernet
+        const net = (data.transfernet == {} || data.transfernet == null) ? new Architect.Perceptron(9, 7, 6, 1) : data.transfernet
         console.log("net: " + net)
         console.log("netPP: " + JSON.parse(net))
-        const trainer = data.transfertrainer == {} || data.transfertrainer == null ? new Trainer(net) : data.transfertrainer
+        const trainer = (data.transfertrainer == {} || data.transfertrainer == null) ? new Trainer(net) : data.transfertrainer
         console.log("trainer: " + trainer)
         console.log("trainerPP: " + JSON.parse(trainer))
         trainer.train(data.Atrain)
