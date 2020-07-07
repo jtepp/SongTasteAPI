@@ -22,9 +22,9 @@ exports.handler = function (event, context, callback) {
 		// net = new Architect.Perceptron(9, 6, 1)
 		try {
 			net = (data.transfernet == {} || data.transfernet == null) ? new Architect.Perceptron(9, 7, 6, 1) : data.transfernet
-			console.log("net: " + JSON.stringify(net))
+			console.log("net?: " + net == data.transfernet)
 			trainer = (data.transfertrainer == {} || data.transfertrainer == null) ? new Trainer(net) : data.transfertrainer
-			console.log("trainer: " + JSON.stringify(trainer))
+			console.log("trainer?: " + trauber == data.transfertrainer)
 			trainer.train(data.Atrain)
 		} catch (err) {
 			console.log('im a failure ' + err)
@@ -35,7 +35,7 @@ exports.handler = function (event, context, callback) {
 		try {
 			net.activate(data.Atrain[data.Atrain.length - 1].input)
 			net.propagate(0.2, data.Atrain[data.Atrain.length - 1].output)
-		} catch (e) { console.log(e) }
+		} catch (e) { console.log(e + " couldnt propagate") }
 		const aa = net.activate(data.Crun)
 		// console.log(true)
 		console.log(data)
