@@ -530,8 +530,8 @@ frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
 
 }
 function embedPLAYLIST(id) {
-    document.getElementById("playlist-view").innerHTML += `<br><iframe class="playlist-iframe" src="https://open.spotify.com/embed/playlist/${id}" class="${responding ? 'FR-' : ''}iframe"
-frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe><br>`;
+    document.getElementById("playlist-view").innerHTML += `<center><iframe class="playlist-iframe" src="https://open.spotify.com/embed/playlist/${id}" class="${responding ? 'FR-' : ''}iframe"
+    frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></center>`;
     document.body.onresize()
 
 }
