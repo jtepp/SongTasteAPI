@@ -123,7 +123,7 @@ if (window.location.href.includes('index.html') || window.location.pathname == '
     retrieveSong(randomWord(wordLength), homePreview[2], '2')
 }
 else if (window.location.href.includes('/app')) {
-
+    document.getElementById('longth').value = window.localStorage.getItem('length') || '5'
 
     updateTEXT()
 
