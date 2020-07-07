@@ -18,23 +18,43 @@ exports.handler = function (event, context, callback) {
         // }
 
 
-        // const net = new Architect.Perceptron(9, 7, 6, 1)
-        const net = new Architect.Perceptron(9, 6, 1)
-        const trainer = new Trainer(net)
+        // const net = new Architect.Perceptron(9, 6, 1)
+        const net = data.transfernet || new Architect.Perceptron(9, 7, 6, 1)
+        const trainer = data.transfertrainer || new Trainer(net)
         trainer.train(data.Atrain)
+        //propagate last result
+        try {
+            net.activate(data.Atrain[data.Atrain.length - 1].input)
+            net.propagate(0.2, data.Atrain[data.Atrain.length - 1].output)
+        } catch (e) { }
         const aa = net.activate(data.Crun)
         // console.log(true)
         console.log(aa)
-        callback(null, {
-            statusCode: 200,
-            headers: {
+        if (data.returnNet) {
+            callback(null, {
+                statusCode: 200,
+                headers: {
 
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Headers':
-                    'Origin, X-Requested-With, Content-Type, Accept',
-            },
-            body: JSON.stringify(aa[0])
-        })
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Headers':
+                        'Origin, X-Requested-With, Content-Type, Accept',
+                },
+                body: JSON.stringify({ "transfernet": net, "transfertrainer": trainer, "returnedGuess": aa[0] })
+            })
+
+        }
+        else {
+            callback(null, {
+                statusCode: 200,
+                headers: {
+
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Headers':
+                        'Origin, X-Requested-With, Content-Type, Accept',
+                },
+                body: JSON.stringify(aa[0])
+            })
+        }
     } catch (e) {
         console.log("failed" + e)
         callback(null, {

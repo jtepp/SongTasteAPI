@@ -687,6 +687,8 @@ async function placeFileContent(target, file) {
         for (let i = 0; i < allSongs.IDList.length; i++) {
             reactingList(allSongs.IDList[i], allSongs.Atrain[i].output == 1 ? true : false)
         }
+        document.getElementById('likedh1').innerHTML = `Liked (${likelist.length})`
+        document.getElementById('dislikedh1').innerHTML = `Disiked (${hatelist.length})`
         toggleDataview()
         console.log(allSongs)
     }).catch(error => console.log(error))
