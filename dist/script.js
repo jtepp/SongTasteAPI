@@ -211,8 +211,7 @@ else if (window.location.href.includes('/app')) {
             // document.getElementById('playlistcontainer').style.height = '100vh'
             // document.getElementById('loadingBar').style.display = 'block'
             // playlist.scrollIntoView(true)
-            startPlaylist(10)
-            playlistrun()
+
         }
     })
 
@@ -343,7 +342,11 @@ async function asyncApp() {
     resClasses.forEach(c => {
         responsive(c, 'FR-' + c)
     })
-    if (saving) await playlistrun()
+    if (saving) {
+        startPlaylist(10)
+        await playlistrun();
+        embedPLAYLIST(plObj.id)
+    }
 }
 
 async function APIcall() {
@@ -862,7 +865,7 @@ async function startPlaylist(len) {
     }
     loadingPL = false;
     document.getElementById('loadingBar').style.display = 'none';
-    embedPLAYLIST(plObj.id)
+    bestURI = listplay
 }
 
 
@@ -876,7 +879,7 @@ async function playlistrun() {
         await createPlaylist(playlistJSON)
         refresh()
         console.log(tokenObj)
-        await replace()
+        await replace(bestURI)
     }
 }
 
@@ -936,8 +939,8 @@ async function refresh() {
 }
 
 
-async function replace() {
-    await fetch(`https://api.spotify.com/v1/playlists/${plObj.id}/tracks?uris=${goodURI.join(',')}`, {
+async function replace(songlist) {
+    await fetch(`https://api.spotify.com/v1/playlists/${plObj.id}/tracks?uris=${songlist.join(',')}`, {
         method: "PUT",
         headers: {
             "Authorization": 'Bearer ' + tokenObj.access_token,
