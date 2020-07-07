@@ -6,6 +6,7 @@ var code;
 var plready = true
 var unauthorized;
 var err;
+var alreadyMadePlaylist = false;
 const playlistJSON = {
     "name": 'SongTaste Favorites',
     "public": true,
@@ -830,7 +831,8 @@ async function playlistrun() {
         console.log(tokenObj)
         userObj = await user()
         console.log(userObj)
-        await createPlaylist(playlistJSON)
+        if (!alreadyMadePlaylist)
+            await createPlaylist(playlistJSON)
         refresh()
         console.log(tokenObj)
         await replace(bestURI)
@@ -860,6 +862,17 @@ async function user() {
     }).then(res => res.json())
 }
 
+// async function checkPlaylists() {
+//     await fetch(`https://api.spotify.com/v1/users/${userObj.id}/playlists?limit=50`, {
+//         method: "GET",
+//         headers: {
+//             'Authorization': `Bearer ${tokenObj.access_token}`
+//         },
+//         body: JSON.stringify(bodyJSON)
+//     }).then(res => res.json()).then(data => { plObj = data; console.log(data) })
+// }
+
+
 async function createPlaylist(bodyJSON) {
     //create
     await fetch(`https://api.spotify.com/v1/users/${userObj.id}/playlists`, {
@@ -879,6 +892,7 @@ async function createPlaylist(bodyJSON) {
         },
         body: imgData.data
     })
+    alreadyMadePlaylist = true;
 }
 
 async function refresh() {
