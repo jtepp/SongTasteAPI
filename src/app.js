@@ -1,87 +1,88 @@
 exports.handler = function (event, context, callback) {
-    console.log(event.body)
-    try {
+	console.log(event.body)
+	try {
 
-        const synaptic = require('synaptic'); // this line is not needed in the browser
-        const Neuron = synaptic.Neuron,
-            Layer = synaptic.Layer,
-            Network = synaptic.Network,
-            Trainer = synaptic.Trainer,
-            Architect = synaptic.Architect;
-        const a = JSON.stringify(event.body).split("\\").join('').split(',"break":"break",').join();
-        const b = a.slice(1, a.length - 1)
-        const data = JSON.parse(b)
-        // for (let i = 0; i < data.Atrain.length; i++) {
-        //     for (let j = 0; j < data.Atrain[i].length; j++) {
-        //         data.Atrain[i][j] *= 100;
-        //     }
-        // }
+		const synaptic = require('synaptic'); // this line is not needed in the browser
+		const Neuron = synaptic.Neuron,
+			Layer = synaptic.Layer,
+			Network = synaptic.Network,
+			Trainer = synaptic.Trainer,
+			Architect = synaptic.Architect;
+		const a = JSON.stringify(event.body).split("\\").join('').split(',"break":"break",').join();
+		const b = a.slice(1, a.length - 1)
+		const data = JSON.parse(b)
+		// for (let i = 0; i < data.Atrain.length; i++) {
+		//     for (let j = 0; j < data.Atrain[i].length; j++) {
+		//         data.Atrain[i][j] *= 100;
+		//     }
+		// }
+		var net = {};
+		var trainer = {}
+
+		// net = new Architect.Perceptron(9, 6, 1)
+		try {
+			net = (data.transfernet == {} || data.transfernet == null) ? new Architect.Perceptron(9, 7, 6, 1) : data.transfernet
+			console.log("net: " + JSON.stringify(net))
+			trainer = (data.transfertrainer == {} || data.transfertrainer == null) ? new Trainer(net) : data.transfertrainer
+			console.log("trainer: " + JSON.stringify(trainer))
+			trainer.train(data.Atrain)
+		} catch (err) {
+			console.log('im a failure ' + err)
+			net = new Architect.Perceptron(9, 7, 6, 1)
+			trainer = new Trainer(net)
+		}
+		//propagate last result
+		try {
+			net.activate(data.Atrain[data.Atrain.length - 1].input)
+			net.propagate(0.2, data.Atrain[data.Atrain.length - 1].output)
+		} catch (e) { console.log(e) }
+		const aa = net.activate(data.Crun)
+		// console.log(true)
+		console.log(data)
+		console.log(aa)
+		if (data.returnnet) {
+			callback(null, {
+				statusCode: 200,
+				headers: {
+
+					'Access-Control-Allow-Origin': '*',
+					'Access-Control-Allow-Headers':
+						'Origin, X-Requested-With, Content-Type, Accept',
+				},
+				body: JSON.stringify({ "transfernet": net, "transfertrainer": trainer, "returnedGuess": aa[0] })
+			})
+
+		}
+		else {
+			callback(null, {
+				statusCode: 200,
+				headers: {
+
+					'Access-Control-Allow-Origin': '*',
+					'Access-Control-Allow-Headers':
+						'Origin, X-Requested-With, Content-Type, Accept',
+				},
+				body: JSON.stringify({ "returnedGuess": aa[0] })
+			})
+		}
+	} catch (e) {
+		console.log("failed" + e)
+		callback(null, {
+			statusCode: 206,
+			headers: {
+
+				'Access-Control-Allow-Origin': '*',
+				'Access-Control-Allow-Headers':
+					'Origin, X-Requested-With, Content-Type, Accept',
+			},
+			body: JSON.stringify({
+				"error": "please make sure your input JSON follows this template",
+				"template": JSON.parse(`{ "Atrain": [ { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" } ], "break":"break", "Crun": "[Array]" }`)
+			})
 
 
-        // const net = new Architect.Perceptron(9, 6, 1)
-        try {
-            const net = (data.transfernet == {} || data.transfernet == null) ? new Architect.Perceptron(9, 7, 6, 1) : data.transfernet
-            console.log("net: " + JSON.stringify(net))
-            const trainer = (data.transfertrainer == {} || data.transfertrainer == null) ? new Trainer(net) : data.transfertrainer
-            console.log("trainer: " + JSON.stringify(trainer))
-            trainer.train(data.Atrain)
-        } catch (err) {
-            console.log('im a failure ' + err)
-            const net = new Architect.Perceptron(9, 7, 6, 1)
-            const trainer = new Trainer(net)
-        }
-        //propagate last result
-        try {
-            net.activate(data.Atrain[data.Atrain.length - 1].input)
-            net.propagate(0.2, data.Atrain[data.Atrain.length - 1].output)
-        } catch (e) { console.log(e) }
-        const aa = net.activate(data.Crun)
-        // console.log(true)
-        console.log(data)
-        console.log(aa)
-        if (data.returnnet) {
-            callback(null, {
-                statusCode: 200,
-                headers: {
-
-                    'Access-Control-Allow-Origin': '*',
-                    'Access-Control-Allow-Headers':
-                        'Origin, X-Requested-With, Content-Type, Accept',
-                },
-                body: JSON.stringify({ "transfernet": net, "transfertrainer": trainer, "returnedGuess": aa[0] })
-            })
-
-        }
-        else {
-            callback(null, {
-                statusCode: 200,
-                headers: {
-
-                    'Access-Control-Allow-Origin': '*',
-                    'Access-Control-Allow-Headers':
-                        'Origin, X-Requested-With, Content-Type, Accept',
-                },
-                body: JSON.stringify({ "returnedGuess": aa[0] })
-            })
-        }
-    } catch (e) {
-        console.log("failed" + e)
-        callback(null, {
-            statusCode: 206,
-            headers: {
-
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Headers':
-                    'Origin, X-Requested-With, Content-Type, Accept',
-            },
-            body: JSON.stringify({
-                "error": "please make sure your input JSON follows this template",
-                "template": JSON.parse(`{ "Atrain": [ { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" }, { "input": "[Array]", "output": "[Array]" } ], "break":"break", "Crun": "[Array]" }`)
-            })
-
-
-        })
-    }
+		})
+	}
 
 }
 
