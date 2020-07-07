@@ -124,7 +124,8 @@ if (window.location.href.includes('index.html') || window.location.pathname == '
 }
 else if (window.location.href.includes('/app')) {
 
-    await updateTEXT()
+
+    updateTEXT()
 
     code = new URLSearchParams(window.location.search).get('code')
     err = new URLSearchParams(window.location.search).get('error') == null
@@ -150,7 +151,7 @@ else if (window.location.href.includes('/app')) {
             "Crun": []
         }
         window.localStorage.setItem('all', allSongs)
-        await updateTEXT();
+        updateTEXT();
 
     })
     searchID.addEventListener('keypress', (e) => {
@@ -721,7 +722,7 @@ function removeFromView(id) {
     const i = allSongs.IDList.indexOf(id)
     allSongs.IDList = allSongs.IDList.slice(0, i).concat(allSongs.IDList.slice(i + 1, allSongs.IDList.length))
     allSongs.Atrain = allSongs.Atrain.slice(0, i).concat(allSongs.Atrain.slice(i + 1, allSongs.Atrain.length))
-    await updateTEXT()
+    updateTEXT()
 }
 
 
