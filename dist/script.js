@@ -384,28 +384,54 @@ async function searchNew(q) {
         })
 }
 
-async function searchLater(q) {
-    do {
-        failed = false;
-        await getToken()
-        await fetch(`https://api.spotify.com/v1/search?q=${q}&type=track&limit=1&offset=${Math.floor(Math.random() * SLrandomness)}`, {
-            method: "GET",
-            headers: {
-                Accept: "application/json",
-                "content-type": "application/json",
-                Authorization: `Bearer ${key}`,
-            }
-        })
-            .then(r => r.json())
-            .then(data => {
-                currentID = data.tracks.items[0].id
-                if (allSongs.IDList.includes(currentID)) { wordLength++; console.log('duplicate ID'); q = randomWord(wordLength) }
-            }).catch(() => {
-                failed = true;
-                q = randomWord(wordLength);
-            }
-            )
-    } while (allSongs.IDList.includes(currentID) || failed)
+async function searchLater(q, pl) {
+    if (pl) {
+        do {
+            failed = false;
+            await getToken()
+            await fetch(`https://api.spotify.com/v1/search?q=${q}&type=track&limit=1&offset=${Math.floor(Math.random() * SLrandomness)}`, {
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    "content-type": "application/json",
+                    Authorization: `Bearer ${key}`,
+                }
+            })
+                .then(r => r.json())
+                .then(data => {
+                    currentID = data.tracks.items[0].id
+                    if (allSongs.IDList.includes(currentID)) { wordLength++; console.log('duplicate ID'); q = randomWord(wordLength) }
+                }).catch(() => {
+                    failed = true;
+                    q = randomWord(wordLength);
+                }
+                )
+        } while (bestURI.includes('spotify:track:' + currentID) || failed)
+
+    }
+    else {
+        do {
+            failed = false;
+            await getToken()
+            await fetch(`https://api.spotify.com/v1/search?q=${q}&type=track&limit=1&offset=${Math.floor(Math.random() * SLrandomness)}`, {
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    "content-type": "application/json",
+                    Authorization: `Bearer ${key}`,
+                }
+            })
+                .then(r => r.json())
+                .then(data => {
+                    currentID = data.tracks.items[0].id
+                    if (allSongs.IDList.includes(currentID)) { wordLength++; console.log('duplicate ID'); q = randomWord(wordLength) }
+                }).catch(() => {
+                    failed = true;
+                    q = randomWord(wordLength);
+                }
+                )
+        } while (allSongs.IDList.includes(currentID) || failed)
+    }
 }
 async function searchSpecific(q) {
     do {
@@ -815,7 +841,7 @@ async function startPlaylist(len) {
         console.log(barLength)
         document.getElementById('barbar').style.width = String(barLength) + '%'
         await getToken()
-        await searchLater(randomWord(wordLength + 1))
+        await searchLater(randomWord(wordLength + 1), true)
         await retrieveFeatures(currentID)
         allSongs.Crun = [
             mainBox.acousticness,
