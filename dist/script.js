@@ -834,8 +834,8 @@ async function playlistrun() {
         userObj = await user()
         console.log(userObj)
         await checkIfMade()
-        if (!alreadyMadePlaylist)
-            await createPlaylist(playlistJSON)
+        await checkIfMade()
+        if (!alreadyMadePlaylist) { await createPlaylist(playlistJSON) }
         refresh()
         console.log(tokenObj)
         await replace(bestURI)
@@ -885,6 +885,7 @@ async function checkIfMade() {
         },
     }).then(res => res.json()).then(data => {
         for (let i = 1; i < data.items.length; i++) {
+            console.log(data.items[i])
             if (data.items[i].name == "SongTaste Favorites")
                 alreadyMadePlaylist = true;
             plObj.id = data.items[i].id
