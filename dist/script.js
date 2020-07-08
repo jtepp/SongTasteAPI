@@ -320,7 +320,6 @@ async function asyncApp() {
         listplay = []
         playlist.innerHTML = '';
         playlist.style.height = '100vh'
-        document.getElementById('playlistcontainer').style.height = '100vh'
         document.getElementById('loadingBar').style.display = 'block'
         playlist.scrollIntoView(true)
 
