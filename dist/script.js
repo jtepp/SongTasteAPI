@@ -124,8 +124,8 @@ if (window.location.href.includes('index.html') || window.location.pathname == '
     retrieveSong(randomWord(wordLength), homePreview[2], '2')
 }
 else if (window.location.href.includes('/app')) {
-    if (Math.abs(likelist.length - hatelist.length) <= 2) { automate.style.background = 'RGB(148,148,148)' }
-    else { 'RGB(148,148,148)' }
+    if (Math.abs(likelist.length - hatelist.length) > 2) { automate.style.background = 'RGB(148,148,148)' }
+    else automate.style.background = 'RGB(207,0,0)'
     document.getElementById('longth').value = window.localStorage.getItem('length') || '5'
     document.getElementById('show').innerHTML = '[' + (window.localStorage.getItem('length') || 5) + ']'
 
@@ -335,6 +335,8 @@ async function asyncApp() {
 }
 
 async function APIcall() {
+    if (Math.abs(likelist.length - hatelist.length) > 2) { automate.style.background = 'RGB(148,148,148)' }
+    else automate.style.background = 'RGB(207,0,0)'
     await fetch(`https://songtaste.netlify.app/.netlify/functions/app`, {
         method: 'POST',
         'content-type': 'application/json',
@@ -604,9 +606,6 @@ async function reactingList(id, like) {
 
 
 async function songReact(like) {
-    if (Math.abs(likelist.length - hatelist.length) <= 2) { automate.style.background = 'RGB(148,148,148)' }
-    else { 'RGB(148,148,148)' }
-    automate.style.background = 'RGB(207,0,0)'
     if (reactready) {
         reactready = false
         allSongs.IDList.push(currentID)
