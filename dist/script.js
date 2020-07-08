@@ -884,11 +884,14 @@ async function checkIfMade() {
             'Authorization': `Bearer ${tokenObj.access_token}`
         },
     }).then(res => res.json()).then(data => {
+        console.log(data.items);
         for (let i = 1; i < data.items.length; i++) {
             console.log(data.items[i])
-            if (data.items[i].name == "SongTaste Favorites")
+            if (data.items[i].name == "SongTaste Favorites") {
                 alreadyMadePlaylist = true;
-            plObj.id = data.items[i].id
+                plObj.id = data.items[i].id
+                console.log("found one")
+            }
         }
 
     })
