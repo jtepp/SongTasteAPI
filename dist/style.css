@@ -126,6 +126,8 @@ audio{display: none;}
 .lame-image{
     /*background-image: url('assets/BigLogo.png');*/
     width: 30vw;
+    min-width: 270px;
+
     height: 30vw;
     max-height: 351px;
     background-position: center;
@@ -282,6 +284,8 @@ header > img:hover{
 
 
 .guess-box{
+    min-width: 270px;
+
     padding:5px;
     font-size: 20pt;
     height: fit-content;
@@ -631,6 +635,7 @@ div>label{cursor: pointer;}
 .FR-lame-image{
      /*background-image: url('assets/BigLogo.png');*/
      width: 60vw;
+     min-width: 270px;
      height: 60vw;
      max-height: 351px;
      background-position: center;
@@ -646,6 +651,7 @@ div>label{cursor: pointer;}
     font-size: 40pt;
     height: fit-content;
     width: auto;
+    min-width: 270px;
     margin-left: 20vw;
     margin-right: 20vw;
 }
