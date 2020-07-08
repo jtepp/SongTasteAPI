@@ -127,7 +127,7 @@ else if (window.location.href.includes('/app')) {
     if (Math.abs(likelist.length - hatelist.length) <= 2) { automate.style.background = 'RGB(148,148,148)' }
     else { 'RGB(148,148,148)' }
     document.getElementById('longth').value = window.localStorage.getItem('length') || '5'
-    document.getElementById('show').innerHTML = '[' + window.localStorage.getItem('length') + ']'
+    document.getElementById('show').innerHTML = '[' + (window.localStorage.getItem('length') || 5) + ']'
 
     updateTEXT()
 
