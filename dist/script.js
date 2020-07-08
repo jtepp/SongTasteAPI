@@ -166,7 +166,7 @@ else if (window.location.href.includes('/app')) {
         }
     })
     document.getElementById('optimize').checked = window.localStorage.getItem('check') || true
-    document.getElementById('optimize').addEventListener('change', () => {
+    document.getElementById('optimize').addEventListener('click', () => {
         window.localStorage.setItem('check', document.getElementById('optimize').checked)
         allSongs.returnnet = document.getElementById('optimize').checked
         console.log(allSongs.returnnet)
