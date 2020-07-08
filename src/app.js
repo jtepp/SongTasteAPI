@@ -33,7 +33,9 @@ exports.handler = function (event, context, callback) {
 		}
 		//propagate last result
 		try {
-			data.Atrain.forEach(e => {
+			//shuffle
+			var ztrain = data.Atrain.sort(() => Math.random() - 0.5)
+			ztrain.forEach(e => {
 				net.activate(e.input)
 				net.propagate(0.2, e.output)
 			})
