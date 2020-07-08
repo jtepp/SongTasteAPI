@@ -892,7 +892,7 @@ async function checkIfMade() {
             if (data.items[i].name == "SongTaste Favorites") {
                 alreadyMadePlaylist = true;
                 window.localStorage.setItem('already', true)
-                plObj.id = data.items[i].id
+                plObj = data.items[i]
                 console.log("found one")
             } else console.log("NOTHING")
         }
