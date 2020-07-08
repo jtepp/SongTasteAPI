@@ -165,8 +165,9 @@ else if (window.location.href.includes('/app')) {
             searchID.innerHTML = ''
         }
     })
-
-    document.getElementById('optimize').addEventListener('click', () => {
+    document.getElementById('optimize').checked = window.localStorage.getItem('check') || true
+    document.getElementById('optimize').addEventListener('change', () => {
+        window.localStorage.setItem('check', document.getElementById('optimize').checked)
         allSongs.returnnet = document.getElementById('optimize').checked
         console.log(allSongs.returnnet)
     })
@@ -833,11 +834,11 @@ async function playlistrun() {
         console.log(tokenObj)
         userObj = await user()
         console.log(userObj)
-        refresh()
+        await refresh()
         await checkIfMade()
         await checkIfMade()
         if (!alreadyMadePlaylist) { await createPlaylist(playlistJSON) }
-        refresh()
+        await refresh()
         console.log(tokenObj)
         await replace(bestURI)
     }
