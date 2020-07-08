@@ -887,6 +887,7 @@ async function checkIfMade() {
         for (let i = 1; i < data.items.length; i++) {
             if (data.items[i].name == "SongTaste Favorites")
                 alreadyMadePlaylist = true;
+            plObj.id = data.items[i].id
         }
 
     })
