@@ -121,9 +121,9 @@ document.body.onresize()
 document.body.onresize()
 
 if (window.location.href.includes('index.html') || window.location.pathname == '/') { //HOMEPAGE STARTUP
-    retrieveSong(randomWord(wordLength), homePreview[0], '0')
-    retrieveSong(randomWord(wordLength), homePreview[1], '1')
-    retrieveSong(randomWord(wordLength), homePreview[2], '2')
+    retrieveSong(randomWord(wordLength), 0, '0')
+    retrieveSong(randomWord(wordLength), 1, '1')
+    retrieveSong(randomWord(wordLength), 2, '2')
 }
 else if (window.location.href.includes('/app')) {
     if (Math.abs(likelist.length - hatelist.length) > 2) { automate.style.background = 'RGB(148,148,148)' }
@@ -443,20 +443,28 @@ async function searchSpecific(q) {
 }
 
 async function retrieveSong(q, spot, ind) {
+    let research = false
     await getToken()
-    await fetch(`https://api.spotify.com/v1/search?q=${q}&type=track&limit=1`, {//&offset=${Math.floor(Math.random() * 20)}`, {
-        method: "GET",
-        headers: {
-            Accept: "application/json",
-            "content-type": "application/json",
-            Authorization: `Bearer ${key}`,
-        }
-    })
-        .then(r => r.json())
-        .then(data => {
-            spot = data.tracks.items[0]
+    do {
+        await fetch(`https://api.spotify.com/v1/search?q=${q}&type=track&limit=1`, {//&offset=${Math.floor(Math.random() * 20)}`, {
+            method: "GET",
+            headers: {
+                Accept: "application/json",
+                "content-type": "application/json",
+                Authorization: `Bearer ${key}`,
+            }
         })
-    await fetch(`https://api.spotify.com/v1/tracks/${spot.id}`, {
+            .then(r => r.json())
+            .then(data => {
+                for (let i = 0; i < homePreview.length; i++) {
+                    if (i != spot) {
+                        if (homePreview[i].id == data.id) research = true;
+                    }
+                }
+                if (!research) homePreview[spot] = data.tracks.items[0]
+            })
+    } while (research)
+    await fetch(`https://api.spotify.com/v1/tracks/${homePreview[spot].id}`, {
         method: "GET",
         headers: {
             Accept: "application/json",
@@ -466,22 +474,22 @@ async function retrieveSong(q, spot, ind) {
     })
         .then(r => r.json())
         .then(data => {
-            spot = data
+            homePreview[spot] = data
 
-            console.log(spot.album.images[0].url)
+            console.log(homePreview[spot].album.images[0].url)
             const frame = document.getElementById('song' + ind)
-            frame.setAttribute('style', 'background-image:url("' + spot.album.images[0].url + '")')
+            frame.setAttribute('style', 'background-image:url("' + homePreview[spot].album.images[0].url + '")')
             const label = document.getElementById('info' + ind)
-            label.innerHTML = `${spot.name}<br>${spot.artists[0].name}`
-            if (spot.preview_url && !responding) {
+            label.innerHTML = `${homePreview[spot].name}<br>${homePreview[spot].artists[0].name}`
+            if (homePreview[spot].preview_url && !responding) {
                 const preview = document.getElementById('audio' + ind)
-                preview.setAttribute('src', spot.preview_url)
+                preview.setAttribute('src', homePreview[spot].preview_url)
                 frame.onmouseenter = () => preview.play().catch((e) => { enable(true) })
                 frame.onmouseout = () => preview.pause()
                 label.innerHTML += '🔊'
             }
             const box = document.getElementById('box' + ind)
-            box.onclick = () => { location.href = "app?s=" + spot.id; window.sessionStorage.setItem('id', spot.id) }
+            box.onclick = () => { location.href = "app?s=" + homePreview[spot].id; window.sessionStorage.setItem('id', homePreview[spot].id) }
         })
 }
 
