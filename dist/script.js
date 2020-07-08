@@ -318,7 +318,8 @@ async function asyncApp() {
     })
     if (saving) {
         listplay = []
-        playlist.innerHTML = '';
+        // playlist.innerHTML = '';
+        // document.getElementById('playlistcontainer').style.height = '100vh'
         playlist.style.height = '100vh'
         document.getElementById('loadingBar').style.display = 'block'
         playlist.scrollIntoView(true)
