@@ -6,6 +6,7 @@ var code;
 var plready = true
 var unauthorized;
 var err;
+const SLrandomness = 10
 var alreadyMadePlaylist = false;
 const playlistJSON = {
     "name": 'SongTaste Favorites',
@@ -387,7 +388,7 @@ async function searchLater(q) {
     do {
         failed = false;
         await getToken()
-        await fetch(`https://api.spotify.com/v1/search?q=${q}&type=track&limit=1&offset=${Math.floor(Math.random() * 18)}`, {
+        await fetch(`https://api.spotify.com/v1/search?q=${q}&type=track&limit=1&offset=${Math.floor(Math.random() * SLrandomness)}`, {
             method: "GET",
             headers: {
                 Accept: "application/json",
