@@ -890,7 +890,7 @@ async function checkIfMade() {
             console.log(data.items[i])
             if (data.items[i].name == "SongTaste Favorites") {
                 alreadyMadePlaylist = true;
-                window.setItem('already', true)
+                window.localStorage.setItem('already', true)
                 plObj.id = data.items[i].id
                 console.log("found one")
             } else console.log("NOTHING")
@@ -901,7 +901,7 @@ async function checkIfMade() {
 
 async function createPlaylist(bodyJSON) {
     //create
-    window.setItem('already', true)
+    window.localStorage.setItem('already', true)
     await fetch(`https://api.spotify.com/v1/users/${userObj.id}/playlists`, {
         method: "POST",
         headers: {
