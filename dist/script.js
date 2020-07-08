@@ -884,7 +884,6 @@ async function checkIfMade() {
             // 'Content-Type': 'application/JSON',
             'Authorization': `Bearer ${tokenObj.access_token}`
         },
-        body: JSON.stringify(bodyJSON)
     }).then(res => res.json()).then(data => {
         for (let i = 1; i < data.items.length; i++) {
             if (data.items[i].name == "SongTaste Favorites")
