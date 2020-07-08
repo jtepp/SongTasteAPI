@@ -792,7 +792,7 @@ async function startPlaylist(len) {
     loadingPL = true;
     document.getElementById('loadingBar').style.display = 'block';
     while (listplay.length < len) {
-        if (counter >= 6 && listplay.length == 0) {
+        if (counter >= 10 && listplay.length == 0) {
             for (let i = 0; i < len; i++) {
                 listplay.push(null)
             }
