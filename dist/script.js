@@ -18,7 +18,7 @@ const imgData = {
 }
 var tokenObj = {}
 var userObj = {}
-var plObj = {}
+var plObj = { "obj": {} }
 var goodURI = []
 var bestURI = []
 var failed = false;
@@ -892,7 +892,7 @@ async function checkIfMade() {
             if (data.items[i].name == "SongTaste Favorites") {
                 alreadyMadePlaylist = true;
                 window.localStorage.setItem('already', true)
-                plObj = data.items[i]
+                plObj['obj']['obj'] = data.items[i]
                 console.log("found one")
             } else console.log("NOTHING")
         }
@@ -910,9 +910,9 @@ async function createPlaylist(bodyJSON) {
             'Authorization': `Bearer ${tokenObj.access_token}`
         },
         body: JSON.stringify(bodyJSON)
-    }).then(res => res.json()).then(data => { plObj = data; console.log(data) })
+    }).then(res => res.json()).then(data => { plObj['obj'] = data; console.log(data) })
     //image
-    await fetch(`https://api.spotify.com/v1/playlists/${plObj.id}/images`, {
+    await fetch(`https://api.spotify.com/v1/playlists/${plObj['obj'].id}/images`, {
         method: "PUT",
         headers: {
             'Content-Type': 'image/jpeg',
@@ -935,7 +935,7 @@ async function refresh() {
 
 
 async function replace(songlist) {
-    await fetch(`https://api.spotify.com/v1/playlists/${plObj.id}/tracks?uris=${songlist.join(',')}`, {
+    await fetch(`https://api.spotify.com/v1/playlists/${plObj['obj'].id}/tracks?uris=${songlist.join(',')}`, {
         method: "PUT",
         headers: {
             "Authorization": 'Bearer ' + tokenObj.access_token,
@@ -945,7 +945,7 @@ async function replace(songlist) {
 }
 
 // async function ammend() {
-//     await fetch(`https://api.spotify.com/v1/playlists/${plObj.id}/tracks?uris=${goodURI.join(',')}`, {
+//     await fetch(`https://api.spotify.com/v1/playlists/${plObj['obj'].id}/tracks?uris=${goodURI.join(',')}`, {
 //         method: "POST",
 //         "Authorization": 'Bearer ' + tokenObj.access_token,
 //         "Content-Type": "application/JSON"
