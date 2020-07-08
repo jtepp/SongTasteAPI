@@ -33,8 +33,10 @@ exports.handler = function (event, context, callback) {
 		}
 		//propagate last result
 		try {
-			net.activate(data.Atrain[data.Atrain.length - 1].input)
-			net.propagate(0.2, data.Atrain[data.Atrain.length - 1].output)
+			data.Atrain.forEach(e => {
+				net.activate(e.input)
+				net.propagate(0.2, e.output)
+			})
 		} catch (e) { console.log(e + " couldnt propagate") }
 		const aa = net.activate(data.Crun)
 		// console.log(true)
