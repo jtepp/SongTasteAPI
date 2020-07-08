@@ -383,7 +383,7 @@ async function searchLater(q) {
     do {
         failed = false;
         await getToken()
-        await fetch(`https://api.spotify.com/v1/search?q=${q}&type=track&limit=1&offset=${Math.floor(Math.random() * 30)}`, {
+        await fetch(`https://api.spotify.com/v1/search?q=${q}&type=track&limit=1&offset=${Math.floor(Math.random() * 18)}`, {
             method: "GET",
             headers: {
                 Accept: "application/json",
