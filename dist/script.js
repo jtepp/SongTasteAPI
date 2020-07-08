@@ -833,6 +833,7 @@ async function playlistrun() {
         console.log(tokenObj)
         userObj = await user()
         console.log(userObj)
+        await checkIfMade()
         if (!alreadyMadePlaylist)
             await createPlaylist(playlistJSON)
         refresh()
@@ -875,6 +876,23 @@ async function user() {
 // }
 
 
+async function checkIfMade() {
+    await fetch(`https://api.spotify.com/v1/users/${userObj.id}/playlists`, {
+        method: "GET",
+        headers: {
+            // 'Content-Type': 'application/JSON',
+            'Authorization': `Bearer ${tokenObj.access_token}`
+        },
+        body: JSON.stringify(bodyJSON)
+    }).then(res => res.json()).then(data => {
+        for (let i = 1; i < data.items.length; i++) {
+            if (data.items[i].name == "SongTaste Favorites")
+                alreadyMadePlaylist = true;
+        }
+
+    })
+}
+
 async function createPlaylist(bodyJSON) {
     //create
     await fetch(`https://api.spotify.com/v1/users/${userObj.id}/playlists`, {
@@ -894,7 +912,6 @@ async function createPlaylist(bodyJSON) {
         },
         body: imgData.data
     })
-    alreadyMadePlaylist = true;
 }
 
 async function refresh() {
