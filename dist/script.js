@@ -185,12 +185,6 @@ else if (window.location.href.includes('/app')) {
 
 
 
-            // listplay = []
-            // playlist.innerHTML = '';
-            // playlist.style.height = '100vh'
-            // document.getElementById('playlistcontainer').style.height = '100vh'
-            // document.getElementById('loadingBar').style.display = 'block'
-            // playlist.scrollIntoView(true)
 
         }
     })
@@ -323,6 +317,13 @@ async function asyncApp() {
         responsive(c, 'FR-' + c)
     })
     if (saving) {
+        listplay = []
+        playlist.innerHTML = '';
+        playlist.style.height = '100vh'
+        document.getElementById('playlistcontainer').style.height = '100vh'
+        document.getElementById('loadingBar').style.display = 'block'
+        playlist.scrollIntoView(true)
+
         plready = false;
         automate.style.backgroundColor = 'RGB(148,148,148)'
         await startPlaylist(document.getElementById('longth').value)
