@@ -337,8 +337,10 @@ async function asyncApp() {
 }
 
 async function APIcall() {
-    if (Math.abs(likelist.length - hatelist.length) > 2) { automate.style.background = 'RGB(148,148,148)' }
-    else automate.style.background = 'RGB(207,0,0)'
+    if (plready) {
+        if (Math.abs(likelist.length - hatelist.length) > 2) { automate.style.background = 'RGB(148,148,148)' }
+        else automate.style.background = 'RGB(207,0,0)'
+    }
     await fetch(`https://songtaste.netlify.app/.netlify/functions/app`, {
         method: 'POST',
         'content-type': 'application/json',
