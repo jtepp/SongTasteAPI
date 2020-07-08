@@ -6,7 +6,7 @@ var code;
 var plready = true
 var unauthorized;
 var err;
-var alreadyMadePlaylist = window.localStorage.getItem('already') || false;
+var alreadyMadePlaylist = false;
 const playlistJSON = {
     "name": 'SongTaste Favorites',
     "public": true,
@@ -836,7 +836,6 @@ async function playlistrun() {
         console.log(userObj)
         await refresh()
         await checkIfMade()
-        await checkIfMade()
         if (!alreadyMadePlaylist) { await createPlaylist(playlistJSON) }
         await refresh()
         console.log(tokenObj)
@@ -887,11 +886,10 @@ async function checkIfMade() {
         },
     }).then(res => res.json()).then(data => {
         console.log(data.items);
-        for (let i = 1; i < data.items.length; i++) {
+        for (let i = 0; i < data.items.length; i++) {
             console.log(data.items[i])
             if (data.items[i].name == "SongTaste Favorites") {
                 alreadyMadePlaylist = true;
-                window.localStorage.setItem('already', true)
                 plObj['obj']['obj'] = data.items[i]
                 console.log("found one")
             } else console.log("NOTHING")
@@ -902,7 +900,7 @@ async function checkIfMade() {
 
 async function createPlaylist(bodyJSON) {
     //create
-    window.localStorage.setItem('already', true)
+    alreadyMadePlaylist = true;
     await fetch(`https://api.spotify.com/v1/users/${userObj.id}/playlists`, {
         method: "POST",
         headers: {
