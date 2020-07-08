@@ -726,7 +726,7 @@ function removeFromView(id) {
     allSongs.IDList = allSongs.IDList.slice(0, i).concat(allSongs.IDList.slice(i + 1, allSongs.IDList.length))
     allSongs.Atrain = allSongs.Atrain.slice(0, i).concat(allSongs.Atrain.slice(i + 1, allSongs.Atrain.length))
     updateTEXT()
-    window.localStorage.setItem('all', allSongs)
+    window.localStorage.setItem('all', JSON.stringify(allSongs))
 }
 
 
