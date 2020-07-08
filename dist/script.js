@@ -891,7 +891,7 @@ async function checkIfMade() {
                 alreadyMadePlaylist = true;
                 plObj.id = data.items[i].id
                 console.log("found one")
-            }
+            } else console.log("NOTHING")
         }
 
     })
