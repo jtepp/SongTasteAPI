@@ -555,7 +555,7 @@ async function retrieveSong(q, spot, ind) {
                 // const sin = tt[1]
                 // const angle = Math.round(Math.asin(sin) * (180 / Math.PI))
                 // frame.setAttribute('data-maxAngle', ((angle + 359) % 360) + 'deg')
-                console.log('SONG ' + spinner[spot])
+                // console.log('SONG ' + spinner[spot])
             }
 
             frame.onmouseenter = () => {
