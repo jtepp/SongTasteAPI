@@ -1,11 +1,10 @@
 {
   "name": "songtastenn",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "scripts": {
-    "build": "./node_modules/.bin/netlify-lambda build src",
-    "serve": "./node_modules/.bin/netlify-lambda serve src"
+    "build": "netlify-lambda build src",
+    "serve": "netlify-lambda serve src"
   },
   "author": "",
   "license": "ISC",
@@ -13,5 +12,16 @@
     "brain.js": "^2.0.0-beta.1",
     "netlify-lambda": "^1.6.3",
     "synaptic": "^1.1.4"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jtepp/SongTasteAPI.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/jtepp/SongTasteAPI/issues"
+  },
+  "homepage": "https://github.com/jtepp/SongTasteAPI#readme",
+  "description": ""
 }

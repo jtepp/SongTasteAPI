@@ -147,13 +147,11 @@ audio{display: none;}
     border-radius: 50%;
     overflow: hidden;
     background-repeat: no-repeat;
-    
+    transform: rotate(attr(data-angle));
     transition: all ease 0.4s;
 }
 .song-image:hover{
     -webkit-animation: rotation 6s infinite linear;
-    -moz-animation: rotation 6s infinite linear;
-    -o-animation: rotation 6s infinite linear;
     animation: rotation 6s linear infinite;
 }
 
@@ -826,26 +824,28 @@ div>label{cursor: pointer;}
 
 }
 
-@keyframes rotation {
-    from {
+    /* @keyframes rotation {
+        from {
       transform: rotate(0deg);
-      -webkit-transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(359deg);
-      -webkit-transform: rotate(359deg);
-    }
-  }
+      /* transform: rotate(attr(data-angle)); */
+      /* -webkit-transform: rotate(0deg); */
+        /* }
+        to { */
+      /* transform: rotate(359deg); */
+      /* transform: rotate(359deg); */
+      /* -webkit-transform: rotate(359deg); 
+        }
+    } */
   @viewport {
 
     zoom:1.0;
     width: 100vw;
-}
-@-ms-viewport {
+    }
+    @-ms-viewport {
 
-zoom:1.0;
-width: 100vw;
-}
+    zoom:1.0;
+    width: 100vw;
+    }
 
 @-o-viewport{
     zoom:1.0;
