@@ -534,8 +534,10 @@ async function retrieveSong(q, spot, ind) {
             frame.setAttribute('data-angle', '0deg')
             // frame.setAttribute('data-maxAngle', '10deg')
             spinner[spot] = 0
+            var st = window.getComputedStyle(frame, null)
+
             frame.onmousemove = () => {
-                const st = window.getComputedStyle(frame, null)
+                st = window.getComputedStyle(frame, null)
 
                 const tt = st.getPropertyValue('transform')
                 const xx = tt.replace('matrix(', '').replace(', 0, 0)', '').split(',')
@@ -546,18 +548,20 @@ async function retrieveSong(q, spot, ind) {
                 const angle = issin ? cos : 360 - cos
 
                 spinner[spot] = Math.round(angle)
-                frame.setAttribute('data-angle', angle + 'deg')
+                // frame.setAttribute('data-angle', angle + 'deg')
                 // console.log(frame.getAttribute('data-maxAngle'))
                 // lm.innerHTML = `angle: ${issin ? cos : 360 - cos}`
 
                 // const sin = tt[1]
                 // const angle = Math.round(Math.asin(sin) * (180 / Math.PI))
                 // frame.setAttribute('data-maxAngle', ((angle + 359) % 360) + 'deg')
-
+                console.log('SONG ' + spinner[spot])
             }
+
             frame.onmouseenter = () => {
+
                 $.keyframe.define({
-                    name: `rotation`,
+                    name: `rotation${ind}`,
                     from: {
                         'transform': `rotate(${spinner[spot]}deg)`
                     },
@@ -567,7 +571,9 @@ async function retrieveSong(q, spot, ind) {
                 });
 
                 // document.getElementById('song' + ind).style.transform = `rotate(${frame.getAttribute('data-angle')})`
-                frame.style.transform = 'rotate(' + spinner[spot] + 'deg)'
+                // frame.style.transform = 'rotate(' + spinner[spot] + 'deg)'
+                frame.style.animation = `rotation${ind} 6s linear infinite`
+
 
                 // console.log(spinner[spot])
                 const preview = document.getElementById('audio' + ind)
@@ -577,7 +583,23 @@ async function retrieveSong(q, spot, ind) {
             frame.onmouseleave = () => {
                 // console.log(document.getElementById('song' + ind).style.transform)
 
-                frame.style.transform = 'rotate(' + spinner[spot] + 'deg)'
+
+
+                // frame.style.transform = 'rotate(' + spinner[spot] + 'deg)'
+
+
+                $.keyframe.define({
+                    name: `derotation${ind}`,
+                    from: {
+                        'transform': `rotate(${spinner[spot]}deg)`
+                    },
+                    to: {
+                        'transform': `rotate(0deg)`
+                    }
+                });
+                frame.style.animation = `derotation${ind} ${Math.round(spinner[spot] / 60)}s linear 1`
+
+
 
                 // frame.setAttribute('data-maxAngle', 10 + 'deg')
                 // document.getElementById('song' + ind).style.transform = `rotate(${spinner[spot]}deg)`
@@ -594,6 +616,20 @@ async function retrieveSong(q, spot, ind) {
                 label.innerHTML += '🔊'
             }
             const box = document.getElementById('box' + ind)
+            frame.style.transform = 'rotate(0deg)'
+            box.onmousemove = () => {
+                st = window.getComputedStyle(frame, null)
+                const pv = st.getPropertyValue('transform')
+                const sp = pv.replace('matrix(', '').replace(', 0, 0)', '').split(',')
+                const cosine = Math.round(Math.acos(sp[0]) * (180 / Math.PI))
+                const sine = Math.round(Math.asin(sp[1]) * (180 / Math.PI))
+                const bcos = cosine > 0
+                const bsin = sine > 0
+                const ang = bsin ? cosine : 360 - cosine
+
+                spinner[spot] = ang
+
+            }
             box.onclick = () => { location.href = "app?s=" + homePreview[spot].id; window.sessionStorage.setItem('id', homePreview[spot].id) }
         })
 }
