@@ -180,11 +180,11 @@ else if (window.location.href.includes('/app')) {
                 window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=code&redirect_uri=${encodeURIComponent(redirect)}&scope=playlist-modify-private%20playlist-modify-public%20ugc-image-upload&show_dialog=false`
             }
             else {
-                toggleDataview()
                 alert('Try keep the difference between liked songs and disliked songs between 0-2')
+                toggleDataview()
+                document.getElementById('hint').style.animation = "pulse 0.4s linear 4"
 
             }
-
 
 
 

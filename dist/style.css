@@ -142,6 +142,7 @@ audio{display: none;}
     /*background-image: url('assets/BigLogo.png');*/
     width: 30vw;
     height: 30vw;
+    /* min-width: 270px; */
     background-position: center;
     background-size: contain;
     border-radius: 50%;
@@ -229,6 +230,7 @@ header > img:hover{
 
 .iframe{
     width:30vw;
+    min-width: 270px;
     height:415px
 }
 
@@ -415,6 +417,8 @@ header > img:hover{
     position: relative;
     top: -30px;
 }
+/* #hint
+{animation: pulse 0.4s linear infinite} */
 
 div>label{cursor: pointer;}
 #options{
@@ -836,6 +840,20 @@ div>label{cursor: pointer;}
       /* -webkit-transform: rotate(359deg); 
         }
     } */
+
+    @keyframes pulse {
+
+                    0% {
+                        font-size: 10pt
+                    }
+                    50% {
+                        font-size: 15pt
+                    }
+                    100% {
+                        font-size: 10pt
+                    }
+    }
+
   @viewport {
 
     zoom:1.0;
