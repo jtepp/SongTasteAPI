@@ -5,6 +5,7 @@ const creds = "NGRjZDczOTlmNDk1NGUyYzhjNjc5ZjM4ZDFiYjE0MTk6ZWNmOWExODVjYzZjNDI4N
 var code;
 var plready = true
 var unauthorized;
+var pulsetimes = 0;
 var err;
 const SLrandomness = 10
 var alreadyMadePlaylist = false;
@@ -33,7 +34,7 @@ var loadingPL = false;
 var listplay = []
 var key = "";
 var inp = {};
-const threshold = 0.55
+const threshold = 0.5//0.55
 var message = '';
 var likelist = []
 var hatelist = []
@@ -180,9 +181,21 @@ else if (window.location.href.includes('/app')) {
                 window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=code&redirect_uri=${encodeURIComponent(redirect)}&scope=playlist-modify-private%20playlist-modify-public%20ugc-image-upload&show_dialog=false`
             }
             else {
-                alert('Try keep the difference between liked songs and disliked songs between 0-2')
                 toggleDataview()
-                document.getElementById('hint').style.animation = "pulse 0.4s linear 4"
+                pulsetimes++
+                $.keyframe.define({
+                    name: `pulse${pulsetimes}`,
+                    "0%": {
+                        'font-size': '10pt'
+                    },
+                    "50%": {
+                        'font-size': '15pt'
+                    },
+                    "100%": {
+                        'font-size': "10pt"
+                    }
+                })
+                document.getElementById('hint').style.animation = `pulse${pulsetimes} 0.4s linear 4`
 
             }
 
@@ -240,6 +253,7 @@ else if (window.location.href.includes('/app')) {
 
         if (v.getAttribute('style') == 'top: 50px' && !clicc) {
             v.setAttribute('style', 'top: 3000px')
+            v.style.animation = "none"
         }
     })
     document.addEventListener('touchstart', (event) => {
@@ -931,9 +945,9 @@ function returnHTMLfordataview(obj) {
 
 function toggleDataview() {
     switch (v.getAttribute('style')) {
-        case 'top: 3000px': v.setAttribute('style', 'top: 50px'); break;
+        case 'top: 50px': v.setAttribute('style', 'top: 3000px'); break;
         default: console.log('defaulted')
-        case 'top: 50px': v.setAttribute('style', 'top: 3000px');
+        case 'top: 3000px': v.setAttribute('style', 'top: 50px'); break;
     }
     document.getElementById('likedh1').innerHTML = `Liked (${likelist.length})`
     document.getElementById('dislikedh1').innerHTML = `Disiked (${hatelist.length})`

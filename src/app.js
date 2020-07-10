@@ -18,10 +18,9 @@ exports.handler = function (event, context, callback) {
 		// }
 		var net = {};
 		var trainer = {}
-
 		// net = new Architect.Perceptron(9, 6, 1)
 		try {
-			net = (data.transfernet == {} || data.transfernet == null) ? new Architect.Perceptron(9, 7, 6, 1) : data.transfernet
+			net = (data.transfernet == {} || data.transfernet == null) ? new Architect.Perceptron(9, 7, 6, 3, 1) : data.transfernet
 			console.log("net?: " + net == data.transfernet)
 			trainer = (data.transfertrainer == {} || data.transfertrainer == null) ? new Trainer(net) : data.transfertrainer
 			console.log("trainer?: " + trauber == data.transfertrainer)
