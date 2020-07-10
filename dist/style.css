@@ -67,7 +67,7 @@
     line-height: 65px;
     color: white;
     text-align: center;
-    text-shadow: 5px 5px 20px black;
+    /* text-shadow: 5px 5px 20px black; */
 }
 b{
     font-weight: 6;
@@ -560,7 +560,7 @@ div>label{cursor: pointer;}
     color: white;
     text-align: center;
     font-size: 30pt;
-    text-shadow: 5px 5px 20px black;
+    /* text-shadow: 5px 5px 20px black; */
 }
 .FR-home-song-bar{
     display: flex;
