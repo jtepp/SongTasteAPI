@@ -39,7 +39,7 @@
     justify-content: center;
 }
 .contbox{
-    border-radius: 10px;
+    border-radius: 12px;
     display: flex;
     flex-direction: column;
     background: RGB(238, 238, 238);
