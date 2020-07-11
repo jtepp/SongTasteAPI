@@ -978,7 +978,7 @@ async function reactingList(id, like) {
 
 
 async function songReact(like) {
-    if (reactready) {
+    if (reactready && !allSongs.Crun.includes(null) && !allSongs.Crun.includes(undefined) && !allSongs.Crun.includes('null') && !allSongs.Crun.includes('undefined') && !allSongs.Crun.includes('')) {
         reactready = false
         allSongs.IDList.push(currentID)
         allSongs.Atrain.push({
@@ -1036,7 +1036,7 @@ async function songReact(like) {
         embed('box-iframe', currentID)
         reactready = true
         // console.log(allSongs)
-    }
+    } else console.log('notready')
     // if (needPlaylist < 1 && Math.abs(likelist.length - hatelist.length) > 2) { automate.style.background = 'RGB(148,148,148)' }
 
     window.localStorage.setItem('all', JSON.stringify(allSongs))
