@@ -331,6 +331,12 @@ else if (window.location.href.includes('guide')) {
     neuG('about')
     neuG('contact')
 }
+else if (window.location.href.includes('contact')) {
+    neuG('nm')
+    neuG('em')
+    neuG('sl')
+    neuG('msg')
+}
 
 
 
