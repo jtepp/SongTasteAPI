@@ -2,14 +2,14 @@ exports.handler = function (event, context, callback) {
 	console.log(event.body)
 	try {
 
-		const synaptic = require('synaptic'); // this line is not needed in the browser
-		const Neuron = synaptic.Neuron,
+		var synaptic = require('synaptic'); // this line is not needed in the browser
+		var Neuron = synaptic.Neuron,
 			Layer = synaptic.Layer,
 			Network = synaptic.Network,
 			Trainer = synaptic.Trainer,
 			Architect = synaptic.Architect;
-		const a = JSON.stringify(event.body).split("\\").join('').split(',"break":"break",').join();
-		const b = a.slice(1, a.length - 1)
+		var a = JSON.stringify(event.body).split("\\").join('').split(',"break":"break",').join();
+		var b = a.slice(1, a.length - 1)
 		var data = JSON.parse(b)
 
 		var yes = {
@@ -108,7 +108,7 @@ exports.handler = function (event, context, callback) {
 				net.propagate(0.2, e.output)
 			})
 		} catch (e) { console.log(e + " couldnt propagate") }
-		const aa = net.activate(data.Crun)
+		var aa = net.activate(data.Crun)
 		// console.log(true)
 		console.log(data)
 		console.log(aa)
