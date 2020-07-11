@@ -397,7 +397,7 @@ async function APIcall() {
         // else automate.style.background = 'RGB(207,0,0)'
     }
 
-
+    allSongs.Crun = ["DLKJHDKLSJHDJKSFHFJKLHDFJKH"]
 
     await fetch(`https://songtaste.netlify.app/.netlify/functions/app`, {
         method: 'POST',
