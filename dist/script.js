@@ -221,6 +221,7 @@ if (window.location.href.includes('index.html') || window.location.pathname == '
     })
 
     automate.addEventListener('click', () => {
+        needPlaylist = 8 - likelist.length
         if (needPlaylist < 1 && plready) { // && !saving) {
             // if (Math.abs(likelist.length - hatelist.length) <= 2) {
 
@@ -1016,7 +1017,7 @@ async function songReact(like) {
         await retrieveFeatures(currentID)
         console.log(like)
         if (needPlaylist >= 1 && like == 1) {
-            needPlaylist--;
+            needPlaylist = 8 - likelist;
 
         }
         if (needMore >= 1) {
