@@ -327,6 +327,7 @@ if (window.location.href.includes('index.html') || window.location.pathname == '
 else if (window.location.href.includes('guide')) {
 
     neuG('home')
+    neuG('start')
 }
 
 

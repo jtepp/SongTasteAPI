@@ -608,7 +608,7 @@ div>label{cursor: pointer;}
     top: 5px;
     left:5px;
 }
-.guide-header{
+.guide-header{cursor:pointer;
     margin-top:0;
     font-weight:3;
     position: relative;
@@ -909,7 +909,7 @@ div>label{cursor: pointer;}
     left:5px;
 }
 
-.FR-guide-header{
+.FR-guide-header{cursor:pointer;
     margin-top:0;
     font-weight:3;
     position: relative;
