@@ -140,7 +140,7 @@ if (window.location.href.includes('index.html') || window.location.pathname == '
     asyncHome();
 }
 else if (window.location.href.includes('/app')) {
-    if (Math.abs(likelist.length - hatelist.length) > 2) { automate.style.background = 'RGB(148,148,148)' }
+    if (needPlaylist < 1 && Math.abs(likelist.length - hatelist.length) > 2) { automate.style.background = 'RGB(148,148,148)' }
     else automate.style.background = 'RGB(207,0,0)'
     document.getElementById('longth').value = window.localStorage.getItem('length') || '5'
     document.getElementById('show').innerHTML = '[' + (window.localStorage.getItem('length') || 5) + ']'
@@ -159,6 +159,7 @@ else if (window.location.href.includes('/app')) {
         if (searchClickCount == 0) { searchClickCount++; searchID.innerHTML = '' }
     })
     document.getElementById('clear').addEventListener('click', () => {
+        document.getElementById('guessID').style.background = 'RGB(146, 146, 146);'
         console.log("CLEARED")
         allSongs.IDList.forEach(e => { removeFromView(e) })
         allSongs = {
@@ -385,7 +386,7 @@ async function asyncApp() {
 
 async function APIcall() {
     if (plready) {
-        if (Math.abs(likelist.length - hatelist.length) > 2) { automate.style.background = 'RGB(148,148,148)' }
+        if (needPlaylist < 1 && Math.abs(likelist.length - hatelist.length) > 2) { automate.style.background = 'RGB(148,148,148)' }
         else automate.style.background = 'RGB(207,0,0)'
     }
     await fetch(`https://songtaste.netlify.app/.netlify/functions/app`, {
@@ -868,11 +869,12 @@ async function songReact(like) {
             console.log(message)
             document.getElementById('guessTEXT').innerHTML = message
         }
+
         embed('box-iframe', currentID)
         reactready = true
         // console.log(allSongs)
     }
-
+    if (needPlaylist < 1 && Math.abs(likelist.length - hatelist.length) > 2) { automate.style.background = 'RGB(148,148,148)' }
     window.localStorage.setItem('all', JSON.stringify(allSongs))
 
 }
