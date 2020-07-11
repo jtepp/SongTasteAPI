@@ -456,11 +456,11 @@ async function asyncHome() {
 
 async function updateTEXT() {
     needMore = 4 - allSongs.IDList.length;
-    needPlaylist = 8 - allSongs.IDList.length;
-    automate.innerHTML = "Automate a playlist";
+    needPlaylist = 8 - likelist.length;
     if (needPlaylist >= 1) {
         automate.innerHTML = (needPlaylist + 1) + " more...";
     }
+    else automate.innerHTML = "Automate a playlist";
     if (needMore >= 1) {
         document.getElementById('guessTEXT').innerHTML = (needMore + 1) + " more...";
     } else {
