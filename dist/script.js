@@ -183,6 +183,8 @@ else if (window.location.href.includes('/app')) {
         }
         window.localStorage.setItem('all', JSON.stringify(allSongs))
         window.localStorage.setItem('targ', JSON.stringify(targets))
+        needMore = 4;
+        needPlaylist = 11
         updateTEXT();
 
     })
@@ -315,11 +317,9 @@ async function updateTEXT() {
     needPlaylist = 12 - allSongs.IDList.length;
     automate.innerHTML = "Automate a playlist";
     if (needPlaylist >= 1) {
-        needPlaylist--;
         automate.innerHTML = (needPlaylist + 1) + " more...";
     }
     if (needMore >= 1) {
-        needMore--;
         document.getElementById('guessTEXT').innerHTML = (needMore + 1) + " more...";
     }
     else {
