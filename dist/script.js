@@ -3,6 +3,7 @@ const redirect = `https://songtaste.netlify.app/app?save=true`;
 const clientID = `4dcd7399f4954e2c8c679f38d1bb1419`
 const creds = "NGRjZDczOTlmNDk1NGUyYzhjNjc5ZjM4ZDFiYjE0MTk6ZWNmOWExODVjYzZjNDI4NmJkMjA3NTNhMThmZTVmYzU=";
 var code;
+var pldone = false
 var targets = JSON.parse(window.localStorage.getItem('targ')) || {
     acousticness: [],
     danceability: [],
@@ -248,6 +249,10 @@ if (window.location.href.includes('index.html') || window.location.pathname == '
 
 
 
+        }
+        if (saving && pldone) {
+            window.sessionStorage.setItem('id', currentID)
+            window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=code&redirect_uri=${encodeURIComponent(redirect)}&scope=playlist-modify-private%20playlist-modify-public%20ugc-image-upload&show_dialog=false`
         }
     })
 
@@ -522,6 +527,7 @@ async function asyncApp() {
         await playlistrun();
         embedPLAYLIST(plID)
         plready = true;
+        pldone = true;
         automate.style.backgroundColor = 'RGB(207,0,0)'
     }
 }
