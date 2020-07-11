@@ -137,6 +137,9 @@ document.body.onresize = () => {
     } catch { }
 }
 document.body.onload = document.body.onresize
+try {
+    if (likelist.length >= 1) document.getElementById('automate').innerHTML = (8 - likelist.length) + ' more...'; else document.getElementById('automate').innerHTML = 'Automate a playlist'
+} catch (e) { console.log(e) }
 document.body.onresize()
 document.body.onresize()
 document.body.onresize()
