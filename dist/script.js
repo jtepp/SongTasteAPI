@@ -391,13 +391,22 @@ async function asyncApp() {
 }
 
 async function APIcall() {
-    await retrieveFeatures(currentID)
     if (plready) {
         // if (needPlaylist < 1 && Math.abs(likelist.length - hatelist.length) > 2) { automate.style.background = 'RGB(148,148,148)' }
         // else automate.style.background = 'RGB(207,0,0)'
     }
 
-    allSongs.Crun = ["DLKJHDKLSJHDJKSFHFJKLHDFJKH"]
+    allSongs.Crun = [
+        mainBox.acousticness,
+        mainBox.danceability,
+        mainBox.duration_ms,
+        mainBox.energy,
+        mainBox.instrumentalness,
+        mainBox.liveness,
+        mainBox.speechiness,
+        mainBox.tempo,
+        mainBox.valence
+    ]
 
     await fetch(`https://songtaste.netlify.app/.netlify/functions/app`, {
         method: 'POST',
