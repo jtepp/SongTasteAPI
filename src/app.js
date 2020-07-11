@@ -57,9 +57,9 @@ exports.handler = function (event, context, callback) {
 			}
 			return Math.round((sum / array.length) * 100) / 100
 		}
-		const avgyes = [average(yes[0]), average(yes[1]), average(yes[2]), average(yes[3]), average(yes[4]), average(yes[5]), average(yes[6]), average(yes[7]), average(yes[8])]
-		const avgno = [average(no[0]), average(no[1]), average(no[2]), average(no[3]), average(no[4]), average(no[5]), average(no[6]), average(no[7]), average(no[8])]
-		const diff = max(goods, bads)
+		var avgyes = [average(yes[0]), average(yes[1]), average(yes[2]), average(yes[3]), average(yes[4]), average(yes[5]), average(yes[6]), average(yes[7]), average(yes[8])]
+		var avgno = [average(no[0]), average(no[1]), average(no[2]), average(no[3]), average(no[4]), average(no[5]), average(no[6]), average(no[7]), average(no[8])]
+		var diff = max(goods, bads)
 		if (goods > bads) {
 			for (let i = 0; i < diff; i++) {
 				console.log('added bad')
