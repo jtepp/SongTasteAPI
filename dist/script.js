@@ -41,7 +41,7 @@ var goodURI = []
 var bestURI = []
 var failed = false;
 var searchClickCount = 0;
-var wordLength = 5;
+var wordLength = 3;
 var currentID = '';
 var barLength = 0;
 var loadingPL = false;
@@ -460,7 +460,7 @@ async function searchLater(q, pl) {
                     currentID = data.tracks.items[0].id
 
 
-                    if (allSongs.IDList.includes(currentID)) { wordLength++; console.log('duplicate ID'); q = randomWord(wordLength) }
+                    if (allSongs.IDList.includes(currentID)) {/* wordLength++; */console.log('duplicate ID'); q = randomWord(wordLength) }
                 }).catch(() => {
                     failed = true;
                     q = randomWord(wordLength);
@@ -568,8 +568,8 @@ async function retrieveSong(q, spot, ind) {
             .then(data => {
                 switch (spot) {
                     case 0: break;
-                    case 1: if (homePreview[0] == data.id) research = true; break;
-                    case 2: if (homePreview[0] == data.id || homePreview[1] == data.id) research = true; break;
+                    case 1: if (homePreview[0] == data.tracks.items[0]) research = true; break;
+                    case 2: if (homePreview[0] == data.tracks.items[0] || homePreview[1] == data.tracks.items[0]) research = true; break;
                 }
                 if (!research) homePreview[spot] = data.tracks.items[0]
             })
