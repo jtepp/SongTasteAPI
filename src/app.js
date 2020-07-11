@@ -62,6 +62,7 @@ exports.handler = function (event, context, callback) {
 		const diff = max(goods, bads)
 		if (goods > bads) {
 			for (let i = 0; i < diff; i++) {
+				console.log('added bad')
 				data.Atrain.push({
 					"input": avgno,
 					"output": 0
@@ -69,6 +70,7 @@ exports.handler = function (event, context, callback) {
 			}
 		} else {
 			for (let i = 0; i < diff; i++) {
+				console.log('added good')
 				data.Atrain.push({
 					"input": avgyes,
 					"output": 1
