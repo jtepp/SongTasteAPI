@@ -48,7 +48,7 @@ var loadingPL = false;
 var listplay = []
 var key = "";
 var inp = {};
-const threshold = 0.5//0.55
+const threshold = 0.5 //0.55
 var message = '';
 var likelist = []
 var hatelist = []
@@ -119,7 +119,7 @@ const responses = {
 var responding = false;
 var homePreview = []
 var mainBox = {}
-const resClasses = ['header', 'footer', 'home-song-bar', 'formstuff', 'button', 'box', 'guess-box', 'lame-image', 'home-song-box', 'nav-top', 'playlist-iframe', 'message', 'home-song-info', 'song-image', 'iframe', 'flexbutton', 'about-sites', 'about-header', 'gcard', 'about-tile']
+const resClasses = ['header', 'footer', 'home-song-bar', 'formstuff', 'button', 'box', 'guess-box', 'lame-image', 'home-song-box', 'nav-top', 'playlist-iframe', 'message', 'home-song-info', 'song-image', 'iframe', 'flexbutton', 'about-header', 'about-body', 'about-tile', 'guide-header', 'guide-body', 'guide-tile']
 const banner = document.getElementById('banner')
 const spacer = document.getElementById("spacer")
 document.body.onresize = () => {
@@ -127,6 +127,14 @@ document.body.onresize = () => {
     resClasses.forEach(c => {
         responsive(c, 'FR-' + c)
     })
+
+    try {
+        const os = document.getElementById('othersites')
+        if (os.classList.contains('FR-about-header')) {
+            os.style.cursor = `pointer`
+            os.onclick = () => { location.href = Math.random > 0.5 ? `https://drjava.netlify.app` : `https://datamuse.netlify.app` }
+        }
+    } catch { }
 }
 document.body.onload = document.body.onresize
 document.body.onresize()
@@ -138,8 +146,7 @@ document.body.onresize()
 
 if (window.location.href.includes('index.html') || window.location.pathname == '/') { //HOMEPAGE STARTUP
     asyncHome();
-}
-else if (window.location.href.includes('/app')) {
+} else if (window.location.href.includes('/app')) {
 
 
     // if (needPlaylist < 1 && Math.abs(likelist.length - hatelist.length) > 2) { automate.style.background = 'RGB(148,148,148)' }
@@ -160,7 +167,10 @@ else if (window.location.href.includes('/app')) {
 
 
     searchID.addEventListener('click', () => {
-        if (searchClickCount == 0) { searchClickCount++; searchID.innerHTML = '' }
+        if (searchClickCount == 0) {
+            searchClickCount++;
+            searchID.innerHTML = ''
+        }
     })
     document.getElementById('clear').addEventListener('click', () => {
         console.log("CLEARED")
@@ -208,7 +218,7 @@ else if (window.location.href.includes('/app')) {
     })
 
     automate.addEventListener('click', () => {
-        if (needPlaylist < 1 && plready) {// && !saving) {
+        if (needPlaylist < 1 && plready) { // && !saving) {
             // if (Math.abs(likelist.length - hatelist.length) <= 2) {
 
             window.sessionStorage.setItem('id', currentID)
@@ -307,14 +317,20 @@ else if (window.location.href.includes('/app')) {
 
     asyncApp()
 
-}
-else if (window.location.href.includes('about')) {
+} else if (window.location.href.includes('about')) {
     neu('gh')
     neu('other')
     document.body.onclick = (e) => {
-        try { if (e.target.attributes[2].name == 'data-link') location.href = e.target.attributes[2].value } catch{ }
+        try { if (e.target.attributes[2].name == 'data-link') location.href = e.target.attributes[2].value } catch { }
     }
 }
+else if (window.location.href.includes('guide')) {
+
+    neuG('home')
+}
+
+
+
 function neu(id) {
     const h = document.getElementById(id)
     for (n of h.childNodes) {
@@ -326,7 +342,7 @@ function neu(id) {
                 n.style.backgroundColor = 'rgb(230,230,230)'
                 n.style.textShadow = "5px 5px 5px rgba(0, 0, 0, 0.2)"
             }
-        } catch{ }
+        } catch { }
     }
     h.onmouseenter = () => {
         for (n of h.childNodes) {
@@ -338,7 +354,7 @@ function neu(id) {
                     n.style.backgroundColor = 'whitesmoke'
                     n.style.textShadow = "0px 0px 0px rgba(0, 0, 0, 0.2)"
                 }
-            } catch{ }
+            } catch { }
         }
     }
     h.onmouseleave = () => {
@@ -351,11 +367,75 @@ function neu(id) {
                     n.style.backgroundColor = 'rgb(230,230,230)'
                     n.style.textShadow = "5px 5px 5px rgba(0, 0, 0, 0.2)"
                 }
-            } catch{ }
+            } catch { }
         }
     }
 
 }
+
+function neuG(id) {
+    const h = document.getElementById(id)
+    for (n of h.childNodes) {
+        try {
+            if (n.classList.contains('guide-header') || n.classList.contains('FR-guide-header')) {
+                n.style.boxShadow = '0px 0px 0px rgba(255, 255, 255, 0.7), inset -5px -5px 5px rgba(255, 255, 255, 0.7), 0px 0px 0px rgba(0, 0, 0, 0.2), inset 5px 5px 5px rgba(0, 0, 0, 0.2)'
+                n.style.top = '5px'
+                n.style.left = '5px'
+                n.style.backgroundColor = 'rgb(230,230,230)'
+                n.style.textShadow = "5px 5px 5px rgba(0, 0, 0, 0.2)"
+            }
+            if (n.classList.contains('guide-body') || n.classList.contains('FR-guide-body')) {
+                n.style.boxShadow = '0px 0px 0px rgba(255, 255, 255, 0.7), inset -5px -5px 5px rgba(255, 255, 255, 0.7), 0px 0px 0px rgba(0, 0, 0, 0.2), inset 5px 5px 5px rgba(0, 0, 0, 0.2)'
+                n.style.top = '5px'
+                n.style.left = '5px'
+                n.style.backgroundColor = 'rgb(230,230,230)'
+                n.style.textShadow = "5px 5px 5px rgba(0, 0, 0, 0.2)"
+            }
+        } catch { }
+    }
+    h.onmouseenter = () => {
+        for (n of h.childNodes) {
+            try {
+                if (n.classList.contains('guide-header') || n.classList.contains('FR-guide-header')) {
+                    n.style.boxShadow = '-5px -5px 5px rgba(255, 255, 255, 0.7), inset 0px 0px 0px rgba(255, 255, 255, 0.7), 5px 5px 5px rgba(0, 0, 0, 0.2), inset 0px 0px 0px rgba(0, 0, 0, 0.2)'
+                    n.style.top = '0px'
+                    n.style.left = '0px'
+                    n.style.backgroundColor = 'whitesmoke'
+                    n.style.textShadow = "0px 0px 0px rgba(0, 0, 0, 0.2)"
+                }
+                if (n.classList.contains('guide-body') || n.classList.contains('FR-guide-body')) {
+                    n.style.boxShadow = '-5px -5px 5px rgba(255, 255, 255, 0.7), inset 0px 0px 0px rgba(255, 255, 255, 0.7), 5px 5px 5px rgba(0, 0, 0, 0.2), inset 0px 0px 0px rgba(0, 0, 0, 0.2)'
+                    n.style.top = '0px'
+                    n.style.left = '0px'
+                    n.style.backgroundColor = 'whitesmoke'
+                    n.style.textShadow = "0px 0px 0px rgba(0, 0, 0, 0.2)"
+                }
+            } catch { }
+        }
+    }
+    h.onmouseleave = () => {
+        for (n of h.childNodes) {
+            try {
+                if (n.classList.contains('guide-header') || n.classList.contains('FR-guide-header')) {
+                    n.style.boxShadow = '0px 0px 0px rgba(255, 255, 255, 0.7), inset -5px -5px 5px rgba(255, 255, 255, 0.7), 0px 0px 0px rgba(0, 0, 0, 0.2), inset 5px 5px 5px rgba(0, 0, 0, 0.2)'
+                    n.style.top = '5px'
+                    n.style.left = '5px'
+                    n.style.backgroundColor = 'rgb(230,230,230)'
+                    n.style.textShadow = "5px 5px 5px rgba(0, 0, 0, 0.2)"
+                }
+                if (n.classList.contains('guide-body') || n.classList.contains('FR-guide-body')) {
+                    n.style.boxShadow = '0px 0px 0px rgba(255, 255, 255, 0.7), inset -5px -5px 5px rgba(255, 255, 255, 0.7), 0px 0px 0px rgba(0, 0, 0, 0.2), inset 5px 5px 5px rgba(0, 0, 0, 0.2)'
+                    n.style.top = '5px'
+                    n.style.left = '5px'
+                    n.style.backgroundColor = 'rgb(230,230,230)'
+                    n.style.textShadow = "5px 5px 5px rgba(0, 0, 0, 0.2)"
+                }
+            } catch { }
+        }
+    }
+
+}
+
 
 
 
@@ -374,8 +454,7 @@ async function updateTEXT() {
     }
     if (needMore >= 1) {
         document.getElementById('guessTEXT').innerHTML = (needMore + 1) + " more...";
-    }
-    else {
+    } else {
         allSongs.Crun = [
             mainBox.acousticness,
             mainBox.danceability,
@@ -507,16 +586,17 @@ async function searchLater(q, pl) {
                     currentID = data.tracks.items[0].id
 
 
-                    if (allSongs.IDList.includes(currentID)) {/* wordLength++; */console.log('duplicate ID'); q = randomWord(wordLength) }
+                    if (allSongs.IDList.includes(currentID)) { /* wordLength++; */
+                        console.log('duplicate ID');
+                        q = randomWord(wordLength)
+                    }
                 }).catch(() => {
                     failed = true;
                     q = randomWord(wordLength);
-                }
-                )
+                })
         } while (bestURI.includes('spotify:track:' + currentID) || failed)
 
-    }
-    else {
+    } else {
         do {
             failed = false;
             await getToken()
@@ -534,12 +614,15 @@ async function searchLater(q, pl) {
                     window.sessionStorage.setItem('id', currentID)
 
 
-                    if (allSongs.IDList.includes(currentID)) { wordLength++; console.log('duplicate ID'); q = randomWord(wordLength) }
+                    if (allSongs.IDList.includes(currentID)) {
+                        wordLength++;
+                        console.log('duplicate ID');
+                        q = randomWord(wordLength)
+                    }
                 }).catch(() => {
                     failed = true;
                     q = randomWord(wordLength);
-                }
-                )
+                })
         } while (allSongs.IDList.includes(currentID) || failed)
     }
 }
@@ -559,7 +642,11 @@ async function searchSpecific(q) {
                 currentID = data.tracks.items[0].id
 
 
-                if (allSongs.IDList.includes(currentID)) { wordLength++; console.log('duplicate ID'); q = randomWord(wordLength) } else {
+                if (allSongs.IDList.includes(currentID)) {
+                    wordLength++;
+                    console.log('duplicate ID');
+                    q = randomWord(wordLength)
+                } else {
 
                     embed('box-iframe', currentID)
                     retrieveFeatures(currentID)
@@ -567,7 +654,8 @@ async function searchSpecific(q) {
                         APIcall()
                         let curArray;
                         const liker = apiData.returnedGuess >= threshold
-                        if (liker) curArray = responses.true; else curArray = responses.false
+                        if (liker) curArray = responses.true;
+                        else curArray = responses.false
                         if (liker) document.getElementById('guessID').style.backgroundColor = "RGB(0,230,0)"
                         else document.getElementById('guessID').style.backgroundColor = "RGB(230,0,0)"
                         // console.log(liker)
@@ -603,7 +691,7 @@ async function retrieveSong(q, spot, ind) {
     let research = false
     await getToken()
     do {
-        await fetch(`https://api.spotify.com/v1/search?q=${q}&type=track&limit=1`, {//&offset=${Math.floor(Math.random() * 20)}`, {
+        await fetch(`https://api.spotify.com/v1/search?q=${q}&type=track&limit=1`, { //&offset=${Math.floor(Math.random() * 20)}`, {
             method: "GET",
             headers: {
                 Accept: "application/json",
@@ -614,9 +702,14 @@ async function retrieveSong(q, spot, ind) {
             .then(r => r.json())
             .then(data => {
                 switch (spot) {
-                    case 0: break;
-                    case 1: if (homePreview[0] == data.tracks.items[0]) research = true; break;
-                    case 2: if (homePreview[0] == data.tracks.items[0] || homePreview[1] == data.tracks.items[0]) research = true; break;
+                    case 0:
+                        break;
+                    case 1:
+                        if (homePreview[0] == data.tracks.items[0]) research = true;
+                        break;
+                    case 2:
+                        if (homePreview[0] == data.tracks.items[0] || homePreview[1] == data.tracks.items[0]) research = true;
+                        break;
                 }
                 if (!research) homePreview[spot] = data.tracks.items[0]
             })
@@ -737,7 +830,10 @@ async function retrieveSong(q, spot, ind) {
                 spinner[spot] = ang
 
             }
-            box.onclick = () => { location.href = "app?s=" + homePreview[spot].id; window.sessionStorage.setItem('id', homePreview[spot].id) }
+            box.onclick = () => {
+                location.href = "app?s=" + homePreview[spot].id;
+                window.sessionStorage.setItem('id', homePreview[spot].id)
+            }
         })
 }
 
@@ -777,6 +873,7 @@ frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
     document.body.onresize()
 
 }
+
 function embedPLAYLIST(id) {
     document.getElementById("playlist-view").innerHTML += `<center><iframe class="playlist-iframe" src="https://open.spotify.com/embed/playlist/${id}" class="${responding ? 'FR-' : ''}iframe"
     frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></center>`;
@@ -805,6 +902,7 @@ function responsive(wide, narrow) {
         }
     }
 }
+
 function randomWord(len) {
     const lows = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm']
     var str = "";
@@ -813,10 +911,10 @@ function randomWord(len) {
     }
     return str;
 }
+
 function enable(b) {
     const e = document.getElementById('enable')
-    if (b) { e.style.top = '40%' }
-    else e.style.top = '300%'
+    if (b) { e.style.top = '40%' } else e.style.top = '300%'
 }
 // acousticness: 0.00321,
 //     danceability: 0.451,
@@ -915,7 +1013,8 @@ async function songReact(like) {
             await APIcall()
             let curArray;
             const liker = apiData.returnedGuess >= threshold
-            if (liker) curArray = responses.true; else curArray = responses.false
+            if (liker) curArray = responses.true;
+            else curArray = responses.false
             if (liker) document.getElementById('guessID').style.backgroundColor = "RGB(0,230,0)"
             else document.getElementById('guessID').style.backgroundColor = "RGB(230,0,0)"
             // console.log(liker)
@@ -967,6 +1066,7 @@ async function readFileContent(file) {
         reader.readAsText(file)
     })
 }
+
 function download(filename, text) {
     var element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
@@ -1047,9 +1147,14 @@ function returnHTMLfordataview(obj) {
 
 function toggleDataview() {
     switch (v.getAttribute('style')) {
-        case 'top: 50px': v.setAttribute('style', 'top: 3000px'); break;
-        default: console.log('defaulted')
-        case 'top: 3000px': v.setAttribute('style', 'top: 50px'); break;
+        case 'top: 50px':
+            v.setAttribute('style', 'top: 3000px');
+            break;
+        default:
+            console.log('defaulted')
+        case 'top: 3000px':
+            v.setAttribute('style', 'top: 50px');
+            break;
     }
     document.getElementById('likedh1').innerHTML = `Liked (${likelist.length})`
     document.getElementById('dislikedh1').innerHTML = `Disiked (${hatelist.length})`
@@ -1185,7 +1290,11 @@ async function createPlaylist(bodyJSON) {
             'Authorization': `Bearer ${tokenObj.access_token}`
         },
         body: JSON.stringify(bodyJSON)
-    }).then(res => res.json()).then(data => { plObj = data; console.log(data); plID = plObj.id })
+    }).then(res => res.json()).then(data => {
+        plObj = data;
+        console.log(data);
+        plID = plObj.id
+    })
     //image
     await fetch(`https://api.spotify.com/v1/playlists/${plID}/images`, {
         method: "PUT",
@@ -1216,7 +1325,10 @@ async function replace(songlist, id) {
             "Authorization": 'Bearer ' + tokenObj.access_token,
             "Content-Type": "application/JSON"
         }
-    }).then(res => { console.log(res); res.json() }).then(data => console.log(data)).catch(e => console.log('errorrrr  ' + e))
+    }).then(res => {
+        console.log(res);
+        res.json()
+    }).then(data => console.log(data)).catch(e => console.log('errorrrr  ' + e))
 }
 
 async function recommend() {
@@ -1270,8 +1382,3 @@ async function recommend() {
 //         "Content-Type": "application/JSON"
 //     }).then(res => { console.log(res); res.json() }).then(data => console.log(data)).catch(e => console.log('errorrrr  ' + e))
 // }
-
-
-
-
-
