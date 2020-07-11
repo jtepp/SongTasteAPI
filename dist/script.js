@@ -328,6 +328,8 @@ else if (window.location.href.includes('guide')) {
 
     neuG('home')
     neuG('start')
+    neuG('about')
+    neuG('contact')
 }
 
 
