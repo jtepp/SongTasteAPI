@@ -100,14 +100,14 @@ exports.handler = function (event, context, callback) {
 			trainer = new Trainer(net)
 		}
 		//propagate last result
-		try {
-			//shuffle
-			var ztrain = data.Atrain.sort(() => Math.random() - 0.5)
-			ztrain.forEach(e => {
-				net.activate(e.input)
-				net.propagate(0.2, e.output)
-			})
-		} catch (e) { console.log(e + " couldnt propagate") }
+		// try {
+		// 	//shuffle
+		// 	var ztrain = data.Atrain.sort(() => Math.random() - 0.5)
+		// 	ztrain.forEach(e => {
+		// 		net.activate(e.input)
+		// 		net.propagate(0.2, e.output)
+		// 	})
+		// } catch (e) { console.log(e + " couldnt propagate") }
 		var aa = net.activate(data.Crun)
 		// console.log(true)
 		console.log(data)
