@@ -437,6 +437,7 @@ async function searchNew(q) {
             window.sessionStorage.setItem('id', currentID)
 
         })
+    await retrieveFeatures(currentID)
 }
 
 
