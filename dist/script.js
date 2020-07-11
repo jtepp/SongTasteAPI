@@ -102,7 +102,7 @@ if (window.location.href.includes('/app') && allSongs != null) {
     }
 }
 var needMore = 4 - allSongs.IDList.length;
-var needplaylist = 11 - likelist.length;
+var needPlaylist = 8 - likelist.length;
 const responses = {
     true: [
         "You might like this one...",
@@ -189,7 +189,7 @@ else if (window.location.href.includes('/app')) {
         window.localStorage.setItem('all', JSON.stringify(allSongs))
         window.localStorage.setItem('targ', JSON.stringify(targets))
         needMore = 4;
-        needPlaylist = 11
+        needPlaylist = 8
         updateTEXT();
 
     })
@@ -321,7 +321,7 @@ async function asyncHome() {
 
 async function updateTEXT() {
     needMore = 4 - allSongs.IDList.length;
-    needPlaylist = 11 - allSongs.IDList.length;
+    needPlaylist = 8 - allSongs.IDList.length;
     automate.innerHTML = "Automate a playlist";
     if (needPlaylist >= 1) {
         automate.innerHTML = (needPlaylist + 1) + " more...";
@@ -846,11 +846,10 @@ async function songReact(like) {
         await reactingList(currentID, like)
         await searchLater(randomWord(wordLength))
         await retrieveFeatures(currentID)
-        automate.innerHTML = "Automate a playlist"
         if (needPlaylist >= 1) {
             needPlaylist--;
             automate.innerHTML = (needPlaylist + 1) + " more..."
-        }
+        } else automate.innerHTML = "Automate a playlist"
         if (needMore >= 1) {
             needMore--;
             document.getElementById('guessTEXT').innerHTML = (needMore + 1) + " more..."
