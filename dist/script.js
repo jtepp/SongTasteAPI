@@ -119,7 +119,7 @@ const responses = {
 var responding = false;
 var homePreview = []
 var mainBox = {}
-const resClasses = ['header', 'footer', 'home-song-bar', 'formstuff', 'button', 'box', 'guess-box', 'lame-image', 'home-song-box', 'nav-top', 'playlist-iframe', 'message', 'home-song-info', 'song-image', 'iframe', 'flexbutton']
+const resClasses = ['header', 'footer', 'home-song-bar', 'formstuff', 'button', 'box', 'guess-box', 'lame-image', 'home-song-box', 'nav-top', 'playlist-iframe', 'message', 'home-song-info', 'song-image', 'iframe', 'flexbutton', 'about-header', 'gcard', 'about-tile']
 const banner = document.getElementById('banner')
 const spacer = document.getElementById("spacer")
 document.body.onresize = () => {
@@ -316,7 +316,7 @@ else if (window.location.href.includes('about')) {
                     n.style.boxShadow = '0px 0px 0px rgba(255, 255, 255, 0.7), inset -5px -5px 5px rgba(255, 255, 255, 0.7), 0px 0px 0px rgba(0, 0, 0, 0.2), inset 5px 5px 5px rgba(0, 0, 0, 0.2)'
                 n.style.top = '5px'
                 n.style.left = '5px'
-                n.style.backgroundColor = 'whitesmoke'
+                n.style.backgroundColor = 'rgb(230,230,230)'
                 n.style.textShadow = "5px 5px 5px rgba(0, 0, 0, 0.2)"
             } catch{ }
         }
@@ -327,7 +327,7 @@ else if (window.location.href.includes('about')) {
                         n.style.boxShadow = '-5px -5px 5px rgba(255, 255, 255, 0.7), inset 0px 0px 0px rgba(255, 255, 255, 0.7), 5px 5px 5px rgba(0, 0, 0, 0.2), inset 0px 0px 0px rgba(0, 0, 0, 0.2)'
                     n.style.top = '0px'
                     n.style.left = '0px'
-                    n.style.backgroundColor = 'white'
+                    n.style.backgroundColor = 'whitesmoke'
                     n.style.textShadow = "0px 0px 0px rgba(0, 0, 0, 0.2)"
                 } catch{ }
             }
@@ -339,13 +339,48 @@ else if (window.location.href.includes('about')) {
                         n.style.boxShadow = '0px 0px 0px rgba(255, 255, 255, 0.7), inset -5px -5px 5px rgba(255, 255, 255, 0.7), 0px 0px 0px rgba(0, 0, 0, 0.2), inset 5px 5px 5px rgba(0, 0, 0, 0.2)'
                     n.style.top = '5px'
                     n.style.left = '5px'
-                    n.style.backgroundColor = 'whitesmoke'
+                    n.style.backgroundColor = 'rgb(230,230,230)'
                     n.style.textShadow = "5px 5px 5px rgba(0, 0, 0, 0.2)"
                 } catch{ }
             }
         }
     }
-
+    for (h of document.getElementsByClassName('FR-about-tile')) {
+        for (n of h.childNodes) {
+            try {
+                if (n.classList.contains('about-header'))
+                    n.style.boxShadow = '0px 0px 0px rgba(255, 255, 255, 0.7), inset -5px -5px 5px rgba(255, 255, 255, 0.7), 0px 0px 0px rgba(0, 0, 0, 0.2), inset 5px 5px 5px rgba(0, 0, 0, 0.2)'
+                n.style.top = '5px'
+                n.style.left = '5px'
+                n.style.backgroundColor = 'rgb(230,230,230)'
+                n.style.textShadow = "5px 5px 5px rgba(0, 0, 0, 0.2)"
+            } catch{ }
+        }
+        h.onmouseenter = () => {
+            for (n of h.childNodes) {
+                try {
+                    if (n.classList.contains('about-header'))
+                        n.style.boxShadow = '-5px -5px 5px rgba(255, 255, 255, 0.7), inset 0px 0px 0px rgba(255, 255, 255, 0.7), 5px 5px 5px rgba(0, 0, 0, 0.2), inset 0px 0px 0px rgba(0, 0, 0, 0.2)'
+                    n.style.top = '0px'
+                    n.style.left = '0px'
+                    n.style.backgroundColor = 'whitesmoke'
+                    n.style.textShadow = "0px 0px 0px rgba(0, 0, 0, 0.2)"
+                } catch{ }
+            }
+        }
+        h.onmouseleave = () => {
+            for (n of h.childNodes) {
+                try {
+                    if (n.classList.contains('about-header'))
+                        n.style.boxShadow = '0px 0px 0px rgba(255, 255, 255, 0.7), inset -5px -5px 5px rgba(255, 255, 255, 0.7), 0px 0px 0px rgba(0, 0, 0, 0.2), inset 5px 5px 5px rgba(0, 0, 0, 0.2)'
+                    n.style.top = '5px'
+                    n.style.left = '5px'
+                    n.style.backgroundColor = 'rgb(230,230,230)'
+                    n.style.textShadow = "5px 5px 5px rgba(0, 0, 0, 0.2)"
+                } catch{ }
+            }
+        }
+    }
 }
 
 
