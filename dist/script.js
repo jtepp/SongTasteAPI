@@ -395,7 +395,7 @@ async function APIcall() {
         // if (needPlaylist < 1 && Math.abs(likelist.length - hatelist.length) > 2) { automate.style.background = 'RGB(148,148,148)' }
         // else automate.style.background = 'RGB(207,0,0)'
     }
-
+    await retrieveFeatures(currentID)
     allSongs.Crun = [
         mainBox.acousticness,
         mainBox.danceability,
