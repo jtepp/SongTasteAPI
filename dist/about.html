@@ -5,8 +5,7 @@
 <head>
     <meta charset=“UTF-8”>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
     <title>About | SongTaste</title>
 </head>
 
@@ -25,24 +24,30 @@
     </header>
     <div class="about-spacing"></div>
     <div class="about-cont">
-        <div class="about-tile">
-            <h1 class="about-header" onclick="location.href = `https://github.com/jtepp`">GitHub</h1>
-            <!-- <iframe id="ghcard-jtepp-1" class="gcard" frameborder="0" scrolling="0" allowtransparency="true"
-                src="https://cdn.jsdelivr.net/github-cards/1.0.2/cards/default.html?user=jtepp&amp;identity=ghcard-jtepp-1"
-                width="400" height="200"></iframe> -->
+        <div class="about-tile" id="gh">
+            <h1 class="about-header" id="head1" onclick="location.href = `https://github.com/jtepp`">GitHub</h1>
             <iframe class="gcard"
                 src="https://cdn.jsdelivr.net/github-cards/1.0.2/cards/default.html?user=jtepp&amp;identity=ghcard-jtepp-1"
-                frameborder="0"></iframe>
+                frameborder="0" style="box-shadow: none;"></iframe>
         </div>
 
+        <div class="about-tile" id="other">
+            <h1 class="about-header">Other Sites</h1>
+            <div class="about-sites">
+                <div class="about-web" data-name="Dr Java" data-link='https://drjava.netlify.com'>
+                    <img src="assets/screenshots/dr-java.png" alt="" width="366px" height="200px">
+                </div>
+                <div class="about-web" data-name="Datamuse" data-link='https://datamuse.netlify.com'>
+                    <img src="assets/screenshots/datamuse.png" alt="" width="366px" height="200px">
+                </div>
+            </div>
+
+        </div>
 
     </div>
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
-        integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
-        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
-        crossorigin="anonymous"></script>
+
+
+
     <script src="script.js"></script>
 </body>
 

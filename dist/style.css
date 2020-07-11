@@ -496,12 +496,14 @@ div>label{cursor: pointer;}
     align-items: center;
     flex-direction: column;
     padding: 10px;
+    height: fit-content;
     /* border: solid 1px black; */
     background-color: whitesmoke;
     border-radius: 20px;
     box-shadow: -5px -5px 5px rgba(255, 255, 255, 0.7), inset 0px 0px 0px rgba(255, 255, 255, 0.7), 5px 5px 5px rgba(0, 0, 0, 0.2), inset 0px 0px 0px rgba(0, 0, 0, 0.2);
     transition: all ease 0.4s;
-    width:fit-content;
+    /* width:fit-content; */
+    margin-bottom: 50px;
 }
 .about-tile:hover{
     box-shadow: 0px 0px 0px rgba(255, 255, 255, 0.7), inset -5px -5px 5px rgba(255, 255, 255, 0.7), 0px 0px 0px rgba(0, 0, 0, 0.2), inset 5px 5px 5px rgba(0, 0, 0, 0.2);
@@ -511,7 +513,7 @@ div>label{cursor: pointer;}
     top: 5px;
     left:5px;
 }
-
+#head1{cursor: pointer;}
 .about-header{
     margin-top:0;
     font-weight:3;
@@ -520,8 +522,7 @@ div>label{cursor: pointer;}
     left: 5px;
     /* box-shadow: 0px 0px 0px rgba(255, 255, 255, 0.7), inset -5px -5px 5px rgba(255, 255, 255, 0.7), 0px 0px 0px rgba(0, 0, 0, 0.2), inset 5px 5px 5px rgba(0, 0, 0, 0.2); */
     background-color:rgb(230,230,230);
-    text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
+    text-shadow: 20px 20px 20px rgba(0, 0, 0, 0.2);
     border-radius: 20px;
     transition: all ease 0.4s;
     margin-bottom: 10px;
@@ -530,7 +531,53 @@ div>label{cursor: pointer;}
     width:fit-content;
 }
 
+.about-sites{
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    height: 220px;
+    width: 366px;
+}
 
+.about-sites::-webkit-scrollbar {
+    width: 0em;
+    background: transparent;
+}
+.about-sites::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+}
+
+.about-web{
+      display: flex;
+      flex-direction: column;
+    transition: all ease 0.4s;
+}
+.about-web > img{
+    border-radius: 10px;
+}
+.about-web:after{
+    cursor: pointer;
+    line-height: 200px;
+    color: white;
+    font-size: 0;
+    transition: all ease 0.4s;
+    text-align: center;
+    content:attr(data-name);
+    position: relative;
+    top: -100%;
+    opacity: 0;
+    border-radius: 10px;
+    backdrop-filter: brightness(40%);
+}
+.about-web:hover:after{
+    opacity: 1;
+    font-size: 40pt;
+    top: calc(-100% + 4px);
+
+    
+}
 
 
 @media(max-width: 750px){
@@ -742,6 +789,7 @@ div>label{cursor: pointer;}
 }
 
 .FR-about-tile{
+    margin-bottom: 50px;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -781,6 +829,9 @@ div>label{cursor: pointer;}
     font-size: 26vw;
 }
 .FR-gcard{
+    display:none
+}
+.FR-about-sites{
     display:none
 }
 
