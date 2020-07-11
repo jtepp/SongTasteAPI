@@ -140,8 +140,12 @@ if (window.location.href.includes('index.html') || window.location.pathname == '
     asyncHome();
 }
 else if (window.location.href.includes('/app')) {
-    if (needPlaylist < 1 && Math.abs(likelist.length - hatelist.length) > 2) { automate.style.background = 'RGB(148,148,148)' }
-    else automate.style.background = 'RGB(207,0,0)'
+
+
+    // if (needPlaylist < 1 && Math.abs(likelist.length - hatelist.length) > 2) { automate.style.background = 'RGB(148,148,148)' }
+    // else automate.style.background = 'RGB(207,0,0)'
+
+
     document.getElementById('longth').value = window.localStorage.getItem('length') || '5'
     document.getElementById('show').innerHTML = '[' + (window.localStorage.getItem('length') || 5) + ']'
 
@@ -205,28 +209,30 @@ else if (window.location.href.includes('/app')) {
 
     automate.addEventListener('click', () => {
         if (needPlaylist < 1 && plready) {// && !saving) {
-            if (Math.abs(likelist.length - hatelist.length) <= 2) {
-                window.sessionStorage.setItem('id', currentID)
-                window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=code&redirect_uri=${encodeURIComponent(redirect)}&scope=playlist-modify-private%20playlist-modify-public%20ugc-image-upload&show_dialog=false`
-            }
-            else {
-                toggleDataview()
-                pulsetimes++
-                $.keyframe.define({
-                    name: `pulse${pulsetimes}`,
-                    "0%": {
-                        'font-size': '10pt'
-                    },
-                    "50%": {
-                        'font-size': '15pt'
-                    },
-                    "100%": {
-                        'font-size': "10pt"
-                    }
-                })
-                document.getElementById('hint').style.animation = `pulse${pulsetimes} 0.4s linear 4`
+            // if (Math.abs(likelist.length - hatelist.length) <= 2) {
 
-            }
+            window.sessionStorage.setItem('id', currentID)
+            window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=code&redirect_uri=${encodeURIComponent(redirect)}&scope=playlist-modify-private%20playlist-modify-public%20ugc-image-upload&show_dialog=false`
+
+            // }
+            // else {
+            //     toggleDataview()
+            //     pulsetimes++
+            //     $.keyframe.define({
+            //         name: `pulse${pulsetimes}`,
+            //         "0%": {
+            //             'font-size': '10pt'
+            //         },
+            //         "50%": {
+            //             'font-size': '15pt'
+            //         },
+            //         "100%": {
+            //             'font-size': "10pt"
+            //         }
+            //     })
+            //     document.getElementById('hint').style.animation = `pulse${pulsetimes} 0.4s linear 4`
+
+            // }
 
 
 
@@ -386,8 +392,8 @@ async function asyncApp() {
 
 async function APIcall() {
     if (plready) {
-        if (needPlaylist < 1 && Math.abs(likelist.length - hatelist.length) > 2) { automate.style.background = 'RGB(148,148,148)' }
-        else automate.style.background = 'RGB(207,0,0)'
+        // if (needPlaylist < 1 && Math.abs(likelist.length - hatelist.length) > 2) { automate.style.background = 'RGB(148,148,148)' }
+        // else automate.style.background = 'RGB(207,0,0)'
     }
     await fetch(`https://songtaste.netlify.app/.netlify/functions/app`, {
         method: 'POST',
@@ -876,7 +882,8 @@ async function songReact(like) {
         reactready = true
         // console.log(allSongs)
     }
-    if (needPlaylist < 1 && Math.abs(likelist.length - hatelist.length) > 2) { automate.style.background = 'RGB(148,148,148)' }
+    // if (needPlaylist < 1 && Math.abs(likelist.length - hatelist.length) > 2) { automate.style.background = 'RGB(148,148,148)' }
+
     window.localStorage.setItem('all', JSON.stringify(allSongs))
 
 }
