@@ -1021,7 +1021,7 @@ async function songReact(like) {
         await retrieveFeatures(currentID)
         console.log(like)
         if (needPlaylist >= 1 && like == 1) {
-            needPlaylist = 8 - likelist;
+            needPlaylist = 8 - likelist.length;
 
         }
         if (needMore >= 1) {
