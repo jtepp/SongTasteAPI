@@ -987,8 +987,12 @@ async function reactingList(id, like) {
     document.getElementById('likedh1').innerHTML = `Liked (${likelist.length})`
     document.getElementById('dislikedh1').innerHTML = `Disiked (${hatelist.length})`
     try {
-        if (likelist.length < 8) document.getElementById('automate').innerHTML = (8 - likelist.length) + ' more...'; else { document.getElementById('automate').innerHTML = 'Automate a playlist'; console.log(likelist.length) }
+        if (likelist.length < 8) document.getElementById('automate').innerHTML = (8 - likelist.length) + ' more...'; else {
+            document.getElementById('automate').innerHTML = 'Automate a playlist'; console.log(likelist.length)
+            needPlaylist = 8 - likelist.length
+        }
     } catch (e) { console.log(e) }
+
 }
 
 
