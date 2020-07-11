@@ -3,6 +3,20 @@ const redirect = `https://songtaste.netlify.app/app?save=true`;
 const clientID = `4dcd7399f4954e2c8c679f38d1bb1419`
 const creds = "NGRjZDczOTlmNDk1NGUyYzhjNjc5ZjM4ZDFiYjE0MTk6ZWNmOWExODVjYzZjNDI4NmJkMjA3NTNhMThmZTVmYzU=";
 var code;
+var targets = JSON.parse(window.localStorage.getItem('targ')) || {
+    acousticness: [],
+    danceability: [],
+    duration_ms: [],
+    energy: [],
+    instrumentalness: [],
+    liveness: [],
+    speechiness: [],
+    tempo: [],
+    valence: []
+}
+for (k in targets) {
+    targets[k] = targets[k].filter(e => e != null && e != undefined && e != 'null' && e != 'undefined' && e != '')
+}
 var plready = true
 var unauthorized;
 var pulsetimes = 0;
@@ -156,7 +170,19 @@ else if (window.location.href.includes('/app')) {
             "break": "break",
             "Crun": []
         }
-        window.localStorage.setItem('all', allSongs)
+        targets = {
+            acousticness: [],
+            danceability: [],
+            duration_ms: [],
+            energy: [],
+            instrumentalness: [],
+            liveness: [],
+            speechiness: [],
+            tempo: [],
+            valence: []
+        }
+        window.localStorage.setItem('all', JSON.stringify(allSongs))
+        window.localStorage.setItem('targ', JSON.stringify(targets))
         updateTEXT();
 
     })
@@ -348,7 +374,8 @@ async function asyncApp() {
 
         plready = false;
         automate.style.backgroundColor = 'RGB(148,148,148)'
-        await startPlaylist(document.getElementById('longth').value)
+        // await startPlaylist(document.getElementById('longth').value)
+        await concretePlaylist()
         await playlistrun();
         embedPLAYLIST(plID)
         plready = true;
@@ -400,8 +427,12 @@ async function searchNew(q) {
         .then(r => r.json())
         .then(data => {
             currentID = data.tracks.items[0].id
+
         })
 }
+
+
+
 
 async function searchLater(q, pl) {
     if (pl) {
@@ -419,6 +450,8 @@ async function searchLater(q, pl) {
                 .then(r => r.json())
                 .then(data => {
                     currentID = data.tracks.items[0].id
+
+
                     if (allSongs.IDList.includes(currentID)) { wordLength++; console.log('duplicate ID'); q = randomWord(wordLength) }
                 }).catch(() => {
                     failed = true;
@@ -443,6 +476,8 @@ async function searchLater(q, pl) {
                 .then(r => r.json())
                 .then(data => {
                     currentID = data.tracks.items[0].id
+
+
                     if (allSongs.IDList.includes(currentID)) { wordLength++; console.log('duplicate ID'); q = randomWord(wordLength) }
                 }).catch(() => {
                     failed = true;
@@ -466,6 +501,8 @@ async function searchSpecific(q) {
             .then(r => r.json())
             .then(data => {
                 currentID = data.tracks.items[0].id
+
+
                 if (allSongs.IDList.includes(currentID)) { wordLength++; console.log('duplicate ID'); q = randomWord(wordLength) } else {
 
                     embed('box-iframe', currentID)
@@ -755,6 +792,10 @@ async function reactingList(id, like) {
                     "img": data.album.images[0].url
                 }
                 likelist.push(nfo)
+                for (k in targets) {
+                    targets[k].push(mainBox[k])
+                }
+                window.localStorage.setItem('targ', JSON.stringify(targets))
                 goodURI.push('spotify:track:' + nfo.id)
                 document.getElementById('goodlist').appendChild(returnHTMLfordataview(nfo))
             } else if (like == 0) {
@@ -885,6 +926,10 @@ function download(filename, text) {
 //remove from likelist, IDList (index), Atrain (index)
 function removeFromView(id) {
     document.getElementById(id).parentNode.removeChild(document.getElementById(id))
+    const u = likelist.indexOf(id)
+    for (k in targets) {
+        targets[k].slice(0, u).concat(targets[k].slice(u + 1, targets[k].length))
+    }
     likelist = likelist.filter(e => e.id != id)
     hatelist = hatelist.filter(e => e.id != id)
     document.getElementById('likedh1').innerHTML = `Liked (${likelist.length})`
@@ -992,6 +1037,14 @@ async function startPlaylist(len) {
     document.getElementById('loadingBar').style.display = 'none';
     bestURI = listplay
 }
+
+async function concretePlaylist() {
+    let trax = await recommend()
+    bestURI = []
+    trax.tracks.forEach(e => bestURI.push(e.uri))
+
+}
+
 
 
 async function playlistrun() {
@@ -1108,6 +1161,50 @@ async function replace(songlist, id) {
         }
     }).then(res => { console.log(res); res.json() }).then(data => console.log(data)).catch(e => console.log('errorrrr  ' + e))
 }
+
+async function recommend() {
+    await getToken()
+    let average = (array) => {
+        let sum = 0
+        for (a of array) {
+            // if(a!=null&&a!=''&&a!=undefined&&a!='null'&&a!='undefined'){}
+            if (a) sum += a
+        }
+        return Math.round((sum / array.length) * 100) / 100
+    }
+    let atarg = []
+    for (k in targets) {
+        if (k == 'duration_ms') {
+            atarg.push(`&target_${k}=${Math.round(average(targets[k]))}`)
+        } else
+            atarg.push(`&target_${k}=${average(targets[k])}`)
+    }
+    let rans = []
+    let curry
+    for (let i = 0; i < 5; i++) {
+        do {
+            curry = Math.floor(Math.random() * likelist.length)
+        } while (rans.includes(curry))
+        rans.push(curry)
+    }
+    let seedTracks = []
+    for (i of rans) { seedTracks.push(likelist[i].id) }
+
+    return await fetch(
+        `https://api.spotify.com/v1/recommendations?seed_tracks=${seedTracks[0]},${seedTracks[1]},${seedTracks[2]},${seedTracks[3]},${seedTracks[4]}${atarg.join('')}&limit=${document.getElementById('longth').value}`
+
+
+
+
+        , {
+            headers: {
+                Authorization: `Bearer ${key}`
+            }
+        }).then(res => res.json())
+}
+
+
+
 
 // async function ammend() {
 //     await fetch(`https://api.spotify.com/v1/playlists/${plObj.id}/tracks?uris=${goodURI.join(',')}`, {
