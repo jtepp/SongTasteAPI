@@ -1003,9 +1003,8 @@ async function songReact(like) {
         console.log(like)
         if (needPlaylist >= 1 && like == 1) {
             needPlaylist--;
-            console.log("subtracted needplaylist")
             automate.innerHTML = (needPlaylist + 1) + " more..."
-        } else automate.innerHTML = "Automate a playlist"
+        } else if (needPlaylist < 1) automate.innerHTML = "Automate a playlist"
         if (needMore >= 1) {
             needMore--;
             document.getElementById('guessTEXT').innerHTML = (needMore + 1) + " more..."
