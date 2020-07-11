@@ -102,7 +102,7 @@ if (window.location.href.includes('/app') && allSongs != null) {
     }
 }
 var needMore = 4 - allSongs.IDList.length;
-var needPlaylist = 11 - allSongs.IDList.length;
+var needplaylist = 11 - likelist.length;
 const responses = {
     true: [
         "You might like this one...",
@@ -321,7 +321,7 @@ async function asyncHome() {
 
 async function updateTEXT() {
     needMore = 4 - allSongs.IDList.length;
-    needPlaylist = 12 - allSongs.IDList.length;
+    needPlaylist = 11 - allSongs.IDList.length;
     automate.innerHTML = "Automate a playlist";
     if (needPlaylist >= 1) {
         automate.innerHTML = (needPlaylist + 1) + " more...";
