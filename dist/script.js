@@ -428,6 +428,7 @@ async function searchNew(q) {
         .then(r => r.json())
         .then(data => {
             currentID = data.tracks.items[0].id
+            window.sessionStorage.setItem('id', currentID)
 
         })
 }
@@ -477,6 +478,7 @@ async function searchLater(q, pl) {
                 .then(r => r.json())
                 .then(data => {
                     currentID = data.tracks.items[0].id
+                    window.sessionStorage.setItem('id', currentID)
 
 
                     if (allSongs.IDList.includes(currentID)) { wordLength++; console.log('duplicate ID'); q = randomWord(wordLength) }
