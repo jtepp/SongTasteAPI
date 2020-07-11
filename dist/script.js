@@ -137,9 +137,6 @@ document.body.onresize = () => {
     } catch { }
 }
 document.body.onload = document.body.onresize
-try {
-    if (likelist.length >= 1) document.getElementById('automate').innerHTML = (8 - likelist.length) + ' more...'; else document.getElementById('automate').innerHTML = 'Automate a playlist'
-} catch (e) { console.log(e) }
 document.body.onresize()
 document.body.onresize()
 document.body.onresize()
@@ -546,6 +543,9 @@ async function APIcall() {
             allSongs.transfertrainer = apiData.transfertrainer
             console.log(apiData.returnedGuess)
         })
+    try {
+        if (likelist.length < 8) document.getElementById('automate').innerHTML = (8 - likelist.length) + ' more...'; else { document.getElementById('automate').innerHTML = 'Automate a playlist'; console.log(likelist.length) }
+    } catch (e) { console.log(e) }
 }
 async function getToken() {
     await fetch(`https://accounts.spotify.com/api/token`, {
@@ -979,6 +979,9 @@ async function reactingList(id, like) {
         })
     document.getElementById('likedh1').innerHTML = `Liked (${likelist.length})`
     document.getElementById('dislikedh1').innerHTML = `Disiked (${hatelist.length})`
+    try {
+        if (likelist.length < 8) document.getElementById('automate').innerHTML = (8 - likelist.length) + ' more...'; else { document.getElementById('automate').innerHTML = 'Automate a playlist'; console.log(likelist.length) }
+    } catch (e) { console.log(e) }
 }
 
 
@@ -1008,8 +1011,8 @@ async function songReact(like) {
         console.log(like)
         if (needPlaylist >= 1 && like == 1) {
             needPlaylist--;
-            automate.innerHTML = (needPlaylist + 1) + " more..."
-        } else if (needPlaylist < 1) automate.innerHTML = "Automate a playlist"
+
+        }
         if (needMore >= 1) {
             needMore--;
             document.getElementById('guessTEXT').innerHTML = (needMore + 1) + " more..."
@@ -1397,3 +1400,7 @@ async function recommend() {
 //         "Content-Type": "application/JSON"
 //     }).then(res => { console.log(res); res.json() }).then(data => console.log(data)).catch(e => console.log('errorrrr  ' + e))
 // }
+
+try {
+    if (likelist.length < 8) document.getElementById('automate').innerHTML = (8 - likelist.length) + ' more...'; else { document.getElementById('automate').innerHTML = 'Automate a playlist'; console.log(likelist.length) }
+} catch (e) { console.log(e) }
