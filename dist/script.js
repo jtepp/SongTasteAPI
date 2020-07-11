@@ -367,7 +367,7 @@ async function asyncApp() {
         await searchNew(randomWord(3))
     } else currentID = initial
     embed('box-iframe', currentID)
-    await retrieveFeatures(currentID, mainBox)
+    await retrieveFeatures(currentID)
     resClasses.forEach(c => {
         responsive(c, 'FR-' + c)
     })
@@ -396,6 +396,9 @@ async function APIcall() {
         // if (needPlaylist < 1 && Math.abs(likelist.length - hatelist.length) > 2) { automate.style.background = 'RGB(148,148,148)' }
         // else automate.style.background = 'RGB(207,0,0)'
     }
+
+
+
     await fetch(`https://songtaste.netlify.app/.netlify/functions/app`, {
         method: 'POST',
         'content-type': 'application/json',
