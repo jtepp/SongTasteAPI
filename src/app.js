@@ -11,6 +11,73 @@ exports.handler = function (event, context, callback) {
 		const a = JSON.stringify(event.body).split("\\").join('').split(',"break":"break",').join();
 		const b = a.slice(1, a.length - 1)
 		const data = JSON.parse(b)
+
+		var yes = {
+			0: [],
+			1: [],
+			2: [],
+			3: [],
+			4: [],
+			5: [],
+			6: [],
+			7: [],
+			8: []
+		}
+		var no = {
+			0: [],
+			1: [],
+			2: [],
+			3: [],
+			4: [],
+			5: [],
+			6: [],
+			7: [],
+			8: []
+		}
+		var goods = 0;
+		var bads = 0;
+		for (o of data.Atrain) {
+			if (o.output == 1) {
+				goods++
+				for (let i = 0; i < 9; i++) {
+					yes[i].push(o.input[i])
+				}
+			} else if (o.output == 0) {
+				bads++
+				for (let i = 0; i < 9; i++) {
+					no[i].push(o.input[i])
+				}
+			}
+		}
+		let average = (array) => {
+			let sum = 0
+			for (a of array) {
+				// if(a!=null&&a!=''&&a!=undefined&&a!='null'&&a!='undefined'){}
+				if (a) sum += a
+			}
+			return Math.round((sum / array.length) * 100) / 100
+		}
+		const avgyes = [average(yes[0]), average(yes[1]), average(yes[2]), average(yes[3]), average(yes[4]), average(yes[5]), average(yes[6]), average(yes[7]), average(yes[8])]
+		const avgno = [average(no[0]), average(no[1]), average(no[2]), average(no[3]), average(no[4]), average(no[5]), average(no[6]), average(no[7]), average(no[8])]
+		const diff = max(goods, bads)
+		if (goods > bads) {
+			for (let i = 0; i < diff; i++) {
+				data.Atrain.push({
+					"input": avgno,
+					"output": 0
+				})
+			}
+		} else {
+			for (let i = 0; i < diff; i++) {
+				data.Atrain.push({
+					"input": avgyes,
+					"output": 1
+				})
+			}
+		}
+
+
+
 		// for (let i = 0; i < data.Atrain.length; i++) {
 		//     for (let j = 0; j < data.Atrain[i].length; j++) {
 		//         data.Atrain[i][j] *= 100;

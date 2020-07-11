@@ -163,7 +163,6 @@ else if (window.location.href.includes('/app')) {
         if (searchClickCount == 0) { searchClickCount++; searchID.innerHTML = '' }
     })
     document.getElementById('clear').addEventListener('click', () => {
-        document.getElementById('guessID').style.background = 'RGB(146, 146, 146);'
         console.log("CLEARED")
         allSongs.IDList.forEach(e => { removeFromView(e) })
         allSongs = {
@@ -191,6 +190,7 @@ else if (window.location.href.includes('/app')) {
         needMore = 4;
         needPlaylist = 8
         updateTEXT();
+        document.getElementById('guessID').style.background = 'RGB(146, 146, 146);'
 
     })
     searchID.addEventListener('keypress', (e) => {
