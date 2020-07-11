@@ -1000,8 +1000,10 @@ async function songReact(like) {
         await reactingList(currentID, like)
         await searchLater(randomWord(wordLength))
         await retrieveFeatures(currentID)
+        console.log(like)
         if (needPlaylist >= 1 && like == 1) {
             needPlaylist--;
+            console.log("subtracted needplaylist")
             automate.innerHTML = (needPlaylist + 1) + " more..."
         } else automate.innerHTML = "Automate a playlist"
         if (needMore >= 1) {
