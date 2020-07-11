@@ -71,8 +71,8 @@ var allSongs = {
     "break": "break",
     "Crun": []
 }
-console.log(window.localStorage.getItem('all'))
-try { console.log(JSON.parse(window.localStorage.getItem('all'))) } catch (e) { console.log(e) }
+// console.log(window.localStorage.getItem('all'))
+// try { console.log(JSON.parse(window.localStorage.getItem('all'))) } catch (e) { console.log(e) }
 try { allSongs = JSON.parse(window.localStorage.getItem('all')) } catch (e) {
     console.log(e)
     if (allSongs == null || JSON.parse(window.localStorage.getItem('all')) == null) allSongs = {
@@ -85,7 +85,7 @@ try { allSongs = JSON.parse(window.localStorage.getItem('all')) } catch (e) {
         "Crun": []
     }
 }
-console.log(allSongs);
+// console.log(allSongs);
 if (window.location.href.includes('/app') && allSongs != null) {
     for (let i = 0; i < allSongs.IDList.length; i++) {
         reactingList(allSongs.IDList[i], allSongs.Atrain[i].output == 1 ? true : false)
@@ -308,7 +308,45 @@ else if (window.location.href.includes('/app')) {
     asyncApp()
 
 }
+else if (window.location.href.includes('about')) {
+    for (h of document.getElementsByClassName('about-tile')) {
+        for (n of h.childNodes) {
+            try {
+                if (n.classList.contains('about-header'))
+                    n.style.boxShadow = '0px 0px 0px rgba(255, 255, 255, 0.7), inset -5px -5px 5px rgba(255, 255, 255, 0.7), 0px 0px 0px rgba(0, 0, 0, 0.2), inset 5px 5px 5px rgba(0, 0, 0, 0.2)'
+                n.style.top = '5px'
+                n.style.left = '5px'
+                n.style.backgroundColor = 'whitesmoke'
+                n.style.textShadow = "5px 5px 5px rgba(0, 0, 0, 0.2)"
+            } catch{ }
+        }
+        h.onmouseenter = () => {
+            for (n of h.childNodes) {
+                try {
+                    if (n.classList.contains('about-header'))
+                        n.style.boxShadow = '-5px -5px 5px rgba(255, 255, 255, 0.7), inset 0px 0px 0px rgba(255, 255, 255, 0.7), 5px 5px 5px rgba(0, 0, 0, 0.2), inset 0px 0px 0px rgba(0, 0, 0, 0.2)'
+                    n.style.top = '0px'
+                    n.style.left = '0px'
+                    n.style.backgroundColor = 'white'
+                    n.style.textShadow = "0px 0px 0px rgba(0, 0, 0, 0.2)"
+                } catch{ }
+            }
+        }
+        h.onmouseleave = () => {
+            for (n of h.childNodes) {
+                try {
+                    if (n.classList.contains('about-header'))
+                        n.style.boxShadow = '0px 0px 0px rgba(255, 255, 255, 0.7), inset -5px -5px 5px rgba(255, 255, 255, 0.7), 0px 0px 0px rgba(0, 0, 0, 0.2), inset 5px 5px 5px rgba(0, 0, 0, 0.2)'
+                    n.style.top = '5px'
+                    n.style.left = '5px'
+                    n.style.backgroundColor = 'whitesmoke'
+                    n.style.textShadow = "5px 5px 5px rgba(0, 0, 0, 0.2)"
+                } catch{ }
+            }
+        }
+    }
 
+}
 
 
 

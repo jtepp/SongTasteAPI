@@ -42,7 +42,7 @@
     border-radius: 12px;
     display: flex;
     flex-direction: column;
-    background: RGB(238, 238, 238);
+    background: white/*RGB(238, 238, 238)*/;
     width: 90vw;
     margin-top: 20px;
     margin-left: 5vw;
@@ -51,8 +51,8 @@
     height: fit-content;
     min-height: 400px;
     /* max-height: fit-content; */
-    border: solid 1px rgba(0, 0, 0, 0.3);
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+    /* border: solid 1px rgba(0, 0, 0, 0.3); */
+    box-shadow:-5px -5px 5px rgba(255, 255, 255, 0.7),  5px 5px 5px rgba(0, 0, 0, 0.3);
 }
 .footer{
     background: RGB(150,150,150);
@@ -113,7 +113,7 @@ b{
     overflow: hidden;
     /* width: 100%; */
     /* justify-content: center; */
-    background: RGB(238, 238, 238);
+    background:RGB(238, 238, 238); 
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -159,6 +159,7 @@ audio{display: none;}
     background-repeat: no-repeat;
     transform: rotate(attr(data-angle));
     transition: all ease 0.4s;
+    box-shadow: -5px -5px 5px rgba(255, 255, 255, 0.7), 5px 5px 5px rgba(0, 0, 0, 0.7);
 
 }
 .song-image:hover{
@@ -268,7 +269,7 @@ header > img:hover{
     background: RGB(0, 230, 0);
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
-    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px -5px 5px rgba(255, 255, 255, 0.7), 0px 5px 5px rgba(0, 0, 0, 0.3);
 
 }
 
@@ -276,7 +277,7 @@ header > img:hover{
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
     background: RGB(230,0,0);
-    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px -5px 5px rgba(255, 255, 255, 0.7), 0px 5px 5px rgba(0, 0, 0, 0.3);
 }
 
 
@@ -302,7 +303,7 @@ header > img:hover{
 
 .guess-box{
     min-width: 270px;
-    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px -5px 5px rgba(255, 255, 255, 0.7), 0px 5px 5px rgba(0, 0, 0, 0.3);
     padding:5px;
     font-size: 20pt;
     height: fit-content;
@@ -448,7 +449,7 @@ div>label{cursor: pointer;}
     background: RGB(146, 146, 146);
     border: solid 1px black;
     border-radius: 10px;
-    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: -5px -5px 5px rgba(255, 255, 255, 0.7), 5px 5px 5px rgba(0, 0, 0, 0.3);
     transition: all ease 0.4s;
 }
 
@@ -476,6 +477,58 @@ div>label{cursor: pointer;}
     transition: all ease 0.4s;
     transform: rotate(90deg);
 }
+
+.about-spacing{
+    height: 50px;
+}
+
+.about-cont{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.about-tile{
+    position: relative;
+    top: 0px;
+    left: 0px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+    /* border: solid 1px black; */
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: -5px -5px 5px rgba(255, 255, 255, 0.7), inset 0px 0px 0px rgba(255, 255, 255, 0.7), 5px 5px 5px rgba(0, 0, 0, 0.2), inset 0px 0px 0px rgba(0, 0, 0, 0.2);
+    transition: all ease 0.4s;
+    width:fit-content;
+}
+.about-tile:hover{
+    box-shadow: 0px 0px 0px rgba(255, 255, 255, 0.7), inset -5px -5px 5px rgba(255, 255, 255, 0.7), 0px 0px 0px rgba(0, 0, 0, 0.2), inset 5px 5px 5px rgba(0, 0, 0, 0.2);
+    background-color: whitesmoke;
+    /* paddding */
+    position: relative;
+    top: 5px;
+    left:5px;
+}
+
+.about-header{
+    position: relative;
+    top: 5px;
+    left: 5px;
+    /* box-shadow: 0px 0px 0px rgba(255, 255, 255, 0.7), inset -5px -5px 5px rgba(255, 255, 255, 0.7), 0px 0px 0px rgba(0, 0, 0, 0.2), inset 5px 5px 5px rgba(0, 0, 0, 0.2); */
+    background-color: whitesmoke;/*rgb(230,230,230);*/
+    text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all ease 0.4s;
+    margin-bottom: 10px;
+    text-align:center;
+    padding: 10px;
+    width:fit-content;
+}
+
+
 
 @media(max-width: 750px){
     .header{
@@ -535,6 +588,8 @@ div>label{cursor: pointer;}
         border-radius: 50%;
         overflow: hidden;
         background-repeat: no-repeat;
+    box-shadow: -5px -5px 5px rgba(255, 255, 255, 0.7), 5px 5px 5px rgba(0, 0, 0, 0.7);
+
     }
     .iframe{
         width:30vw;
@@ -597,6 +652,7 @@ div>label{cursor: pointer;}
 }
 .FR-song-image{
     /*background-image: url('assets/BigLogo.png');*/
+    box-shadow: -5px -5px 5px rgba(255, 255, 255, 0.7), 5px 5px 5px rgba(0, 0, 0, 0.7);
     width: 351px;
     height: 351px;
     background-position: center;

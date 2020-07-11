@@ -5,7 +5,7 @@
 <head>
     <meta charset=“UTF-8”>
     <link rel="stylesheet" href="style.css">
-    <title>Guide | SongTaste</title>
+    <title>About | SongTaste</title>
 </head>
 
 <body>
@@ -16,16 +16,22 @@
                 <div class="nav-top" onclick='location.href = "/"'>Home</div>
                 <div class="nav-top"
                     onclick='window.localStorage.setItem(`id`,`random`);location.href = "app?s=random"'>Start</div>
-                <div class="nav-top" onclick="location.href = `about`">About
-                </div>
+                <div class="nav-top" onclick='location.href = "guide"'>Guide</div>
                 <div class="nav-top" onclick='location.href = "contact"'>Contact</div>
             </div>
         </div>
     </header>
-
-
-
+    <div class="about-spacing"></div>
+    <div class="about-cont">
+        <div class="about-tile">
+            <h1 class="about-header" onclick="location.href = `https://github.com/jtepp`">GitHub</h1>
+            <iframe id="ghcard-jtepp-1" frameborder="0" height="fit-content" scrolling="0" allowtransparency="true"
+                src="https://cdn.jsdelivr.net/github-cards/1.0.2/cards/default.html?user=jtepp&amp;identity=ghcard-jtepp-1"
+                width="400" height="200"></iframe>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
+
 
 </html>
