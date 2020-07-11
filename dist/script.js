@@ -846,7 +846,7 @@ async function songReact(like) {
         await reactingList(currentID, like)
         await searchLater(randomWord(wordLength))
         await retrieveFeatures(currentID)
-        if (needPlaylist >= 1) {
+        if (needPlaylist >= 1 && like == 1) {
             needPlaylist--;
             automate.innerHTML = (needPlaylist + 1) + " more..."
         } else automate.innerHTML = "Automate a playlist"
