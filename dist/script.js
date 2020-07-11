@@ -197,8 +197,10 @@ if (window.location.href.includes('index.html') || window.location.pathname == '
         }
         window.localStorage.setItem('all', JSON.stringify(allSongs))
         window.localStorage.setItem('targ', JSON.stringify(targets))
-        needMore = 4;
-        needPlaylist = 8
+        likelist = []
+        hatelist = []
+        needMore = 4 - allSongs.IDList.length;
+        needPlaylist = 8 - likelist.length;
         updateTEXT();
         document.getElementById('guessID').style.background = 'RGB(146, 146, 146);'
 
