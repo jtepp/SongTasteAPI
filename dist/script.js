@@ -344,6 +344,9 @@ else if (window.location.href.includes('contact')) {
     neuG('em')
     neuG('sl')
     neuG('msg')
+    if (responding) {
+        document.getElementById('cant').classList.remove('about-cont')
+    }
 }
 
 

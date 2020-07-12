@@ -29,54 +29,58 @@
     </center>
     <hr>
     <br>
+    <div class="about-cont" id="cant">
+        <form action="/" method="post" name="contact" data-netlify="true" netlify netlify-honeypot="honeypot"
+            class="formstuff" style="width: 40vw;">
+            <input type="text" name="honeypot" id="honeypot" style="visibility: hidden;">
 
-    <form action="/" method="post" name="contact" data-netlify="true" netlify netlify-honeypot="honeypot"
-        class="formstuff" style="width: 40vw;">
-        <input type="text" name="honeypot" id="honeypot" style="visibility: hidden;">
+            <div class="guide-tile" id="nm">
+                <h3 class="guide-header"><label for="name">Your name:</label></h3>
+                <input class="guide-body" style="width: 300px;" type="text" name="name" id="name"
+                    placeholder="Last name, First name">
+            </div>
 
-        <div class="guide-tile" id="nm">
-            <h3 class="guide-header"><label for="name">Your name:</label></h3>
-            <input class="guide-body" style="width: 300px;" type="text" name="name" id="name"
-                placeholder="Last name, First name">
-        </div>
+            <div class="guide-tile" id="em">
+                <h3 class="guide-header"><label for="email">Email:</label></h3>
+                <input class="guide-body" type="email" name="email" id="email" placeholder="you@email.com" required>
+            </div>
 
-        <div class="guide-tile" id="em">
-            <h3 class="guide-header"><label for="email">Email:</label></h3>
-            <input class="guide-body" type="email" name="email" id="email" placeholder="you@email.com" required>
-        </div>
-
-        <div class="guide-tile" id="sl">
-            <h3 class="guide-header"><label for="type">Reason:</label></h3>
-            <select class='guide-body' name="type" id="type" onchange="
-                    const s = document.getElementById('type')
-                    const o = document.getElementById('specify')
-                    const v = s.options[s.selectedIndex].value
-                    if(v=='other')o.style.visibility= 'visible'
-                    else o.style.visibility = 'hidden' ">
-                <option value="feedback" selected="selected">Feedback</option>
-                <option value="bug">Bug report</option>
-                <option value="suggestion">Suggestion</option>
-                <option value="question">Question</option>
-                <option value="other">Other (please specify)</option>
-            </select>
-            <input type="text" class="guide-body" style="visibility: hidden;" name="specify" id="specify">
-        </div>
-
-
-
-        <div class="guide-tile" id="msg">
-            <h3 class="guide-header"><label for="message">Message</label></h1>
-                <textarea class="guide-body" style="text-align: left;" name="message" id="message" cols="30" rows="10"
-                    required></textarea>
-        </div>
+            <div class="guide-tile" id="sl">
+                <h3 class="guide-header"><label for="type">Reason:</label></h3>
+                <select class='guide-body' name="type" id="type" onchange="
+                        const s = document.getElementById('type')
+                        const o = document.getElementById('specify')
+                        const v = s.options[s.selectedIndex].value
+                        if(v=='other')o.style.visibility= 'visible'
+                        else o.style.visibility = 'hidden' ">
+                    <option value="feedback" selected="selected">Feedback</option>
+                    <option value="bug">Bug report</option>
+                    <option value="suggestion">Suggestion</option>
+                    <option value="question">Question</option>
+                    <option value="other">Other (please specify)</option>
+                </select>
+                <input type="text" class="guide-body" style="visibility: hidden;" name="specify" id="specify">
+            </div>
 
 
 
-        <div data-netlify-recaptcha></div>
+            <div class="guide-tile" id="msg">
+                <h3 class="guide-header"><label for="message">Message</label></h1>
+                    <textarea class="guide-body" style="text-align: left;" name="message" id="message" cols="30"
+                        rows="10" required></textarea>
+            </div>
 
-        <input type="submit" class="button" style="padding-top: 0;" value="Submit" style="cursor:pointer">
 
-    </form>
+
+            <div data-netlify-recaptcha></div>
+
+
+            <div class="about-cont">
+                <input type="submit" class="button" style="padding-top: 0;" value="Submit" style="cursor:pointer;">
+            </div>
+
+        </form>
+    </div>
 
     <script src="script.js"></script>
 </body>
